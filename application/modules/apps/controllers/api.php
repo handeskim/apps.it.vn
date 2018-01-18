@@ -15,7 +15,8 @@ class Api extends REST_Controller {
 	}
 	
 	public function notification_get(){
-		$response = array('user_data' => $this->user_data);
+		$staff = $this->user_data;
+		$response = array('user_data' => $staff);
 		
 		$this->response($response);
 	}
