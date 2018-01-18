@@ -8,7 +8,7 @@ class Apps extends MY_Controller{
 		if($this->login){
 			$this->user_data = $this->session->userdata('data_users');
 			$this->permisson = $this->user_data['authorities'];
-			$id_clients = $this->user_data['id'];
+			$this->staff = $this->user_data['id'];
 		}else{
 			redirect(base_url('sign'));
 		}

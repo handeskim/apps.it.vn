@@ -5,10 +5,11 @@ class Customer_Management extends MY_Controller{
 		$this->load->library('rest');
 		$this->load->model('global_model', 'GlobalMD');	
 		$this->login = $this->session->userdata('auth_sign');
-		$this->user_data = $this->session->userdata('data_users');
-		$this->permisson = $this->user_data['authorities'];
-		$this->users = $this->user_data['id'];
-		if(isset($this->login)==false){
+		if($this->login){
+			$this->user_data = $this->session->userdata('data_users');
+			$this->permisson = $this->user_data['authorities'];
+			$this->staff = $this->user_data['id'];
+		}else{
 			redirect(base_url('sign'));
 		}
 		
@@ -32,8 +33,8 @@ class Customer_Management extends MY_Controller{
 		$this->parser->parse('default/footer',$data);
 	}
 	private function excel_command(){
-		$user = $this->users;
-		if($this->permisson == 1 || $this->permisson == 2 || $this->permisson == 3 || $this->permisson == 5){
+		$user = $this->staff;
+		if($this->permisson == 1 || $this->permisson == 2 || ){
 			$sql = "SELECT 
 			c.code,
 			c.full_name,
@@ -63,7 +64,7 @@ class Customer_Management extends MY_Controller{
 		return core_encode($sql);
 	}
 	private function total_customer(){
-		$user = $this->users;
+		$user = $this->staff;
 		
 		try { 
 			if($this->permisson == 1 || $this->permisson == 2 || $this->permisson == 3 || $this->permisson == 5){
@@ -79,14 +80,14 @@ class Customer_Management extends MY_Controller{
 		return $result;
 	}
 	private function Customer(){
-		$user = $this->users;
+		$user = $this->staff;
 			$xcrud = Xcrud::get_instance();
 			$xcrud->table('customer');
 			$xcrud->unset_csv();
 		
 			if($this->permisson == 4){
 				$xcrud->unset_remove();
-				$xcrud->where('supervisor',$this->users);
+				$xcrud->where('supervisor',$this->staff);
 				
 			}
 			if($this->permisson == 2 || $this->permisson == 3 || $this->permisson == 5){
