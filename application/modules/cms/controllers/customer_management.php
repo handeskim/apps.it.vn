@@ -34,7 +34,7 @@ class Customer_Management extends MY_Controller{
 	}
 	private function excel_command(){
 		$user = $this->staff;
-		if($this->permisson == 1 || $this->permisson == 2 || ){
+		if($this->permisson == 1 || $this->permisson == 2 ){
 			$sql = "SELECT 
 			c.code,
 			c.full_name,
