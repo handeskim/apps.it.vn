@@ -4,7 +4,7 @@ class Api extends REST_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->db = $this->load->database('default', TRUE);
-		$this->staff = 0;
+		$this->login = $this->session->userdata('auth_sign');
 		$this->data_users = $this->session->userdata('data_users')
 		if($this->login){
 			$this->user_data = $this->session->userdata('data_users');
