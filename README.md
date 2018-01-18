@@ -1,4 +1,5 @@
 ### Quan Ly kho thuoc
+------------------------------------------------------
 Phần Mềm Quản lý bán hàng, Đơn hàng Thuốc Và Trị liệu.
     
     ##### Mô Tả
