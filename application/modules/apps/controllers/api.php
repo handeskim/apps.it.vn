@@ -4,6 +4,7 @@ class Api extends REST_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->db = $this->load->database('default', TRUE);
+		$this->staff = 0;
 		$this->login = $this->session->userdata('auth_sign');
 		if($this->login){
 			$this->user_data = $this->session->userdata('data_users');
@@ -14,8 +15,8 @@ class Api extends REST_Controller {
 	}
 	
 	public function notification_get(){
-		$staff = $this->staff;
-		$response = array('staff' => $staff);
+		
+		$response = array('staff' => $this->staff);
 		$this->response($response);
 	}
 }
