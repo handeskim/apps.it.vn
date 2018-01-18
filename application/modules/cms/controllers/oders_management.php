@@ -5,10 +5,11 @@ class Oders_Management extends MY_Controller{
 		$this->load->library('rest');
 		$this->load->model('global_model', 'GlobalMD');	
 		$this->login = $this->session->userdata('auth_sign');
-		$this->user_data = $this->session->userdata('data_users');
-		$this->permisson = $this->user_data['authorities'];
-		$this->users = $this->user_data['id'];
-		if(isset($this->login)==false){
+		if($this->login){
+			$this->user_data = $this->session->userdata('data_users');
+			$this->permisson = $this->user_data['authorities'];
+			$this->staff = $this->user_data['id'];
+		}else{
 			redirect(base_url('sign'));
 		}
 		
@@ -34,7 +35,7 @@ class Oders_Management extends MY_Controller{
 			$xcrud->table('orders');
 			$xcrud->unset_csv();
 			$xcrud->unset_print();
-			$xcrud->where('code_staff',$this->users);
+			$xcrud->where('code_staff',$this->staff);
 			$xcrud->unset_add();
 			if($this->permisson == 2){
 				$xcrud->unset_remove();

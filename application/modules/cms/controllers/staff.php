@@ -5,10 +5,11 @@ class Staff extends MY_Controller{
 		$this->load->library('rest');
 		$this->load->model('global_model', 'GlobalMD');	
 		$this->login = $this->session->userdata('auth_sign');
-		$this->user_data = $this->session->userdata('data_users');
-		$this->permisson = $this->user_data['authorities'];
-		$id_clients = $this->user_data['id'];
-		if(isset($this->login)==false){
+		if($this->login){
+			$this->user_data = $this->session->userdata('data_users');
+			$this->permisson = $this->user_data['authorities'];
+			$this->staff = $this->user_data['id'];
+		}else{
 			redirect(base_url('sign'));
 		}
 		
@@ -18,7 +19,7 @@ class Staff extends MY_Controller{
 		$msg ='';
 		$data = array(
 			'msg' => $msg,
-			'content' => $this->staff(),
+			'content' => $this->staffs(),
 			'user_data' => $this->user_data,
 			'title'=> 'Staff Management',
 			'title_main' => 'Staff Management',
@@ -29,7 +30,7 @@ class Staff extends MY_Controller{
 		$this->parser->parse('default/layout/main_curd_account',$data);
 		$this->parser->parse('default/footer',$data);
 	}
-	private function staff(){
+	private function staffs(){
 		if($this->permisson == 1 || $this->permisson == 2){
 			$xcrud = Xcrud::get_instance();
 			$xcrud->table('staff');
@@ -59,7 +60,6 @@ class Staff extends MY_Controller{
 			$xcrud->relation('status','status','id','name_status');
 			$xcrud->relation('authorities','authorities','id','name_auth');
 			$xcrud->columns('status,code,full_name,hinh_anh,email,passport_id,authorities,status,dien_thoai');
-			// $xcrud->fields('full_name,email,password,authorities,');
 			$xcrud->change_type('password', 'password', 'md5', array('class'=>'xcrud-input form-control', 'maxlength'=>10,'placeholder'=>'Nhập mật khẩu'));
 			$xcrud->change_type('hinh_anh', 'image', '', 
 				array(

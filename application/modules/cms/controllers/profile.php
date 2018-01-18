@@ -5,19 +5,20 @@ class Profile extends MY_Controller{
 		$this->load->library('rest');
 		$this->load->model('global_model', 'GlobalMD');	
 		$this->login = $this->session->userdata('auth_sign');
-		$this->user_data = $this->session->userdata('data_users');
-		$this->permisson = $this->user_data['authorities'];
-		$this->id_user = $this->user_data['id'];
-		if(isset($this->login)==false){
+		
+		if($this->login){
+			$this->user_data = $this->session->userdata('data_users');
+			$this->permisson = $this->user_data['authorities'];
+			$this->staff = $this->user_data['id'];
+		}else{
 			redirect(base_url('sign'));
 		}
-		
 	}
 	private function Profile(){
 
 		$xcrud = Xcrud::get_instance();
 		$xcrud->table('staff');
-		$xcrud->where('id',$this->id_user);
+		$xcrud->where('id',$this->staff);
 		$xcrud->unset_csv();
 		$xcrud->unset_remove();
 		$xcrud->unset_add();
@@ -59,7 +60,7 @@ class Profile extends MY_Controller{
 					'path' => '/upload/staff/',
 				)
 		);
-		$response = $xcrud->render('edit', $this->id_user); 
+		$response = $xcrud->render('edit', $this->staff); 
 			return $response;
 	}
 	public function index(){
