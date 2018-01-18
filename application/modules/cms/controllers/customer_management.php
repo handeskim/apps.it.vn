@@ -84,7 +84,7 @@ class Customer_Management extends MY_Controller{
 			$xcrud = Xcrud::get_instance();
 			$xcrud->table('customer');
 			$xcrud->unset_csv();
-		
+			
 			if($this->permisson == 4 || $this->permisson == 5|| $this->permisson == 3){
 				$xcrud->unset_add();
 				$xcrud->unset_remove();

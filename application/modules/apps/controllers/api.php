@@ -15,14 +15,13 @@ class Api extends REST_Controller {
 	}
 	
 	public function notification_get(){
-		$staff = $this->user_data;
+		$staff = 1;
 		$response = array('user_data' => $staff);
 		
 		$this->response($response);
 	}
 }
 
-////------Start Class Core Apps-------////
 class Appscore extends MY_Controller{
 	
 	function __construct(){

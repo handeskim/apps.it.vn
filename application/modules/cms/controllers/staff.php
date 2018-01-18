@@ -15,7 +15,6 @@ class Staff extends MY_Controller{
 		
 	}
 	public function index(){
-		
 		$msg ='';
 		$data = array(
 			'msg' => $msg,
