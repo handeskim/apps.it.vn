@@ -89,11 +89,11 @@ CREATE TABLE `customer` (
 CREATE TABLE `notification`(
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `title` varchar(1024) COLLATE utf8_unicode_ci NOT NULL,
-  `staff` bigint(1024) COLLATE utf8_unicode_ci NOT NULL,
-  `authorities` int(1024) COLLATE utf8_unicode_ci NOT NULL,
+  `staff` bigint(255) COLLATE utf8_unicode_ci NOT NULL,
+  `authorities` int(255) COLLATE utf8_unicode_ci NOT NULL,
   `links` varchar(1024) COLLATE utf8_unicode_ci NOT NULL,
   `times` datetime COLLATE utf8_unicode_ci NOT NULL,
-  `status` int(1024) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) 
 
