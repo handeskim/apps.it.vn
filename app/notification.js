@@ -4,4 +4,4 @@ function loadIt() {
         $( "#notifications_response" ).html( notifications_response );
       });
   }
-setInterval(loadIt, 2000);
+setInterval(loadIt, 10000);
