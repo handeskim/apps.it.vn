@@ -30,6 +30,7 @@
 	<script src="<?php echo base_url();?>public/plugins/bootpag/jquery.bootpag.min.js"></script>
 
   <script src="<?php echo base_url();?>public/dist/css/rila_global.css"></script>
+  <script src="<?php echo base_url();?>apps/notification.js"></script>
 </head>
 <body ng-app="rilaApps" class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -124,23 +125,5 @@
   </header>
 
 <script>
-// setInterval(function(){
-//     jQuery.ajax({ , success: function(notifications_response){
-//         // salesGauge.setValue(data.value);
-//         jQuery('#notifications_response').append(notifications_response)
-//     },});
-// }, 3000);
-function loadIt() {
-  jQuery('#notifications_response').empty();
-  // jQuery.get(url_global+"cms/notification", function(notifications_response)) {
-  //   // var jdata = JSON.parse(data);
-  //   
-    
-  // });
-  $.get(url_global+"cms/notification", function( notifications_response ) {
-    $( "#notifications_response" ).html( notifications_response );
-     //jQuery('#').append(notifications_response);
-    });
-}
-setInterval(loadIt, 30000);
+
 </script>
