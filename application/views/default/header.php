@@ -122,3 +122,12 @@
       </div>
     </nav>
   </header>
+
+<script>
+setInterval(function(){
+    jQuery.ajax({ url_global: "cms/notification", success: function(notifications_response){
+        // salesGauge.setValue(data.value);
+        jQuery('#notifications_response').append(notifications_response)
+    },});
+}, 3000);
+</script>
