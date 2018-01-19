@@ -54,10 +54,7 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
 		<li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i style="color: #ed3237;font-size: 18px;" class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
-            </a>
+           
             <ul class="dropdown-menu">
               <li class="header">You have 10 notifications</li>
               <li>

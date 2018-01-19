@@ -25,7 +25,6 @@ class Notification extends MY_Controller{
 		}
 	}
 	public function index(){
-		
 		$this->temp_notifacation();
 	}
 	public function temp_notifacation(){
@@ -34,7 +33,12 @@ class Notification extends MY_Controller{
 		if($data){
 			$total_notifications = count($data);
 		}
-		$temp = '<ul class="dropdown-menu"><li class="header">bạn có '.$total_notifications.' Thông báo</li><li><ul class="menu">';
+		$temp = '
+		 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i style="color: #ed3237;font-size: 18px;" class="fa fa-bell-o"></i>
+              <span class="label label-warning">'.$total_notifications.'</span>
+            </a>
+		<ul class="dropdown-menu"><li class="header">Bạn có '.$total_notifications.' Thông báo</li><li><ul class="menu">';
 		if(!empty($data)){
 			foreach($data as $value){
 				$temp .= '<li><a href="'.$value['links'].'"><i class="fa fa-users text-aqua"></i> '.$value['title'].' </a></li>';
