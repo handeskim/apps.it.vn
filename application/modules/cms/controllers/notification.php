@@ -41,7 +41,17 @@ class Notification extends MY_Controller{
 		<ul class="dropdown-menu"><li class="header">Bạn có '.$total_notifications.' Thông báo</li><li><ul class="menu">';
 		if(!empty($data)){
 			foreach($data as $value){
-				$temp .= '<li><a href="'.$value['links'].'"><i class="fa fa-users text-aqua"></i> '.$value['title'].' </a></li>';
+				$authorities = $value['authorities'];
+				if($authorities==3){
+					$fa_icon = "fa-shopping-cart";
+				}else if($authorities==4){
+					$fa_icon = "fa-file";
+				}else if($authorities==5){
+					$fa_icon = "fa-cube";
+				}else{
+					$fa_icon = "fa-bullhorn";
+				}
+				$temp .= '<li><a href="'.$value['links'].'"><i class="fa '.$fa_icon.' text-aqua"></i> '.$value['title'].' </a></li>';
 			}
 		}
         $temp .= '</ul></li></ul>';
