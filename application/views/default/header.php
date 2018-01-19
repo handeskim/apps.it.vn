@@ -132,7 +132,7 @@
 // }, 3000);
 function loadIt() {
   jQuery('#notifications_response').empty();
-  $.get(url_global: "cms/notification", function(notifications_response)) {
+  $.get(url_global+"cms/notification", function(notifications_response)) {
     // var jdata = JSON.parse(data);
       $('#notifications_response').append(notifications_response);
     
