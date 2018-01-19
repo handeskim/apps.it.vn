@@ -9,3 +9,4 @@ Table_name: users
         'emails' => 'thư diện tử',
         'status' => 'trạng thái sử dụng',
     }
+
