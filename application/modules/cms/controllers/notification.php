@@ -18,7 +18,11 @@ class Notification extends MY_Controller{
 		$staff =  $this->staff ;
 		$authorities =  $this->authorities;
 		try{
-			$sql = "SELECT * FROM notification WHERE staff = '$staff' AND `status` = 1 AND authorities = '$authorities'";
+			if($authorities == 1 || $authorities ==2){
+				$sql = "SELECT * FROM notification WHERE `status` = 1 ";
+			}else{
+				$sql = "SELECT * FROM notification WHERE staff = '$staff' AND `status` = 1 AND authorities = '$authorities'";
+			}
 			return $this->GlobalMD->query_global($sql);
 		}catch (Exception $e) {
 			return false;
