@@ -142,5 +142,5 @@ function loadIt() {
      //jQuery('#').append(notifications_response);
     });
 }
-setInterval(loadIt, 2000);
+setInterval(loadIt, 30000);
 </script>
