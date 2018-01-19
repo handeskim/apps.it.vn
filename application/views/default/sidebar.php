@@ -35,60 +35,60 @@
   
   <ul class="sidebar-menu" data-widget="tree">
 	
-	<li class="header">Dashboard</li>
+	<li class="header">Trang Chủ</li>
 	<li class="treeview">
 		<a href="#">
-		<i class="fa fa-briefcase"></i> <span>Customer</span>
+		<i class="fa fa-briefcase"></i> <span>Khách hàng</span>
 			<span class="pull-right-container">
 			<i class="fa fa-angle-left pull-right"></i>
 			</span>
 		</a>
 		<ul class="treeview-menu">
-			<li><a href="<?php echo base_url();?>cms/customer_management"><i class="fa fa-user-secret"></i> Customer Management</a></li>
-			<li><a href="<?php echo base_url();?>cms/scheduling"><i class="fa fa-history"></i> Scheduling Callback</a></li>
+			<li><a href="<?php echo base_url();?>cms/customer_management"><i class="fa fa-user-secret"></i> Quản lý khách hàng</a></li>
+			<li><a href="<?php echo base_url();?>cms/scheduling"><i class="fa fa-history"></i> Lập lịch gọi lại</a></li>
 		</ul>
 	</li>
 	<li class="treeview">
 		<a href="#">
-		<i class="fa fa-shopping-cart"></i> <span>Oders</span>
+		<i class="fa fa-shopping-cart"></i> <span>Đơn hàng</span>
 			<span class="pull-right-container">
 			<i class="fa fa-angle-left pull-right"></i>
 			</span>
 		</a>
 		<ul class="treeview-menu">
-			<li><a href="<?php echo base_url();?>cms/oders_management"><i class="fa fa-shopping-cart"></i> Orders Management</a></li>
+			<li><a href="<?php echo base_url();?>cms/oders_management"><i class="fa fa-shopping-cart"></i> Quản lý đơn hàng</a></li>
 
 		</ul>
 	</li>
 	<li class="treeview">
 		<a href="#">
-		<i class="fa fa-cubes"></i> <span>Product</span>
+		<i class="fa fa-cubes"></i> <span>Sản phẩm</span>
 			<span class="pull-right-container">
 			<i class="fa fa-angle-left pull-right"></i>
 			</span>
 		</a>
 		<ul class="treeview-menu">
-			<li><a href="<?php echo base_url();?>cms/product_management"><i class="fa fa-cube"></i> Product Management</a></li>
+			<li><a href="<?php echo base_url();?>cms/product_management"><i class="fa fa-cube"></i> Quản lý sản phẩ<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"></a></li>
 
 		</ul>
 	</li>
 	
 	<li class="treeview">
 		<a href="#">
-		<i class="fa fa-gears"></i> <span>General</span>
+		<i class="fa fa-gears"></i> <span>Hệ thống</span>
 			<span class="pull-right-container">
 			<i class="fa fa-angle-left pull-right"></i>
 			</span>
 		</a>
 		<ul class="treeview-menu">
-			<li><a href="<?php echo base_url();?>cms/staff"><i class="fa fa-users"></i> Staff / Accounts</a></li>
-			<li><a href="<?php echo base_url();?>cms/partnersPost"><i class="fa fa-ship"></i> Partners Post</a></li>
-			<li><a href="<?php echo base_url();?>cms/typesPharma"><i class="fa  fa-eyedropper"></i> Types Pharma</a></li>
+			<li><a href="<?php echo base_url();?>cms/staff"><i class="fa fa-users"></i> Nhân viên </a></li>
+			<li><a href="<?php echo base_url();?>cms/partnersPost"><i class="fa fa-ship"></i> Dịch vụ bưu chính</a></li>
+			<li><a href="<?php echo base_url();?>cms/typesPharma"><i class="fa  fa-eyedropper"></i> Loại thuốc</a></li>
 			
 		</ul>
 	</li>
 	
-	<li><a  href="<?php echo base_url()?>exits"><i class="fa fa-sign-out"></i> <span>Log out</span></a></li>
+	<li><a  href="<?php echo base_url()?>exits"><i class="fa fa-sign-out"></i> <span>Đăng xuất tài khoản</span></a></li>
 	<li class="header">Catalog Manager navigation panel</li>
   </ul>
 </section>
