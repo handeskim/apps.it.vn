@@ -124,10 +124,19 @@
   </header>
 
 <script>
-setInterval(function(){
-    jQuery.ajax({ url_global: "cms/notification", success: function(notifications_response){
-        // salesGauge.setValue(data.value);
-        jQuery('#notifications_response').append(notifications_response)
-    },});
-}, 3000);
+// setInterval(function(){
+//     jQuery.ajax({ , success: function(notifications_response){
+//         // salesGauge.setValue(data.value);
+//         jQuery('#notifications_response').append(notifications_response)
+//     },});
+// }, 3000);
+function loadIt() {
+  jQuery('#notifications_response').empty();
+  $.get(url_global: "cms/notification", function(notifications_response) {
+    // var jdata = JSON.parse(data);
+      $('#notifications_response').append(notifications_response);
+    
+  });
+}
+setInterval(loadIt, 2000);
 </script>
