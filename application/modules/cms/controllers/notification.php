@@ -18,7 +18,7 @@ class Notification extends MY_Controller{
 		$staff =  $this->staff ;
 		$authorities =  $this->authorities;
 		try{
-			$sql = "SELECT * FROM notification WHERE staff = 2 AND `status` = 1 AND authorities = 1";
+			$sql = "SELECT * FROM notification WHERE staff = '$staff' AND `status` = 1 AND authorities = '$authorities'";
 			return $this->GlobalMD->query_global($sql);
 		}catch (Exception $e) {
 			return false;
@@ -37,7 +37,7 @@ class Notification extends MY_Controller{
 		$temp = '<ul class="dropdown-menu"><li class="header">bạn có '.$total_notifications.' Thông báo</li><li><ul class="menu">';
 		if(!empty($data)){
 			foreach($data as $value){
-				$temp .= '<li><a href="#"><i class="fa fa-users text-aqua"></i> '' </a></li>';
+				$temp .= '<li><a href="'.$value['link'].'"><i class="fa fa-users text-aqua"></i> '.$value['title'].' </a></li>';
 			}
 		}
         $temp .= '</ul></li></ul>';
