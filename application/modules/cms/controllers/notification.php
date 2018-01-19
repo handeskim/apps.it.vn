@@ -37,7 +37,7 @@ class Notification extends MY_Controller{
 		$temp = '<ul class="dropdown-menu"><li class="header">bạn có '.$total_notifications.' Thông báo</li><li><ul class="menu">';
 		if(!empty($data)){
 			foreach($data as $value){
-				$temp .= '<li><a href="'.$value['link'].'"><i class="fa fa-users text-aqua"></i> '.$value['title'].' </a></li>';
+				$temp .= '<li><a href="'.$value['links'].'"><i class="fa fa-users text-aqua"></i> '.$value['title'].' </a></li>';
 			}
 		}
         $temp .= '</ul></li></ul>';
