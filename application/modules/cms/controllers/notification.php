@@ -37,11 +37,11 @@ class Notification extends MY_Controller{
 		if($data){
 			$total_notifications = count($data);
 		}
-		$temp = '<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i style="color: #ed3237;font-size: 18px;" class="fa fa-bell-o"></i>';
+		$temp = '<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
 		if($total_notifications==0){
-			$temp .= '<span class="label label-primary">'.$total_notifications.'</span>';
+			$temp .= '<i style="color: #00a65a;font-size: 18px;" class="fa fa-bell-o"></i>';
 		}else{
-			$temp .= '<span class="label label-warning">'.$total_notifications.'</span>';
+			$temp .= '<i style="color: #ed3237;font-size: 18px;" class="fa fa-bell-o"></i><span class="label label-warning">'.$total_notifications.'</span>';
 		}
 		
 
