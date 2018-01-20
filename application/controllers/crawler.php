@@ -29,12 +29,7 @@ class Crawler extends MY_Controller{
 				$msg = 'Vui lòng chọn Sử Dụng element ';
 			}
 		}
-		$data = array(
-			'title' => "Crawler Text",
-			'msg' => $msg,
-			'response' => $response,
-		);
-		$this->parser->parse('main',$data);
+		var_dump($response);
 	}
 	public function crawler_run($url,$namespace,$element){
 		if(!empty($element)){
