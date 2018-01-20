@@ -9,8 +9,8 @@ class Crawler extends MY_Controller{
 	public function index(){
 		$msg = '';
 		$response = '';
-		$cmd = $this->input->get_post('c_check');
-		$key = $this->input->get_post('key');
+		$cmd = $this->input->get('c_check');
+		$key = $this->input->get('key');
 		if(!empty($cmd)){
 			if($cmd==1){
 				$c_element = "#dnn_ctr734_View_uc_divListCol";
@@ -20,13 +20,8 @@ class Crawler extends MY_Controller{
 				$c_element = ".trackingItem";
 				$c_url = "https://www.viettelpost.com.vn/Tracking?KEY=".$key;
 			}
-
-			if(!empty($c_url)){
-				$response = $this->crawler_run($c_url,$c_element);	
-			}else{
-				$msg = 'Vui lòng Nhập url cần lấy text';
-			}
-				
+			$response = $this->crawler_run($c_url,$c_element);	
+			var_dump($response);
 			
 		}
 
