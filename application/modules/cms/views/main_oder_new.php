@@ -3,6 +3,11 @@
 <div class="row">
   <div class="col-md-12">
        <form role="form">
+            <div class="form-group">
+                <label for="ProductLabel">Nhập mã sản phẩm </label>
+                  <input type="text" class="form-control" id="ProductLabel" placeholder="Mã sản phẩm ">
+             </div>           
+
             <div class="box box-info">
                 <div class="box-header">
                 <h3 class="box-title">Tạo mới đơn hàng</h3>
