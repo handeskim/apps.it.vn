@@ -16,7 +16,7 @@ class Crawler extends MY_Controller{
 				$links =  'http://www.vnpost.vn/en-us/dinh-vi/buu-pham?key='.$key;
 				$response = '<span> <a target ="_blank" href="'.$links.'"> Nhấn vào đây  </a> để xem chi tiết  </span>';
 			}
-			if($cmd == 2){
+			if($cmd==2){
 				$c_element = ".trackingItem";
 				$c_url = "https://www.viettelpost.com.vn/Tracking?KEY=".$key;
 				$response = $this->crawler_run($c_url,$c_element);	
