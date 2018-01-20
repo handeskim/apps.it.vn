@@ -1,5 +1,5 @@
 <?php
-class Crawler extends MY_Controller{
+class Tracker extends MY_Controller{
 	function __construct(){
 		parent::__construct();
 		header('Content-Type: text/html; charset=utf-8');
