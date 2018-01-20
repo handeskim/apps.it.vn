@@ -22,7 +22,9 @@ class Crawler extends MY_Controller{
 				$c_element = ".trackingItem";
 				$c_url = "https://www.viettelpost.com.vn/Tracking?KEY=".$key;
 			}
+			$html = getCURL($c_url);
 			$response = $this->crawler_run($c_url,$c_element);	
+			var_dump($html);
 			var_dump($response);
 			
 		}
