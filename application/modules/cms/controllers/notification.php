@@ -37,11 +37,15 @@ class Notification extends MY_Controller{
 		if($data){
 			$total_notifications = count($data);
 		}
-		$temp = '
-		 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i style="color: #ed3237;font-size: 18px;" class="fa fa-bell-o"></i>
-              <span class="label label-warning">'.$total_notifications.'</span>
-            </a>
+		$temp = '<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i style="color: #ed3237;font-size: 18px;" class="fa fa-bell-o"></i>';
+		if($total_notifications==0){
+			$temp .= '<span class="label label-primary">'.$total_notifications.'</span>';
+		}else{
+			$temp .= '<span class="label label-warning">'.$total_notifications.'</span>';
+		}
+		
+
+        $temp .= '</a>
 		<ul class="dropdown-menu"><li class="header">Bạn có '.$total_notifications.' Thông báo</li><li><ul class="menu">';
 		if(!empty($data)){
 			foreach($data as $value){
