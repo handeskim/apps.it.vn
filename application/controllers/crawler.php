@@ -12,8 +12,9 @@ class Crawler extends MY_Controller{
 		$cmd = $this->input->get('c_check');
 		$key = $this->input->get('key');
 		if(!empty($cmd)){
-			$cmd = 1;
-			$key = 'Ee423817221vn';
+			$cmd = 2;
+			$key = '505170505';
+			// $key = 'Ee423817221vn';
 			if($cmd==1){
 				$c_element = "#dnn_ctr734_View_uc_divListCol";
 				$c_url = "http://www.vnpost.vn/en-us/dinh-vi/buu-pham?key=".$key;
