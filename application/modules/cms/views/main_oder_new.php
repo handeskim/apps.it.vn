@@ -5,7 +5,8 @@
        <form role="form">
             <div class="form-group">
                 <label for="ProductLabel">Nhập mã sản phẩm </label>
-                  <input type="text" class="form-control" id="ProductLabel" placeholder="Mã sản phẩm ">
+                  <input type="text" class="form-control col-md-6" id="ProductLabel" placeholder="Mã sản phẩm ">
+                  <span class="col-md-4"><p class="btn btn-default"> Tìm kiếm </p></span> 
              </div>           
 
             <div class="box box-info">
