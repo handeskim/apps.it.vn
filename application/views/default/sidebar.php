@@ -68,7 +68,7 @@
 			</span>
 		</a>
 		<ul class="treeview-menu">
-			<li><a href="<?php echo base_url();?>cms/product_management"><i class="fa fa-cube"></i> Quản lý sản phẩ<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"></a></li>
+			<li><a href="<?php echo base_url();?>cms/product_management"><i class="fa fa-cube"></i> Quản lý sản phẩm </a></li>
 
 		</ul>
 	</li>
