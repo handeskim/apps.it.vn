@@ -13,23 +13,16 @@ class Crawler extends MY_Controller{
 		$key = $this->input->get('key');
 		if(!empty($cmd)){
 			$cmd = 1;
-			// $key = '505170505';
 			$key = 'Ee423817221vn';
 			if($cmd==1){
-				$c_element = "#dnn_ctr734_View_uc_divListCol";
-				$c_url = "http://www.vnpost.vn/en-us/dinh-vi/buu-pham?key=".$key."&7sn8rj2i&10e1&callback=_xdc_._bfrl8o&token=88032";
+				$response =  "http://www.vnpost.vn/en-us/dinh-vi/buu-pham?key=".$key."&7sn8rj2i&10e1&callback=_xdc_._bfrl8o&token=88032";
 			}
 			if($cmd == 2){
 				$c_element = ".trackingItem";
 				$c_url = "https://www.viettelpost.com.vn/Tracking?KEY=".$key;
 			}
-			$html = file_get_html($c_url);
-			$response = $this->crawler_run($c_url,$c_element);	
-			var_dump($html);
-			var_dump($response);
-			
 		}
-
+		$response = $this->crawler_run($c_url,$c_element);	
 		var_dump($response);
 		
 	}
