@@ -20,9 +20,9 @@ class Crawler extends MY_Controller{
 			if($cmd == 2){
 				$c_element = ".trackingItem";
 				$c_url = "https://www.viettelpost.com.vn/Tracking?KEY=".$key;
+				$response = $this->crawler_run($c_url,$c_element);	
 			}
 		}
-		$response = $this->crawler_run($c_url,$c_element);	
 		var_dump($response);
 		
 	}
