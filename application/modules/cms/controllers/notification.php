@@ -44,7 +44,6 @@ class Notification extends MY_Controller{
 			$temp .= '<i style="color: #ed3237;font-size: 18px;" class="fa fa-bell-o"></i><span class="label label-warning">'.$total_notifications.'</span>';
 		}
 		
-
         $temp .= '</a>
 		<ul class="dropdown-menu"><li class="header">Bạn có '.$total_notifications.' Thông báo</li><li><ul class="menu">';
 		if(!empty($data)){
