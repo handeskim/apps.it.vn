@@ -33,7 +33,7 @@ class Crawler extends MY_Controller{
 			$html = getCURL($url);
 			$output=array();
 			$string= str_get_html($html);
-			$list = $string->find('#'.$element);
+			$list = $string->find($element);
 			$i=1;
 			foreach ($list as $key => $val){
 				return $this->regex_word_html($val->innertext);
