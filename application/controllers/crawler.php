@@ -15,7 +15,7 @@ class Crawler extends MY_Controller{
 			$cmd = 1;
 			$key = 'Ee423817221vn';
 			if($cmd==1){
-				$response =  "http://www.vnpost.vn/en-us/dinh-vi/buu-pham?key=".$key."&7sn8rj2i&10e1&callback=_xdc_._bfrl8o&token=88032";
+				$response =  "http://www.vnpost.vn/en-us/dinh-vi/buu-pham?key=".$key;
 			}
 			if($cmd == 2){
 				$c_element = ".trackingItem";
