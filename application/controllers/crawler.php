@@ -29,12 +29,9 @@ class Crawler extends MY_Controller{
 				
 			
 		}
-		$data = array(
-			'title' => "Crawler Text",
-			'msg' => $msg,
-			'response' => $response,
-		);
-		$this->parser->parse('main',$data);
+
+		var_dump($response);
+		
 	}
 	public function crawler_run($url,$element){
 		if(!empty($element)){
