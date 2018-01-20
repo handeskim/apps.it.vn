@@ -5,32 +5,14 @@
        <form role="form">
             <div class="box box-info">
                 <div class="box-header">
-                <h3 class="box-title">Hướng dẫn sử dụng
-                </h3>
+                <h3 class="box-title">Tạo mới đơn hàng</h3>
                 </div>
-                <!-- /.box-header -->
                 <div class="box-body pad">
-                <form>
-                        <textarea id="use_guide" name="manuals" rows="10" cols="80">
-                            Nội dung Hướng dẫn sử dụng
-                        </textarea>
-                </form>
+                    <textarea id="use_guide" name="manuals" rows="10" cols="80">Nội dung Hướng dẫn sử dụng</textarea>
+                    <textarea id="note" name="note" rows="3" cols="80">Ghi chú</textarea>
                 </div>
             </div>
-            <div class="box box-info">
-                <div class="box-header">
-                <h3 class="box-title">Ghi chú
-                </h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body pad">
-                <form>
-                    <textarea id="note" name="note" rows="3" cols="80">
-                         Ghi chú
-                    </textarea>
-                </form>
-                </div>
-            </div>
+            
        </form>
   </div>
 </div>
