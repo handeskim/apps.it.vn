@@ -25,7 +25,7 @@
                 <!-- /.box-header -->
                 <div class="box-body pad">
                 <form>
-                    <textarea id="use_guide" name="manuals" rows="3" cols="80">
+                    <textarea id="note" name="note" rows="3" cols="80">
                          Ghi chú
                     </textarea>
                 </form>
@@ -37,10 +37,8 @@
 </section>
 <script>
   $(function () {
-    // Replace the <textarea id="editor1"> with a CKEditor
-    // instance, using default configuration.
-    CKEDITOR.replace('use_guide')
-    //bootstrap WYSIHTML5 - text editor
+     CKEDITOR.replace('use_guide')
+     CKEDITOR.replace('note')
     $('.textarea').wysihtml5()
   })
 </script>
