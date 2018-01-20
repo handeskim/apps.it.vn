@@ -3,20 +3,34 @@
 <div class="row">
   <div class="col-md-12">
        <form role="form">
-       <div class="box box-info">
-            <div class="box-header">
-              <h3 class="box-title">Hướng dẫn sử dụng
-              </h3>
+            <div class="box box-info">
+                <div class="box-header">
+                <h3 class="box-title">Hướng dẫn sử dụng
+                </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body pad">
+                <form>
+                        <textarea id="use_guide" name="manuals" rows="10" cols="80">
+                            Nội dung Hướng dẫn sử dụng
+                        </textarea>
+                </form>
+                </div>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body pad">
-              <form>
-                    <textarea id="use_guide" name="manuals" rows="10" cols="80">
-                          Hướng dẫn sử dụng
+            <div class="box box-info">
+                <div class="box-header">
+                <h3 class="box-title">Ghi chú
+                </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body pad">
+                <form>
+                    <textarea id="use_guide" name="manuals" rows="3" cols="80">
+                         Ghi chú
                     </textarea>
-              </form>
+                </form>
+                </div>
             </div>
-          </div>
        </form>
   </div>
 </div>
