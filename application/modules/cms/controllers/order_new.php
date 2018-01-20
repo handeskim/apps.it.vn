@@ -20,8 +20,8 @@ class Order_new extends MY_Controller{
 			'msg' => $msg,
 			
 			'user_data' => $this->user_data,
-			'title'=> 'Staff Management',
-			'title_main' => 'Staff Management',
+			'title'=> 'Tạo đơn hàng',
+			'title_main' => 'Tạo đơn hàng',
 		);
 		$this->parser->parse('default/header',$data);
 		$this->parser->parse('default/sidebar',$data);
