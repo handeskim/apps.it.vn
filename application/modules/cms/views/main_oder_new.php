@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-12">
        <form role="form">
-            <div class="form-group col-md-6">
+            <div class="form-group">
                 <label for="ProductLabel">Nhập mã sản phẩm </label>
                   <input type="text" class="form-control" id="ProductLabel" placeholder="Mã sản phẩm ">
                   <button class="btn btn-default"> Thêm sản phẩm</button>
