@@ -8,8 +8,14 @@
                 <h3 class="box-title">Tạo mới đơn hàng</h3>
                 </div>
                 <div class="box-body pad">
-                    <textarea id="use_guide" name="manuals" rows="10" cols="80">Nội dung Hướng dẫn sử dụng</textarea>
-                    <textarea id="note" name="note" rows="3" cols="80">Ghi chú</textarea>
+                    <div class="form-group">
+                          <label for="exampleInputEmail1">Hướng dẫn sử dụng</label>
+                          <textarea id="use_guide" name="manuals" rows="10" cols="80">Nội dung Hướng dẫn sử dụng</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Ghi chú</label>
+                         <textarea id="note" name="note" rows="3" cols="80">Ghi chú</textarea>
+                    </div>
                 </div>
             </div>
             
