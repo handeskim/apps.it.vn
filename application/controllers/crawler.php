@@ -12,8 +12,6 @@ class Crawler extends MY_Controller{
 		$cmd = $this->input->get('c_check');
 		$key = $this->input->get('key');
 		if(!empty($cmd)){
-			$cmd = 1;
-			$key = 'Ee423817221vn';
 			if($cmd==1){
 				$links =  'http://www.vnpost.vn/en-us/dinh-vi/buu-pham?key='.$key;
 				$response = '<span> <a target ="_blank" href="'.$links.'"> Nhấn vào đây  </a> để xem chi tiết  </span>';
