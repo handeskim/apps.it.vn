@@ -10,37 +10,38 @@ class Crawler extends MY_Controller{
 		$msg = '';
 		$response = '';
 		$cmd = $this->input->get_post('c_check');
+		$key = $this->input->get_post('key');
 		if(!empty($cmd)){
-			$c_namespace = $this->input->get_post('c_namespace');
-			if(!empty($c_namespace)){
-				$c_element = $this->input->get_post('c_element');
-				if(!empty($c_element)){
-					$c_url = $this->input->get_post('c_url');
-					if(!empty($c_url)){
-						$response = $this->crawler_run($c_url,$c_namespace,$c_element);
-						
-					}else{
-						$msg = 'Vui lòng Nhập url cần lấy text';
-					}
-				}else{
-					$msg = 'Vui lòng Nhập Tên Element (Class hoặc ID nội dung)';
-				}
-			}else{
-				$msg = 'Vui lòng chọn Sử Dụng element ';
+			if($cmd==1){
+				$c_element = "#dnn_ctr734_View_uc_divListCol";
+				$c_url = "http://www.vnpost.vn/en-us/dinh-vi/buu-pham?key=".$key;
 			}
+			if($cmd == 2){
+				$c_element = ".trackingItem";
+				$c_url = "https://www.viettelpost.com.vn/Tracking?KEY=".$key;
+			}
+
+			if(!empty($c_url)){
+				$response = $this->crawler_run($c_url,$c_element);	
+			}else{
+				$msg = 'Vui lòng Nhập url cần lấy text';
+			}
+				
+			
 		}
-		var_dump($response);
+		$data = array(
+			'title' => "Crawler Text",
+			'msg' => $msg,
+			'response' => $response,
+		);
+		$this->parser->parse('main',$data);
 	}
-	public function crawler_run($url,$namespace,$element){
+	public function crawler_run($url,$element){
 		if(!empty($element)){
 			$html = getCURL($url);
 			$output=array();
 			$string= str_get_html($html);
-			if($namespace==1){
-				$list = $string->find('#'.$element);
-			}else{
-				$list = $string->find('.'.$element);
-			}
+			$list = $string->find('#'.$element);
 			$i=1;
 			foreach ($list as $key => $val){
 				return $this->regex_word_html($val->innertext);
