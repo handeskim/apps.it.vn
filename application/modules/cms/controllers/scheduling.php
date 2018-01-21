@@ -22,8 +22,8 @@ class Scheduling extends MY_Controller{
 			'msg' => $msg,
 			'content' => $this->scheduling(),
 			'user_data' => $this->user_data,
-			'title'=> 'Customer care',
-			'title_main' => 'Customer care',
+			'title'=> 'Lập lịch gọi lại',
+			'title_main' => 'Lập lịch gọi lại',
 		);
 		$this->parser->parse('default/header',$data);
 		$this->parser->parse('default/sidebar',$data);
@@ -45,12 +45,15 @@ class Scheduling extends MY_Controller{
 			if($this->permisson == 4){
 				$xcrud->where('code_staff',$this->staff);
 			}
-			$xcrud->table_name('[Customer care] - Scheduling Callback');
+			$xcrud->table_name('[Customer care] - Lập lịch gọi lại');
 			$xcrud->label('code_staff','Mã Nhân viên');
 			$xcrud->label('code_customer','Mã Khách hàng');
 			$xcrud->label('scheduling','Ngày lập lịch');
 			$xcrud->label('note','Ghi chú');
 			$xcrud->validation_required('code_staff');
+			$xcrud->relation('status','status','id','name_status');
+			$xcrud->relation('code_staff','staff','id','code' ,'authorities=4');
+			$xcrud->relation('code_customer','customer','id','code');
 			$xcrud->validation_required('code_customer');
 			$xcrud->validation_required('scheduling');
 			$xcrud->change_type('note', 'textarea');

@@ -20,8 +20,8 @@ class Product_Management extends MY_Controller{
 			'msg' => $msg,
 			'content' => $this->Product(),
 			'user_data' => $this->user_data,
-			'title'=> 'Product Management',
-			'title_main' => 'Product Management',
+			'title'=> 'Quản lý sản phẩm',
+			'title_main' => 'Quản lý sản phẩm',
 		);
 		$this->parser->parse('default/header',$data);
 		$this->parser->parse('default/sidebar',$data);
@@ -30,15 +30,20 @@ class Product_Management extends MY_Controller{
 		$this->parser->parse('default/footer',$data);
 	}
 	private function Product(){
-		if($this->permisson == 1 || $this->permisson == 2){
+		if($this->permisson == 1 || $this->permisson == 2 || $this->permisson == 4){
 			$xcrud = Xcrud::get_instance();
 			$xcrud->table('products');
 			$xcrud->unset_csv();
 			$xcrud->unset_print();
+			if($this->permisson == 4){
+				$xcrud->unset_remove();
+				$xcrud->unset_add();
+				$xcrud->unset_edit();
+			}
 			if($this->permisson == 2){
 				$xcrud->unset_remove();
 			}
-			$xcrud->table_name('[Product] - Product Management');
+			$xcrud->table_name('[Product] - Quản lý sản phẩm');
 			$xcrud->label('code_products','Mã Sản Phẩm');
 			$xcrud->label('name_products','Tên Sản Phẩm');
 			$xcrud->label('label_products','Nhãn sản phẩm');

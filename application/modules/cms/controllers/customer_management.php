@@ -23,8 +23,8 @@ class Customer_Management extends MY_Controller{
 			'user_data' => $this->user_data,
 			'excel_command' => $this->excel_command(),
 			'total_customer' => $this->total_customer(),
-			'title'=> 'Customer Management',
-			'title_main' => 'Customer Management',
+			'title'=> 'Quản lý khách hàng',
+			'title_main' => 'Quản lý khách hàng',
 		);
 		$this->parser->parse('default/header',$data);
 		$this->parser->parse('default/sidebar',$data);
@@ -99,7 +99,7 @@ class Customer_Management extends MY_Controller{
 			if($this->permisson == 2){
 				$xcrud->unset_edit();
 			}
-			$xcrud->table_name('[Customer] - Customer Management');
+			$xcrud->table_name('[Customer] - Quản lý khách hàng');
 			$xcrud->label('code','Mã khách hàng');
 			$xcrud->label('full_name','Họ Va Tên');
 			$xcrud->label('email','email');

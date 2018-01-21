@@ -20,8 +20,8 @@ class Oders_Management extends MY_Controller{
 			'msg' => $msg,
 			'content' => $this->Order(),
 			'user_data' => $this->user_data,
-			'title'=> 'Orders Management',
-			'title_main' => 'Orders Management',
+			'title'=> 'Quản lý Đơn hàng',
+			'title_main' => 'Quản lý Đơn hàng',
 		);
 		$this->parser->parse('default/header',$data);
 		$this->parser->parse('default/sidebar',$data);
@@ -40,7 +40,7 @@ class Oders_Management extends MY_Controller{
 			if($this->permisson == 2){
 				$xcrud->unset_remove();
 			}
-			$xcrud->table_name('[Orders] - Orders Management');
+			$xcrud->table_name('[Orders] - Quản lý Đơn hàng');
 		
 			$xcrud->label('code_products','Mã Sản Phẩm');
 			$xcrud->label('code_orders','Mã Đơn hàng');
