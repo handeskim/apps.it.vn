@@ -39,6 +39,7 @@ class Scheduling extends MY_Controller{
 			$xcrud->table('scheduling_callback');
 			$xcrud->unset_csv();
 			$xcrud->unset_print();
+			$xcrud->order_by('scheduling','desc');
 			if($this->permisson == 2 || $this->permisson == 4){
 				$xcrud->unset_remove();
 			}
@@ -51,7 +52,7 @@ class Scheduling extends MY_Controller{
 			$xcrud->label('scheduling','Ngày lập lịch');
 			$xcrud->label('note','Ghi chú');
 			$xcrud->validation_required('code_staff');
-			$xcrud->relation('status','status','id','name_status');
+			$xcrud->relation('status','status_callback','id','name_status');
 			$xcrud->relation('code_staff','staff','id','code' ,'authorities=4');
 			$xcrud->relation('code_customer','customer','id','code');
 			$xcrud->validation_required('code_customer');
