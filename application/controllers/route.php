@@ -26,8 +26,8 @@ class Route extends MY_Controller{
 			$links = "https://www.viettelpost.com.vn/Tracking?KEY=".$key;
 			
 		}
-		header("Location: ''.$links.'");
-		exit;
+		edirect($links);
+		
 	}
 	public function packer(){
 		$query = $this->input->get('query');
