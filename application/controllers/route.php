@@ -26,7 +26,7 @@ class Route extends MY_Controller{
 			$links = "https://www.viettelpost.com.vn/Tracking?KEY=".$key;
 			
 		}
-		redirect($links);
+		header('Location: '.$links);
 		
 	}
 	public function packer(){
