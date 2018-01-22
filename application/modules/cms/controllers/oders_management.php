@@ -34,8 +34,15 @@ class Oders_Management extends MY_Controller{
 			$xcrud = Xcrud::get_instance();
 			$xcrud->table('orders');
 			$xcrud->unset_csv();
+			
 			$xcrud->unset_print();
-			$xcrud->where('code_staff',$this->staff);
+			if($this->permisson == 3 || $this->permisson == 5 ){
+				$xcrud->unset_remove();
+				$xcrud->unset_edit();
+			}
+			if($this->permisson == 4){
+				$xcrud->where('code_staff',$this->staff);
+			}
 			$xcrud->unset_add();
 			if($this->permisson == 2){
 				$xcrud->unset_remove();
@@ -52,19 +59,20 @@ class Oders_Management extends MY_Controller{
 			$xcrud->label('price','Giá');
 			$xcrud->label('manuals','Hướng Dẫn');
 			$xcrud->label('note','Ghi chú');
-			$xcrud->relation('code_products','products','id','code_products');
+			$xcrud->relation('code_customner','customer','code','full_name');
+			$xcrud->relation('code_products','products','id','id');
 			$xcrud->relation('type_orders','type_oders','id','name_oders');
 			$xcrud->relation('type_post','type_post','id','name_type_orders');
 			$xcrud->relation('code_staff','staff','id','code');
 			
-			$products_list = $xcrud->nested_table('code_products','products','id','code_products');
-			$products_list->unset_add(); 
-			$products_list->unset_edit(); 
-			$products_list->unset_remove(); 
-			$Staff_list = $xcrud->nested_table('code_staff','staff','id','code');
-			$Staff_list->unset_add(); 
-			$Staff_list->unset_edit(); 
-			$Staff_list->unset_remove(); 
+			// $products_list = $xcrud->nested_table('code_products','products','id','code_products');
+			// $products_list->unset_add(); 
+			// $products_list->unset_edit(); 
+			// $products_list->unset_remove(); 
+			// $Staff_list = $xcrud->nested_table('code_staff','staff','id','code');
+			// $Staff_list->unset_add(); 
+			// $Staff_list->unset_edit(); 
+			// $Staff_list->unset_remove(); 
 			$xcrud->benchmark();
 			$response = $xcrud->render();
 			return $response;

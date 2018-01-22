@@ -14,13 +14,18 @@ class Notification extends MY_Controller{
 		}
 		
 	}
+	
 	private function Notification(){
 		$staff =  $this->staff ;
 		$authorities =  $this->authorities;
 		try{
 			if($authorities == 1 || $authorities ==2){
 				$sql = "SELECT * FROM notification WHERE `status` = 1 ";
-			}else{
+			}
+			if($authorities == 3 || $authorities == 5){
+				$sql = "SELECT * FROM notification WHERE `status` = 1 AND authorities = '$authorities'";
+			}
+			if($authorities == 4){
 				$sql = "SELECT * FROM notification WHERE staff = '$staff' AND `status` = 1 AND authorities = '$authorities'";
 			}
 			return $this->GlobalMD->query_global($sql);
@@ -58,7 +63,7 @@ class Notification extends MY_Controller{
 				}else{
 					$fa_icon = "fa-bullhorn";
 				}
-				$temp .= '<li><a href="'.$value['links'].'"><i class="fa '.$fa_icon.' text-aqua"></i> '.$value['title'].' </a></li>';
+				$temp .= '<li><a href="'.base_url().'route?query='.$value['id'].'"><i class="fa '.$fa_icon.' text-aqua"></i> '.$value['title'].' </a></li>';
 			}
 		}
         $temp .= '</ul></li></ul>';
