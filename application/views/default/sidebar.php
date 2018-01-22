@@ -24,7 +24,7 @@
 	</div>
 	<div class="pull-left info">
 	  <p></p>
-	  <a href="#"><?php echo $user_data["email"]; ?></a><br>
+	  <a href="<?php echo base_url('cms/profile');?>"><?php echo $user_data["full_name"]; ?></a><br>
 	</div>
 	
   </div>
@@ -32,7 +32,9 @@
   
   <!-- /.search form -->
   <!-- sidebar menu: : style can be found in sidebar.less -->
-  
+  <?php 
+	$authorities = $user_data['authorities'];
+  ?>
   <ul class="sidebar-menu" data-widget="tree">
 	
 	<li class="header">Trang Chủ</li>
@@ -72,7 +74,9 @@
 
 		</ul>
 	</li>
-	
+	<?php 
+		if($authorities ==1 || $authorities == 2){
+	?>
 	<li class="treeview">
 		<a href="#">
 		<i class="fa fa-gears"></i> <span>Hệ thống</span>
@@ -87,7 +91,9 @@
 			
 		</ul>
 	</li>
-	
+	<?php 
+		}
+	?>
 	<li><a  href="<?php echo base_url()?>exits"><i class="fa fa-sign-out"></i> <span>Đăng xuất tài khoản</span></a></li>
 	<li class="header">Catalog Manager navigation panel</li>
   </ul>

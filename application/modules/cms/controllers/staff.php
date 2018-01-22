@@ -14,32 +14,135 @@ class Staff extends MY_Controller{
 		}
 		
 	}
+	
+	public function addnew(){
+		$msg ='';
+		if($this->permisson == 1 || $this->permisson == 2 ){
+			$cmd = $this->input->post('cmd');
+			if($cmd ==1000){
+				$params = $_POST;
+				$msg = $this->InsertStaff($params);
+			}
+			
+			$data = array(
+				'msg' => $msg,
+				'content' => $this->staffs(),
+				'Addauthorities' => $this->Addauthorities(),
+				'user_data' => $this->user_data,
+				'excel_command' => $this->excel_command(),
+				'title'=> 'Thêm mới nhân sự',
+				'title_main' => 'Thêm mới nhân sự',
+			);
+			$this->parser->parse('default/header',$data);
+			$this->parser->parse('default/sidebar',$data);
+			$this->parser->parse('default/main',$data);
+			$this->parser->parse('default/layout/main_add_staff',$data);
+			$this->parser->parse('default/footer',$data);
+		}else{
+			redirect(base_url('cms/staff'));
+		}
+	}
+	private function InsertStaff($params){
+		$this->db->insert('staff', $params); 
+		$id_staff = $this->db->insert_id();
+		if(isset($id_staff)){
+			$array_staff = array(
+				'code' => 'PQA0'.$id_staff,
+				'password' => md5($params['password']),
+				'status' => 1,
+				'hinh_anh' => 'default.jpg',
+			);
+			$this->db->where('id', $id_staff);
+			$Update = $this->db->update('staff', $array_staff); 
+			if($Update==true){
+				return '<div class="callout callout-success">
+					<h4>Thành công!</h4>
+					<p>Tạo mới nhân sự Thành công vui lòng về trang quản lý nhân sự <a href="'. base_url('cms/staff').'"> xem chi tiết </a></p>
+				  </div>';
+			}else{
+				return '<div class="callout callout-danger">
+					<h4>Thất bại!</h4>
+					<p>Tạo mới nhân sự thất bại vui lòng thử lại.</p>
+				  </div>';
+			}
+		}else{
+			return '<div class="callout callout-danger">
+                <h4>Thất bại!</h4>
+                <p>Tạo mới nhân sự thất bại vui lòng thử lại.</p>
+              </div>';
+		}
+	}
+	private function Addauthorities(){
+		$sql = "SELECT * FROM authorities WHERE id != 1";
+		return $this->GlobalMD->query_global($sql);
+	}
 	public function index(){
 		$msg ='';
 		$data = array(
 			'msg' => $msg,
 			'content' => $this->staffs(),
 			'user_data' => $this->user_data,
-			'title'=> 'Staff Management',
-			'title_main' => 'Staff Management',
+			'excel_command' => $this->excel_command(),
+			'title'=> 'Quản lý nhân sự',
+			'title_main' => 'Quản lý nhân sự',
 		);
 		$this->parser->parse('default/header',$data);
 		$this->parser->parse('default/sidebar',$data);
 		$this->parser->parse('default/main',$data);
-		$this->parser->parse('default/layout/main_curd_account',$data);
+		$this->parser->parse('default/layout/main_curd_staff',$data);
 		$this->parser->parse('default/footer',$data);
+	}
+	private function excel_command(){
+		$user = $this->staff;
+		$permisson = $this->permisson;
+		if($this->permisson == 1 || $this->permisson == 2 ){
+			$sql = "SELECT 
+			s.full_name,
+			s.`code`,
+			s.dia_chi,
+			s.dien_thoai,
+			s.discount,
+			s.email,
+			s.ngay_sinh,
+			s.passport_id,
+			st.name_status,
+			a.name_auth
+			FROM staff s 
+			INNER JOIN authorities a ON s.authorities = a.id 
+			INNER JOIN `status` st ON s.`status` = st.id";
+		}else{
+			$sql = "
+			SELECT 
+			s.full_name,
+			s.`code`,
+			s.dia_chi,
+			s.dien_thoai,
+			s.discount,
+			s.email,
+			s.ngay_sinh,
+			s.passport_id,
+			st.name_status,
+			a.name_auth
+			FROM staff s 
+			INNER JOIN authorities a ON s.authorities = a.id 
+			INNER JOIN `status` st ON s.`status` = st.id
+			WHERE s.authorities = $permisson
+			AND s.id = $user";
+		}
+		return core_encode($sql);
 	}
 	private function staffs(){
 		if($this->permisson == 1 || $this->permisson == 2){
 			$xcrud = Xcrud::get_instance();
 			$xcrud->table('staff');
 			$xcrud->where('authorities !=','1');
+			$xcrud->order_by('id','desc');
 			$xcrud->unset_csv();
-			$xcrud->unset_csv();
+			$xcrud->unset_add();
 			if($this->permisson == 2){
 				$xcrud->unset_remove();
 			}
-			$xcrud->table_name('[HRM] - Staff Management');
+			$xcrud->table_name('[HRM] - Quản lý nhân viên');
 			$xcrud->label('full_name','Họ Và Tên');
 			$xcrud->label('email','email');
 			$xcrud->label('ngay_sinh','Ngày Sinh');
@@ -58,6 +161,7 @@ class Staff extends MY_Controller{
 			$xcrud->validation_required('authorities');
 			$xcrud->relation('status','status','id','name_status');
 			$xcrud->relation('authorities','authorities','id','name_auth');
+			$xcrud->fields('status,full_name,hinh_anh,email,passport_id,authorities,status,dien_thoai');
 			$xcrud->columns('status,code,full_name,hinh_anh,email,passport_id,authorities,status,dien_thoai');
 			$xcrud->change_type('password', 'password', 'md5', array('class'=>'xcrud-input form-control', 'maxlength'=>10,'placeholder'=>'Nhập mật khẩu'));
 			$xcrud->change_type('hinh_anh', 'image', '', 

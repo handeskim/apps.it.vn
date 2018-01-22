@@ -16,8 +16,13 @@ class Oders_Management extends MY_Controller{
 	}
 
 	private function button_new_order(){
-		$temp='<a class="btn btn-primary" href="'.base_url('cms/order_new').'"> <i class="fa fa-cart-plus"> </i> Tạo mới đơn hàng</a>';
-		return $temp;
+		$temp = '';
+		if($this->permisson == 1 || $this->permisson == 2 || $this->permisson == 3 || $this->permisson == 5){
+			return $temp;
+		}else{
+			$temp='<a class="btn btn-primary" href="'.base_url('cms/order_new').'"> <i class="fa fa-cart-plus"> </i> Tạo mới đơn hàng</a>';
+			return $temp;
+		}
 	}
 	public function index(){
 		$msg ='';
@@ -31,7 +36,7 @@ class Oders_Management extends MY_Controller{
 		$this->parser->parse('default/header',$data);
 		$this->parser->parse('default/sidebar',$data);
 		$this->parser->parse('default/main',$data);
-		$this->parser->parse('default/layout/main_curd_Product',$data);
+		$this->parser->parse('default/layout/main_curd_order',$data);
 		$this->parser->parse('default/footer',$data);
 	}
 	private function Order(){

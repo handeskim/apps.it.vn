@@ -8,6 +8,7 @@ class Order_new extends MY_Controller{
 		if($this->login){
 			$this->user_data = $this->session->userdata('data_users');
 			$this->permisson = $this->user_data['authorities'];
+			$this->discounts = $this->user_data['discount'];
 			$this->authorities = $this->user_data['authorities'];
 			$this->staff = $this->user_data['id'];
 		}else{
@@ -76,9 +77,9 @@ class Order_new extends MY_Controller{
 			$params = $_POST;
 			$checkCode = $thiss->InfoProductCheckOrder($params['CodeOrder']);
 			if($checkCode==true){
-				$code_customer = time().uniqid();
+				
 				if($params['NameCheckCustomer'] == 2){
-					$this->setUpCustomer($params,$code_customer);
+					$code_customer = $this->setUpCustomer($params);
 				}else{
 					$code_customer = $params['CodeCustomer'];	
 				}
@@ -86,6 +87,11 @@ class Order_new extends MY_Controller{
 					$this->setUpcallback($params,$code_customer);
 				}
 				$this->db->trans_start();
+				if(isset($params['discounts'])){
+					$discounts = $params['discounts'];
+				}else{
+					$discounts = 0;
+				}
 				foreach($params ["product"] as $valueP){
 					$code_products = $valueP[0];
 					$infoP = $this->InfoProduct($code_products);
@@ -93,6 +99,8 @@ class Order_new extends MY_Controller{
 					$quantily_old = (int)$infoP[0]['quantily'];
 					$price = (int)$infoP[0]['price'];
 					$total_price = (int)$quantily * (int)$price;
+					$price_discounts = (($total_price * $discounts)/100);
+					$total_pay = $total_price - $price_discounts;
 					$quantily_update = $quantily_old-$quantily;
 					$this->update_quantily($quantily_update,$code_products);
 					$arrayOrder = array(
@@ -102,9 +110,10 @@ class Order_new extends MY_Controller{
 						'code_staff' => $this->staff,
 						'code_customner' => $code_customer,
 						'type_orders' => 2,
+						'discounts' => $discounts,
 						'quantily' => $quantily,
 						'price' => $price,
-						'total_price' => $total_price,
+						'total_price' => $total_pay,
 						'manuals' => $params['manuals'],
 						'note' => $params['note'],
 					);
@@ -123,7 +132,7 @@ class Order_new extends MY_Controller{
 		$msg ='';
 		$data = array(
 			'msg' => $msg,
-			
+			'discounts' => $this->discounts,
 			'user_data' => $this->user_data,
 			'title'=> 'Tạo đơn hàng',
 			'title_main' => 'Tạo đơn hàng',
@@ -145,9 +154,8 @@ class Order_new extends MY_Controller{
 		}
 		
 	}
-	private function setUpCustomer($params,$code_customer){
+	private function setUpCustomer($params){
 		$customer = array(
-			'code' => $code_customer,
 			'full_name'  => $params['name_customer'],
 			'email'  => $params['email_customer'],
 			'dia_chi'  => $params['addr_customer'],
@@ -155,7 +163,21 @@ class Order_new extends MY_Controller{
 			'note'  => $params['note_customer'],
 			'supervisor'  => $this->staff,
 		);
-		$this->db->insert('customer',$customer);
+		$this->db->insert('customer', $customer); 
+		$id_customer = $this->db->insert_id();
+		if(isset($id_customer)){
+			$code = 'KHPAQ0'.$id_customer;
+			$array_customer = array(
+				'code' => $code,
+			);
+			$this->db->where('id', $id_customer);
+			$Update = $this->db->update('customer', $array_customer); 
+			if($Update==true){
+				return $code;
+			}
+		}else{
+			return $code = 0;
+		}
 	}
 	private function setUpcallback($params,$code_customer){
 		$date = date('Y-m-d',strtotime($params['date_allBack']));

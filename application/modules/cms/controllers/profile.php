@@ -30,7 +30,7 @@ class Profile extends MY_Controller{
 		$xcrud->unset_pagination();
 		$xcrud->unset_print();
 		$xcrud->unset_search();
-		$xcrud->table_name('My Account Information');
+		$xcrud->table_name('Thông tin tài khoản của tôi');
 		$xcrud->label('full_name','Họ Và Tên');
 			$xcrud->label('email','email');
 			$xcrud->label('ngay_sinh','Ngày Sinh');
@@ -70,7 +70,7 @@ class Profile extends MY_Controller{
 			'msg' => $msg,
 			'content' => $this->Profile(),
 			'user_data' => $this->user_data,
-			'title'=> 'Apps Convert Phone',
+			'title'=> 'Tài Khoản của tôi',
 			'title_main' => 'Tài Khoản của tôi',
 		);
 		$this->parser->parse('default/header',$data);

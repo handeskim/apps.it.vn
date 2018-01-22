@@ -41,7 +41,7 @@
 							<div id="item_cart">
 								<div class="col-md-6">
 									<label >Mã đơn hàng</label>
-									<input id="CodeOrder" type="text" class="form-control" id="CodeOrder" name="CodeOrder" value="" placeholder="Mã đơn hàng - mã vận đơn">
+									<input id="CodeOrder" type="text" class="form-control" id="CodeOrder" name="CodeOrder" value="" placeholder="Mã đơn hàng - mã vận đơn" required>
 								</div>
 								<div class="col-md-6">
 									<label for="exampleInputEmail1">Nhà cung cấp dịch vụ</label>
@@ -55,24 +55,35 @@
 							
 						</div>
 						<div class="form-group col-md-12" style="margin-top: 10px;float:  left;width: 100%;">
-						<hr>
-								<label>Thông tin Giỏ hàng</label>
-								<div id="item_cart">
-									<table style="text-align: center;" id="bodyAddCart" class="table table-bordered"> 
-										<thead>
-										  <tr>
-											 <th style="text-align: center;" >Mã sản phẩm</th>
-											 <th style="text-align: center;" >Tên sản phẩm</th>
-											 <th style="text-align: center;" >Nhãn sản phẩm</th>
-											 <th style="text-align: center;" >Số lượng </th>
-											 <th style="text-align: center;" >Giá </th>
-										  </tr>
-										</thead>
-										<tbody >
-										
-										</tbody>
-									</table>
-								</div>
+							<hr>
+							<label>Thông tin Giỏ hàng</label>
+							<div id="item_cart">
+								<table style="text-align: center;" id="bodyAddCart" class="table table-bordered"> 
+									<thead>
+									  <tr>
+										 <th style="text-align: center;" >Mã sản phẩm</th>
+										 <th style="text-align: center;" >Tên sản phẩm</th>
+										 <th style="text-align: center;" >Nhãn sản phẩm</th>
+										 <th style="text-align: center;" >Số lượng </th>
+										 <th style="text-align: center;" >Giá </th>
+									  </tr>
+									</thead>
+									<tbody >
+									
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="form-group col-md-12" style="">
+							<hr>
+						<?php if($discounts==1){ ?>
+						<div class="col-md-12">
+							<div id="discounts"> 
+								<label >% Giảm Giá</label>
+								<input id="discounts" type="number" class="form-control" name="discounts" value="" placeholder="% Giảm Giá exp: 15 là 15%" required>
+							</div>
+						</div>
+						<?php } ?>
 						</div>
 						<div class="form-group col-md-12" style="">
 						<hr>
@@ -80,7 +91,7 @@
 							<div id="item_customer">
 								<div class="col-md-2">
 									<label for="exampleInputEmail1">Khách hàng</label>
-									<select id="NameCheckCustomer" name="NameCheckCustomer" class="form-control"> 
+									<select id="NameCheckCustomer" name="NameCheckCustomer" class="form-control" required> 
 										<option value="1"> Cũ</option>
 										<option value="2"> Mới</option>
 									</select>
@@ -90,19 +101,19 @@
 									<div class="col-md-12">
 										<div id="Customer_old"> 
 											<label >Mã khách hàng</label>
-											<input id="CodeCustomer" type="text" class="form-control" name="CodeCustomer" value="" placeholder="Mã khách hàng - xxxxx">
+											<input id="CodeCustomer" type="text" class="form-control" name="CodeCustomer" value="" placeholder="Mã khách hàng - xxxxx" required>
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div id="Customer_New"> 
 											<label >Tên Khách hàng</label>
-											<input id="name_customer" type="text" class="form-control" name="name_customer" value="" placeholder="Mã khách hàng - xxxxx">
+											<input id="name_customer" type="text" class="form-control" name="name_customer" value="" placeholder="Mã khách hàng - xxxxx" required>
 											<label >Địa Chỉ Khách hàng</label>
-											<input id="addr_customer" type="text" class="form-control" name="addr_customer" value="" placeholder="Địa Chỉ Khách hàng- xxxxx">
+											<input id="addr_customer" type="text" class="form-control" name="addr_customer" value="" placeholder="Địa Chỉ Khách hàng- xxxxx" required>
 											<label >Email Khách hàng</label>
-											<input id="email_customer" type="text" class="form-control" name="email_customer" value="" placeholder="Email Khách hàng - xxxxx">
+											<input id="email_customer" type="text" class="form-control" name="email_customer" value="" placeholder="Email Khách hàng - xxxxx" required>
 											<label >Số ĐT Khách hàng</label>
-											<input id="phone_customer" type="text" class="form-control" name="phone_customer" value="" placeholder="Số ĐT Khách hàng - xxxxx">
+											<input id="phone_customer" type="text" class="form-control" name="phone_customer" value="" placeholder="Số ĐT Khách hàng - xxxxx" required>
 											<div class="form-group">
 												<label for="exampleInputEmail1">Ghi chú Khách hàng</label>
 												 <textarea id="note_customer" name="note_customer" rows="3" cols="50">Ghi chú</textarea>
@@ -118,17 +129,16 @@
 							<div id="item_customer">
 								<div class="col-md-2">
 									<label for="exampleInputEmail1">Lịch gọi lại</label>
-									<select id="NameCheckCallBack" name="NameCheckCallBack" class="form-control"> 
+									<select id="NameCheckCallBack" name="NameCheckCallBack" class="form-control" required> 
 										<option value="2"> Không</option>
 										<option value="1"> Có</option>
 									</select>
 								</div>
 								<div class="col-md-8">
-									
 									<div class="col-md-12">
 										<div id="CallBack"> 
 											<label>Ngày gọi lại</label>
-											<input id="date_allBack" type="text" class="form-control" name="date_allBack" value="" placeholder="mm-dd-yyyy">
+											<input id="date_allBack" type="text" class="form-control" name="date_allBack" value="" placeholder="mm-dd-yyyy" >
 											<label for="exampleInputEmail1">Ghi chú gọi lại</label>
 											<textarea id="note_callback" name="note_callback" rows="3" cols="50">Ghi chú</textarea>
 										</div>
