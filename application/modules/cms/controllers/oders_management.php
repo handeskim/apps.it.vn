@@ -39,7 +39,6 @@ class Oders_Management extends MY_Controller{
 			$xcrud = Xcrud::get_instance();
 			$xcrud->table('orders');
 			$xcrud->unset_csv();
-			
 			$xcrud->unset_print();
 			if($this->permisson == 3 ){
 				$xcrud->unset_remove();
@@ -50,6 +49,8 @@ class Oders_Management extends MY_Controller{
 			if($this->permisson == 5 ){
 				$xcrud->unset_remove();
 				$xcrud->where('type_orders',$this->permisson);
+				$xcrud->or_where('type_orders',8);
+				$xcrud->or_where('type_orders',9);
 				$xcrud->button(base_url().'route/packer?query={code_orders}','Xác thực','fa fa-check-circle','',array('target'=>'_blank'));
 				$xcrud->unset_edit();
 			}
