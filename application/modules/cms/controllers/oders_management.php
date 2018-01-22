@@ -58,6 +58,8 @@ class Oders_Management extends MY_Controller{
 				$xcrud->where('code_staff',$this->staff);
 				$xcrud->where('type_orders',$this->permisson);
 				$xcrud->or_where('type_orders',$this->permisson);
+				$xcrud->fields('code_orders,type_post,type_orders,manuals,note');
+				$xcrud->columns('code_orders,price,quantily,total_price,code_customner,type_post,type_orders,manuals,note');
 				
 			}
 			$xcrud->unset_add();
