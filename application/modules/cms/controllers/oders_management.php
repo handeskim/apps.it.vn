@@ -41,12 +41,22 @@ class Oders_Management extends MY_Controller{
 			$xcrud->unset_csv();
 			
 			$xcrud->unset_print();
-			if($this->permisson == 3 || $this->permisson == 5 ){
+			if($this->permisson == 3 ){
 				$xcrud->unset_remove();
+				$xcrud->where('type_orders',$this->permisson);
+				$xcrud->button(base_url().'route/accountancy?query={code_orders}','Xác thực','fa fa-check-circle','',array('target'=>'_blank'));
+				$xcrud->unset_edit();
+			}
+			if($this->permisson == 5 ){
+				$xcrud->unset_remove();
+				$xcrud->where('type_orders',$this->permisson);
+				$xcrud->button(base_url().'route/packer?query={code_orders}','Xác thực','fa fa-check-circle','',array('target'=>'_blank'));
 				$xcrud->unset_edit();
 			}
 			if($this->permisson == 4){
 				$xcrud->where('code_staff',$this->staff);
+				$xcrud->where('type_orders',$this->permisson);
+				$xcrud->or_where('type_orders',$this->permisson);
 				
 			}
 			$xcrud->unset_add();
@@ -69,7 +79,7 @@ class Oders_Management extends MY_Controller{
 			$xcrud->relation('type_orders','type_oders','id','name_oders');
 			$xcrud->relation('type_post','type_post','id','name_type_orders');
 			$xcrud->relation('code_staff','staff','id','code');
-			$xcrud->button(base_url().'route?query={code_orders}','Xác thực','fa fa-check-circle','',array('target'=>'_blank'));
+		
 			$xcrud->benchmark();
 			$response = $xcrud->render();
 			return $response;

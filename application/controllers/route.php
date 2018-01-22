@@ -15,12 +15,30 @@ class Route extends MY_Controller{
 	
 		
 	}
-	
-
-	public function index(){
+	public function packer(){
 		$query = $this->input->get('query');
-		$data_notifation = array('status' => 2,);
+		$data_notifation = array(
+				'status' => 1,
+				'authorities' => 3,
+			);
+		$this->db->where('links', $query);
+	
+		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
 		
+		if($UpdateNotifation==true){
+			$data_Orders = array('type_orders' => 4,);
+			$this->db->where('code_orders', $query);
+			$UpdateOrderStatus = $this->db->update('orders', $data_Orders); 
+			redirect(base_url('cms/oders_management'));
+		}
+	}
+
+	public function accountancy(){
+		$query = $this->input->get('query');
+		$data_notifation = array(
+				'status' => 1,
+				'authorities' => 5,
+			);
 		$this->db->where('links', $query);
 	
 		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
