@@ -14,10 +14,15 @@ class Oders_Management extends MY_Controller{
 		}
 		
 	}
+
+	private function button_new_order(){
+		$temp='<a href="'.base_url('cms/order_new').'"> Tạo mới đơn hàng</a>';
+		return $temp;
+	}
 	public function index(){
 		$msg ='';
 		$data = array(
-			'msg' => $msg,
+			'msg' => $this->button_new_order(),
 			'content' => $this->Order(),
 			'user_data' => $this->user_data,
 			'title'=> 'Quản lý Đơn hàng',
