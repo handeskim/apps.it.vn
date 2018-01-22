@@ -55,6 +55,7 @@ class Oders_Management extends MY_Controller{
 				$xcrud->unset_edit();
 			}
 			if($this->permisson == 4){
+				$xcrud->unset_remove();
 				$xcrud->where('code_staff',$this->staff);
 				$xcrud->where('type_orders',$this->permisson);
 				$xcrud->or_where('type_orders',$this->permisson);
