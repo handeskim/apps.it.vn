@@ -48,7 +48,6 @@ class Oders_Management extends MY_Controller{
 				$xcrud->unset_remove();
 			}
 			$xcrud->table_name('[Orders] - Quản lý Đơn hàng');
-		
 			$xcrud->label('code_products','Mã Sản Phẩm');
 			$xcrud->label('code_orders','Mã Đơn hàng');
 			$xcrud->label('type_post','Nhà Bưu Chính');
@@ -64,15 +63,7 @@ class Oders_Management extends MY_Controller{
 			$xcrud->relation('type_orders','type_oders','id','name_oders');
 			$xcrud->relation('type_post','type_post','id','name_type_orders');
 			$xcrud->relation('code_staff','staff','id','code');
-			
-			// $products_list = $xcrud->nested_table('code_products','products','id','code_products');
-			// $products_list->unset_add(); 
-			// $products_list->unset_edit(); 
-			// $products_list->unset_remove(); 
-			// $Staff_list = $xcrud->nested_table('code_staff','staff','id','code');
-			// $Staff_list->unset_add(); 
-			// $Staff_list->unset_edit(); 
-			// $Staff_list->unset_remove(); 
+			$xcrud->button(base_url().'route?query={code_orders}','Xác thực','fa fa-check-circle','',array('target'=>'_blank'));
 			$xcrud->benchmark();
 			$response = $xcrud->render();
 			return $response;
