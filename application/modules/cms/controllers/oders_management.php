@@ -86,6 +86,7 @@ class Oders_Management extends MY_Controller{
 			$xcrud->relation('code_staff','staff','id','code');
 			$xcrud->button(base_url().'prints/orders?query={id}','In Đơn hàng','fa fa-print','',array('target'=>'_blank'));
 			$xcrud->button(base_url().'prints/guide?query={id}','In Hướng Dẫn','fa fa-file','',array('target'=>'_blank'));
+			$xcrud->button(base_url().'route/tracking?key={code_orders}&code={type_post}','Xem vận đơn','fa fa-ship','',array('target'=>'_blank'));
 			$xcrud->benchmark();
 			$response = $xcrud->render();
 			return $response;

@@ -15,6 +15,20 @@ class Route extends MY_Controller{
 	
 		
 	}
+	public function tracking(){
+		$key = $this->input->get('key');
+		$cmd = $this->input->get('posts');
+		if($cmd==1){
+			$links =  'http://www.vnpost.vn/en-us/dinh-vi/buu-pham?key='.$key;
+			
+		}
+		if($cmd==2){
+			$links = "https://www.viettelpost.com.vn/Tracking?KEY=".$key;
+			
+		}
+		header('Location: '.$links.');
+		exit;
+	}
 	public function packer(){
 		$query = $this->input->get('query');
 		$data_notifation = array(
