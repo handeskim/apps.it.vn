@@ -44,7 +44,7 @@ class Route extends MY_Controller{
 		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
 		
 		if($UpdateNotifation==true){
-			$data_Orders = array('type_orders' => 3,);
+			$data_Orders = array('type_orders' => 5,);
 			$this->db->where('code_orders', $query);
 			$UpdateOrderStatus = $this->db->update('orders', $data_Orders); 
 			redirect(base_url('cms/oders_management'));
