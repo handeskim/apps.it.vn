@@ -54,6 +54,19 @@ class Order_new extends MY_Controller{
 		$install = $this->db->insert('notification',$order);
 
 	}
+	public function update_quantily($quantily,$id){
+		if($quantily < 0 ){
+			$quantily_update = 0;
+		}else{
+			$quantily_update = $quantily;
+		}
+		$data = array(
+			'quantily' => $quantily_update,
+		 );
+
+		$this->db->where('id', $id);
+		$this->db->update('products', $data); 
+	}
 	public function index(){
 		if($this->authorities == 3){
 			redirect(base_url('cms/oders_management'));
@@ -61,48 +74,51 @@ class Order_new extends MY_Controller{
 		$cmd = $this->input->post('cmd');
 		if(!empty($cmd)){
 			$params = $_POST;
-			$code_customer = time().uniqid();
-			if($params['NameCheckCustomer'] == 2){
-				
-				$this->setUpCustomer($params,$code_customer);
-			}else{
-				$code_customer = $params['CodeCustomer'];	
+			$checkCode = $thiss->InfoProductCheckOrder($params['CodeOrder']);
+			if($checkCode==true){
+				$code_customer = time().uniqid();
+				if($params['NameCheckCustomer'] == 2){
+					$this->setUpCustomer($params,$code_customer);
+				}else{
+					$code_customer = $params['CodeCustomer'];	
+				}
+				if($params['NameCheckCallBack'] ==1){
+					$this->setUpcallback($params,$code_customer);
+				}
+				$this->db->trans_start();
+				foreach($params ["product"] as $valueP){
+					$code_products = $valueP[0];
+					$infoP = $this->InfoProduct($code_products);
+					$quantily = (int)$valueP[1];
+					$quantily_old = (int)$infoP[0]['quantily'];
+					$price = (int)$infoP[0]['price'];
+					$total_price = (int)$quantily * (int)$price;
+					$quantily_update = $quantily_old-$quantily;
+					$this->update_quantily($quantily_update,$code_products);
+					$arrayOrder = array(
+						'code_products' => $code_products,
+						'code_orders' => $params['CodeOrder'],
+						'type_post' => $params['NamePost'],
+						'code_staff' => $this->staff,
+						'code_customner' => $code_customer,
+						'type_orders' => 2,
+						'quantily' => $quantily,
+						'price' => $price,
+						'total_price' => $total_price,
+						'manuals' => $params['manuals'],
+						'note' => $params['note'],
+					);
+					$install = $this->db->insert('orders',$arrayOrder);
+				}
+				$this->db->trans_complete();
+				if($install==true){
+					$this->Notifacation($params['CodeOrder']);
+					redirect(base_url('cms/oders_management'));
+					$msg = "Tạo đơn hàng thành công";
+				}else{
+					$msg = "Tạo đơn hàng thất bại";
+				}
 			}
-			if($params['NameCheckCallBack'] ==1){
-				$this->setUpcallback($params,$code_customer);
-			}
-			$this->db->trans_start();
-			foreach($params ["product"] as $valueP){
-				
-				$code_products = $valueP[0];
-				$infoP = $this->InfoProduct($code_products);
-				$quantily = (int)$valueP[1];
-				$price = (int)$infoP[0]['price'];
-				$total_price = (int)$quantily * (int)$price;
-				$arrayOrder = array(
-					'code_products' => $code_products,
-					'code_orders' => $params['CodeOrder'],
-					'type_post' => $params['NamePost'],
-					'code_staff' => $this->staff,
-					'code_customner' => $code_customer,
-					'type_orders' => 2,
-					'quantily' => $quantily,
-					'price' => $price,
-					'total_price' => $total_price,
-					'manuals' => $params['manuals'],
-					'note' => $params['note'],
-				);
-				$install = $this->db->insert('orders',$arrayOrder);
-			}
-			$this->db->trans_complete();
-			if($install==true){
-				$this->Notifacation($params['CodeOrder']);
-				redirect(base_url('cms/oders_Management'));
-				$msg = "Tạo đơn hàng thành công";
-			}else{
-				$msg = "Tạo đơn hàng thất bại";
-			}
-			
 		}
 		$msg ='';
 		$data = array(
@@ -119,6 +135,16 @@ class Order_new extends MY_Controller{
 		$this->parser->parse('default/footer',$data);
 	}
 	
+	private function CheckOrder($order){
+		$sql = "SELECT * FROM orders WHERE code_orders = '$order'";
+		$resuls = $this->GlobalMD->query_global($sql);
+		if(!empty($resuls)){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
 	private function setUpCustomer($params,$code_customer){
 		$customer = array(
 			'code' => $code_customer,
