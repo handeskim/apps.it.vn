@@ -15,7 +15,9 @@ class TypesPharma extends MY_Controller{
 		
 	}
 	public function index(){
-		
+		if($this->permisson == 5 || $this->permisson == 3 || $this->permisson == 4){
+			redirect(base_url('apps'));
+		}
 		$msg ='';
 		$data = array(
 			'msg' => $msg,

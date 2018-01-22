@@ -1,3 +1,6 @@
+ <?php 
+	$authorities = $user_data['authorities'];
+  ?>
 <aside class="main-sidebar">
 <!-- sidebar: style can be found in sidebar.less -->
 <section class="sidebar">
@@ -23,21 +26,41 @@
 	  <img src="<?php echo base_url().$img_awata;?>" class="img-circle" alt="User Image">
 	</div>
 	<div class="pull-left info">
-	  <p></p>
-	  <a href="<?php echo base_url('cms/profile');?>"><?php echo $user_data["full_name"]; ?></a><br>
+		<a href="<?php echo base_url('cms/profile');?>"><?php echo $user_data["full_name"]; ?></a>
+		</br>
+		<p style="padding-top:10px">  
+		   <small><?php 
+		   if(!empty($user_data['authorities'])){
+			   if($user_data['authorities']==1){
+				   echo "Quản trị viên";
+			   }else if($user_data['authorities']==2){
+				   echo "Quản trị viên";
+			   }else if($user_data['authorities']==3){
+				   echo "Nhân viên kế toán";
+			   }else if($user_data['authorities']==4){
+				   echo "Nhân viên bán hàng";
+			   }else if($user_data['authorities']==5){
+				   echo "Nhân viên kho";
+			   }
+		   }
+		   ?> </small>
+                 
+       </p>
+	 
 	</div>
 	
   </div>
-  <!-- search form -->
-  
-  <!-- /.search form -->
-  <!-- sidebar menu: : style can be found in sidebar.less -->
-  <?php 
-	$authorities = $user_data['authorities'];
-  ?>
+
   <ul class="sidebar-menu" data-widget="tree">
 	
-	<li class="header">Trang Chủ</li>
+	<li class="header">.</li>
+	<li ><a href="<?php echo base_url('apps');?>">
+			<i class="fa fa-dashboard"></i> <span>Trang Chủ</span>
+		</a>
+	</li>
+	<?php 
+		if($authorities ==1 || $authorities == 2 || $authorities ==4){
+	?>
 	<li class="treeview">
 		<a href="#">
 		<i class="fa fa-briefcase"></i> <span>Khách hàng</span>
@@ -47,9 +70,14 @@
 		</a>
 		<ul class="treeview-menu">
 			<li><a href="<?php echo base_url();?>cms/customer_management"><i class="fa fa-user-secret"></i> Quản lý khách hàng</a></li>
+			<?php 
+				if($authorities ==4){
+			?>
 			<li><a href="<?php echo base_url();?>cms/scheduling"><i class="fa fa-history"></i> Lập lịch gọi lại</a></li>
+			<?php } ?>
 		</ul>
 	</li>
+	<?php } ?>
 	<li class="treeview">
 		<a href="#">
 		<i class="fa fa-shopping-cart"></i> <span>Đơn hàng</span>
@@ -94,8 +122,9 @@
 	<?php 
 		}
 	?>
+	
+	<li class="header">Copyright © PQA Software</li>
 	<li><a  href="<?php echo base_url()?>exits"><i class="fa fa-sign-out"></i> <span>Đăng xuất tài khoản</span></a></li>
-	<li class="header">Catalog Manager navigation panel</li>
   </ul>
 </section>
 <!-- /.sidebar -->

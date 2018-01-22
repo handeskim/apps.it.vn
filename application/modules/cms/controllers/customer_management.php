@@ -15,7 +15,9 @@ class Customer_Management extends MY_Controller{
 		
 	}
 	public function index(){
-		
+		if($this->permisson == 3 || $this->permisson == 5 ){
+			redirect(base_url('apps'));
+		}
 		$msg ='';
 		$data = array(
 			'msg' => $msg,
@@ -84,19 +86,12 @@ class Customer_Management extends MY_Controller{
 			$xcrud = Xcrud::get_instance();
 			$xcrud->table('customer');
 			$xcrud->unset_csv();
-			
-			if($this->permisson == 4 || $this->permisson == 5|| $this->permisson == 3){
-				$xcrud->unset_add();
-				$xcrud->unset_remove();
+			$xcrud->unset_add();
+			if($this->permisson == 4){
 				$xcrud->where('supervisor',$this->staff);
-				
 			}
 			if($this->permisson == 2 || $this->permisson == 3 || $this->permisson == 5){
 				$xcrud->unset_remove();
-				$xcrud->unset_edit();
-				
-			}
-			if($this->permisson == 2){
 				$xcrud->unset_edit();
 			}
 			$xcrud->table_name('[Customer] - Quản lý khách hàng');
@@ -118,27 +113,13 @@ class Customer_Management extends MY_Controller{
 			$xcrud->validation_required('dia_chi');
 			$xcrud->validation_required('dien_thoai');
 			$xcrud->validation_required('supervisor');
-			$xcrud->relation('supervisor','staff','id',array('code'),'authorities=4 and id='.$user);
-			$xcrud->change_type('hinh_anh', 'image', '', 
-				array(
-						'width' => 200, 
-						'height' => 200,
-						'path' => '/upload/Customer/',
-					)
-			);
+			if($this->permisson == 4 || $this->permisson == 5|| $this->permisson == 3){
+				$xcrud->relation('supervisor','staff','id',array('code'),'authorities=4 and id='.$user);
+			}else{
+				$xcrud->relation('supervisor','staff','id',array('code'),'authorities=4');
+			}
+			$xcrud->change_type('hinh_anh', 'image', '', array('width' => 200, 'height' => 200,'path' => '/upload/Customer/',));
 			$xcrud->button(base_url().'prints/customer_details?code={id}','Prints','fa fa-print','',array('target'=>'_blank'));
-			//$xcrud->relation('generic','generic_pharma','id','name_generic_pharma');
-			// $xcrud->relation('authorities','authorities','id','name_auth');
-			// $xcrud->columns('status,code,full_name,hinh_anh,email,passport_id,authorities,status,dien_thoai');
-			//$xcrud->fields('code_products,name_products,label_products,types,generic,quantily,price,images,manuals,note');
-			// $xcrud->change_type('password', 'password', 'md5', array('class'=>'xcrud-input form-control', 'maxlength'=>10,'placeholder'=>'Nhập mật khẩu'));
-			//$xcrud->change_type('images', 'image', '', 
-									//array(
-									//		'width' => 200, 
-									//		'height' => 200,
-									//		'path' => '/upload/product',
-									//	)
-								//);
 			$xcrud->benchmark();
 			$response = $xcrud->render();
 			return $response;

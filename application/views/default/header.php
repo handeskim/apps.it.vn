@@ -85,19 +85,19 @@
               <img src="<?php echo base_url().$img_awata;?>" class="img-circle" alt="User Image">
 
                 <p>
-                 <?php echo "Account Name is " .$user_data['email']; ?> <br>
-                   <small>Authorities: <?php 
+                 <?php echo "Mã Nhân viên: " .$user_data['code']; ?> <br>
+                   <small>Chức vụ: <?php 
 				   if(!empty($user_data['authorities'])){
 					   if($user_data['authorities']==1){
-						   echo "Administrator";
+						   echo "Quản trị viên";
 					   }else if($user_data['authorities']==2){
-						   echo "Admin";
+						   echo "Quản trị viên";
 					   }else if($user_data['authorities']==3){
-						   echo "Staff Accountant";
+						   echo "Nhân viên kế toán";
 					   }else if($user_data['authorities']==4){
-						   echo "Staff";
+						   echo "Nhân viên bán hàng";
 					   }else if($user_data['authorities']==5){
-						   echo "Oder staff";
+						   echo "Nhân viên kho";
 					   }
 				   }
 				   ?> </small>
