@@ -38,6 +38,7 @@ class Oders_Management extends MY_Controller{
 	
 			$xcrud = Xcrud::get_instance();
 			$xcrud->table('orders');
+			$xcrud->unset_view();
 			$xcrud->unset_csv();
 			$xcrud->unset_print();
 			if($this->permisson == 3 ){
