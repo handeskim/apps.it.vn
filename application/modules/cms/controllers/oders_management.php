@@ -16,7 +16,7 @@ class Oders_Management extends MY_Controller{
 	}
 
 	private function button_new_order(){
-		$temp='<a class="btn btn-primary" href="'.base_url('cms/order_new').'"> <i class="fa fa-cart-plus"> </i>Tạo mới đơn hàng</a>';
+		$temp='<a class="btn btn-primary" href="'.base_url('cms/order_new').'"> <i class="fa fa-cart-plus"> </i> Tạo mới đơn hàng</a>';
 		return $temp;
 	}
 	public function index(){
