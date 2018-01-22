@@ -25,7 +25,7 @@ class Route extends MY_Controller{
 	
 		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
 		
-		if($Update==true){
+		if($UpdateNotifation==true){
 			$data_Orders = array('type_orders' => 3,);
 			$this->db->where('code_orders', $query);
 			$UpdateOrderStatus = $this->db->update('notification', $data_Orders); 
