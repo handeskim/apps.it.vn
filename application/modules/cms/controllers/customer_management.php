@@ -14,6 +14,62 @@ class Customer_Management extends MY_Controller{
 		}
 		
 	}
+	private function InsertCustomer($params){
+		$this->db->insert('customer', $params); 
+		$id_customer = $this->db->insert_id();
+		if(isset($id_customer)){
+			$array_staff = array(
+				'code' => 'KHPQA0'.$id_customer,
+				'supervisor' => $this->staff,
+			);
+			$this->db->where('id', $id_customer);
+			$Update = $this->db->update('customer', $array_staff); 
+			if($Update==true){
+				return '<div class="callout callout-success">
+					<h4>Thành công!</h4>
+					<p>Tạo mới khách hàng Thành công vui lòng về trang quản lý nhân sự <a href="'. base_url('cms/customer_management').'"> xem chi tiết </a></p>
+				  </div>';
+			}else{
+				return '<div class="callout callout-danger">
+					<h4>Thất bại!</h4>
+					<p>Tạo mới  khách hàng thất bại vui lòng thử lại.</p>
+				  </div>';
+			}
+		}else{
+			return '<div class="callout callout-danger">
+                <h4>Thất bại!</h4>
+                <p>Tạo mới  khách hàng thất bại vui lòng thử lại.</p>
+              </div>';
+		}
+	}
+	public function addnew(){
+		$msg ='';
+		if($this->permisson == 3 || $this->permisson == 5 ){
+			redirect(base_url('apps'));
+		}
+			$cmd = $this->input->post('cmd');
+			if($cmd ==1000){
+				$params = $_POST;
+				$msg = $this->InsertCustomer($params);
+			}
+		$data = array(
+			'msg' => $msg,
+			'content' => $this->Customer(),
+			'user_data' => $this->user_data,
+			'excel_command' => $this->excel_command(),
+			'staff' => $this->staff,
+			'total_customer' => $this->total_customer(),
+			'title'=> 'Quản lý khách hàng',
+			'title_main' => 'Quản lý khách hàng',
+		);
+		$this->parser->parse('default/header',$data);
+		$this->parser->parse('default/sidebar',$data);
+		$this->parser->parse('default/main',$data);
+		$this->parser->parse('default/layout/main_curd_addcustomer',$data);
+		$this->parser->parse('default/footer',$data);
+	}
+	
+	
 	public function index(){
 		if($this->permisson == 3 || $this->permisson == 5 ){
 			redirect(base_url('apps'));
@@ -31,7 +87,7 @@ class Customer_Management extends MY_Controller{
 		$this->parser->parse('default/header',$data);
 		$this->parser->parse('default/sidebar',$data);
 		$this->parser->parse('default/main',$data);
-		$this->parser->parse('default/layout/main_curd_Customer',$data);
+		$this->parser->parse('default/layout/main_curd_Customers',$data);
 		$this->parser->parse('default/footer',$data);
 	}
 	private function excel_command(){
@@ -86,13 +142,19 @@ class Customer_Management extends MY_Controller{
 			$xcrud = Xcrud::get_instance();
 			$xcrud->table('customer');
 			$xcrud->unset_csv();
+			$xcrud->order_by('id','desc');
 			$xcrud->unset_add();
+			
 			if($this->permisson == 4){
 				$xcrud->where('supervisor',$this->staff);
+				$xcrud->unset_remove();
 			}
 			if($this->permisson == 2 || $this->permisson == 3 || $this->permisson == 5){
 				$xcrud->unset_remove();
 				$xcrud->unset_edit();
+			}
+			if($this->permisson == 3 || $this->permisson == 5){
+				$xcrud->unset_print();
 			}
 			$xcrud->table_name('[Customer] - Quản lý khách hàng');
 			$xcrud->label('code','Mã khách hàng');
@@ -113,6 +175,12 @@ class Customer_Management extends MY_Controller{
 			$xcrud->validation_required('dia_chi');
 			$xcrud->validation_required('dien_thoai');
 			$xcrud->validation_required('supervisor');
+			if($this->permisson == 4){
+				$xcrud->columns('code,full_name,email,dien_thoai');
+			}else{
+				$xcrud->columns('code,full_name,email,dien_thoai,supervisor');
+			}
+			
 			if($this->permisson == 4 || $this->permisson == 5|| $this->permisson == 3){
 				$xcrud->relation('supervisor','staff','id',array('code'),'authorities=4 and id='.$user);
 			}else{

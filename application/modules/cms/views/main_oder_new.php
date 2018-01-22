@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="<?php echo base_url();?>public/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 <section class="content">
 	<div class="row">
+		<div class="col-md-12">
 		<div class="box box-info">
 			<div class="box-header">
 				<h3 class="box-title">Tạo mới đơn hàng</h3>
@@ -35,13 +36,13 @@
 					</div>     
 				</div>
 				<div class="col-md-12">
-					<form id="formId" role="form" action="" method="post" onsubmit="return submitDetailsForm()">
+					<form id="formId" role="form" action="#" method="POST" onsubmit="return submitDetailsForm()">
 						<hr>
 						<div class="form-group col-md-12">
 							<div id="item_cart">
 								<div class="col-md-6">
 									<label >Mã đơn hàng</label>
-									<input id="CodeOrder" type="text" class="form-control" id="CodeOrder" name="CodeOrder" value="" placeholder="Mã đơn hàng - mã vận đơn" required>
+									<input id="CodeOrder" type="text" class="form-control" name="CodeOrder" value="" placeholder="Mã đơn hàng - mã vận đơn" required>
 								</div>
 								<div class="col-md-6">
 									<label for="exampleInputEmail1">Nhà cung cấp dịch vụ</label>
@@ -91,34 +92,14 @@
 							<div id="item_customer">
 								<div class="col-md-2">
 									<label for="exampleInputEmail1">Khách hàng</label>
-									<select id="NameCheckCustomer" name="NameCheckCustomer" class="form-control" required> 
+									<select id="NameCheckCustomer" name="NameCheckCustomer" class="form-control" > 
 										<option value="1"> Cũ</option>
 										<option value="2"> Mới</option>
 									</select>
 								</div>
 								<div class="col-md-8">
-									
 									<div class="col-md-12">
-										<div id="Customer_old"> 
-											<label >Mã khách hàng</label>
-											<input id="CodeCustomer" type="text" class="form-control" name="CodeCustomer" value="" placeholder="Mã khách hàng - xxxxx" required>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div id="Customer_New"> 
-											<label >Tên Khách hàng</label>
-											<input id="name_customer" type="text" class="form-control" name="name_customer" value="" placeholder="Mã khách hàng - xxxxx" required>
-											<label >Địa Chỉ Khách hàng</label>
-											<input id="addr_customer" type="text" class="form-control" name="addr_customer" value="" placeholder="Địa Chỉ Khách hàng- xxxxx" required>
-											<label >Email Khách hàng</label>
-											<input id="email_customer" type="text" class="form-control" name="email_customer" value="" placeholder="Email Khách hàng - xxxxx" required>
-											<label >Số ĐT Khách hàng</label>
-											<input id="phone_customer" type="text" class="form-control" name="phone_customer" value="" placeholder="Số ĐT Khách hàng - xxxxx" required>
-											<div class="form-group">
-												<label for="exampleInputEmail1">Ghi chú Khách hàng</label>
-												 <textarea id="note_customer" name="note_customer" rows="3" cols="50">Ghi chú</textarea>
-											</div>
-										</div>
+										<div id="template_customer"></div>
 									</div>
 								</div>
 							</div>
@@ -129,7 +110,7 @@
 							<div id="item_customer">
 								<div class="col-md-2">
 									<label for="exampleInputEmail1">Lịch gọi lại</label>
-									<select id="NameCheckCallBack" name="NameCheckCallBack" class="form-control" required> 
+									<select id="NameCheckCallBack" name="NameCheckCallBack" class="form-control" > 
 										<option value="2"> Không</option>
 										<option value="1"> Có</option>
 									</select>
@@ -170,13 +151,13 @@
 				</div>
 			</div>
 		</div>
+		</div>
 	</div>
 </section>
 <script>
   $(function () {
      CKEDITOR.replace('use_guide')
      CKEDITOR.replace('note')
-     CKEDITOR.replace('note_customer')
      CKEDITOR.replace('note_callback')
     $('.textarea').wysihtml5()
   });

@@ -14,7 +14,9 @@ class Order_new extends MY_Controller{
 		}else{
 			redirect(base_url('sign'));
 		}
-		
+		// if($this->permisson == 5 || $this->permisson == 3){
+			// redirect(base_url('apps'));
+		// }
 	}
 	
 	public function AddCart(){
@@ -69,15 +71,12 @@ class Order_new extends MY_Controller{
 		$this->db->update('products', $data); 
 	}
 	public function index(){
-		if($this->permisson == 5 || $this->permisson == 3){
-			redirect(base_url('apps'));
-		}
+		$msg ='';
 		$cmd = $this->input->post('cmd');
 		if(!empty($cmd)){
 			$params = $_POST;
-			$checkCode = $thiss->InfoProductCheckOrder($params['CodeOrder']);
-			if($checkCode==true){
-				
+			$checkCode = $this->CheckOrder($params['CodeOrder']);
+			if($checkCode==false){
 				if($params['NameCheckCustomer'] == 2){
 					$code_customer = $this->setUpCustomer($params);
 				}else{
@@ -122,14 +121,24 @@ class Order_new extends MY_Controller{
 				$this->db->trans_complete();
 				if($install==true){
 					$this->Notifacation($params['CodeOrder']);
-					redirect(base_url('cms/oders_management'));
-					$msg = "Tạo đơn hàng thành công";
+					$msg =  '<div class="callout callout-success">
+						<h4>Thành công!</h4>
+						<p>Tạo mới đơn hàng thành công </p>
+					</div>';
 				}else{
-					$msg = "Tạo đơn hàng thất bại";
+					$msg =  '<div class="callout callout-danger">
+					<h4>Thất bại!</h4>
+					<p>Tạo mới đơn hàng thất bại vui lòng thử lại.</p>
+				  </div>';
 				}
+			}else{
+				$msg =  '<div class="callout callout-danger">
+					<h4>Thất bại!</h4>
+					<p>Tạo đơn hàng thất bại, Mã đơn hàng đã tồn tại.</p>
+				  </div>';
 			}
 		}
-		$msg ='';
+		
 		$data = array(
 			'msg' => $msg,
 			'discounts' => $this->discounts,

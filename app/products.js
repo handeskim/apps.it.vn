@@ -75,15 +75,39 @@ function submitDetailsForm() {
 	}
   
 }
+function temp_old_customer(){
+	$("#template_customer").empty();
+	var temp ='<div id="Customer_old">';
+		temp +='<label >Mã khách hàng</label>';
+		temp +='<input id="CodeCustomer" type="text" class="form-control" name="CodeCustomer" value="" placeholder="Mã khách hàng - xxxxx" required></div>';
+	$("#template_customer").append(temp);
+}
+function temp_new_customer(){
+	$("#template_customer").empty();
+	var temp ='<div id="Customer_New"> ';
+		temp +='<label >Tên Khách hàng</label>';
+		temp +='<input id="name_customer" type="text" class="form-control" name="name_customer" value="" placeholder="Mã khách hàng - xxxxx" required>';
+		temp +='<label >Địa Chỉ Khách hàng</label>';
+		temp +='<input id="addr_customer" type="text" class="form-control" name="addr_customer" value="" placeholder="Địa Chỉ Khách hàng- xxxxx" required>';
+		temp +='<label >Email Khách hàng</label>';
+		temp +='<input id="email_customer" type="text" class="form-control" name="email_customer" value="" placeholder="Email Khách hàng - xxxxx" required>';
+		temp +='<label >Số ĐT Khách hàng</label>';
+		temp +='<input id="phone_customer" type="text" class="form-control" name="phone_customer" value="" placeholder="Số ĐT Khách hàng - xxxxx" required>';
+		temp +='<div class="form-group">';
+		temp +='<label for="exampleInputEmail1">Ghi chú Khách hàng</label>';
+		temp +=' <textarea name="note_customer" rows="3" cols="50">Ghi chú</textarea>';
+		temp +='</div>';
+		temp +='</div>';
+		
+	$("#template_customer").append(temp);
+}
 $(function() {
-	$('#Customer_New').hide(); 
+	temp_old_customer()
 	$('#NameCheckCustomer').change(function(){
 		if($('#NameCheckCustomer').val() == 2) {
-			$('#Customer_New').show(); 
-			$('#Customer_old').hide(); 
+			temp_new_customer();
 		} else {
-			$('#Customer_New').hide(); 
-			$('#Customer_old').show(); 
+			temp_old_customer();
 		} 
 	});
 });

@@ -50,7 +50,7 @@ class Staff extends MY_Controller{
 				'code' => 'PQA0'.$id_staff,
 				'password' => md5($params['password']),
 				'status' => 1,
-				'hinh_anh' => 'default.jpg',
+				'hinh_anh' => null,
 			);
 			$this->db->where('id', $id_staff);
 			$Update = $this->db->update('staff', $array_staff); 

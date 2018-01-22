@@ -16,7 +16,7 @@ class Scheduling extends MY_Controller{
 		
 	}
 	public function index(){
-		if($this->permisson == 5 || $this->permisson == 3 || $this->permisson == 4){
+		if($this->permisson == 5 || $this->permisson == 3 ){
 			redirect(base_url('apps'));
 		}
 		$msg ='';
@@ -40,6 +40,7 @@ class Scheduling extends MY_Controller{
 			$xcrud = Xcrud::get_instance();
 			$xcrud->table('scheduling_callback');
 			$xcrud->unset_csv();
+			$xcrud->unset_csv();
 			$xcrud->unset_print();
 			$xcrud->order_by('scheduling','desc');
 			if($this->permisson == 2 || $this->permisson == 4){
@@ -55,8 +56,8 @@ class Scheduling extends MY_Controller{
 			$xcrud->label('note','Ghi chú');
 			$xcrud->validation_required('code_staff');
 			$xcrud->relation('status','status_callback','id','name_status');
-			$xcrud->relation('code_staff','staff','id','code' ,'authorities=4');
-			$xcrud->relation('code_customer','customer','id','code');
+			$xcrud->relation('code_staff','staff','id','code' ,'id='.$this->staff);
+			$xcrud->relation('code_customer','customer','id','code','supervisor='.$this->staff);
 			$xcrud->validation_required('code_customer');
 			$xcrud->validation_required('scheduling');
 			$xcrud->change_type('note', 'textarea');
