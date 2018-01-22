@@ -8,7 +8,7 @@ class Xcrud_config
     public static $dbname = 'c0apps'; // Your database name
     public static $dbuser = 'c0apps'; // Your database username
     public static $dbpass = '112233fF'; // // Your database password
-    public static $dbhost = '123.16.190.154'; // Your database host, 'localhost' is default.
+    public static $dbhost = 'localhost'; // Your database host, 'localhost' is default.
   
     // theme and language
     public static $theme = 'bootstrap'; // can be 'default', 'bootstrap', 'minimal' or your custom. Theme of xCRUD visual presentation. For using bootstrap you need to load it on your page.
