@@ -63,7 +63,12 @@ class Notification extends MY_Controller{
 				}else{
 					$fa_icon = "fa-bullhorn";
 				}
-				$temp .= '<li><a href="'.base_url().'route?query='.$value['id'].'"><i class="fa '.$fa_icon.' text-aqua"></i> '.$value['title'].' </a></li>';
+				if($value['authorities']==3){
+					$temp .= '<li><a href="'.base_url().'route/accountancy?query='.$value['links'].'"><i class="fa '.$fa_icon.' text-aqua"></i> '.$value['title'].' </a></li>';
+				}else if($value['authorities']==5){
+					$temp .= '<li><a href="'.base_url().'route/packer?query='.$value['links'].'"><i class="fa '.$fa_icon.' text-aqua"></i> '.$value['title'].' </a></li>';
+				}
+				
 			}
 		}
         $temp .= '</ul></li></ul>';
