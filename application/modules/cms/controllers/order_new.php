@@ -68,7 +68,7 @@ class Order_new extends MY_Controller{
 		$this->db->update('products', $data); 
 	}
 	public function index(){
-		if($this->authorities == 3){
+		if($this->authorities == 3 || $this->authorities == 5){
 			redirect(base_url('cms/oders_management'));
 		}
 		$cmd = $this->input->post('cmd');
