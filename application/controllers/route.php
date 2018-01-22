@@ -20,7 +20,7 @@ class Route extends MY_Controller{
 		$cmd = $this->input->get('posts');
 		if($cmd==1){
 			$links =  'http://www.vnpost.vn/en-us/dinh-vi/buu-pham?key='.$key;
-			
+			 
 		}
 		if($cmd==2){
 			$links = "https://www.viettelpost.com.vn/Tracking?KEY=".$key;
