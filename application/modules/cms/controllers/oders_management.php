@@ -47,6 +47,7 @@ class Oders_Management extends MY_Controller{
 			}
 			if($this->permisson == 4){
 				$xcrud->where('code_staff',$this->staff);
+				
 			}
 			$xcrud->unset_add();
 			if($this->permisson == 2){

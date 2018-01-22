@@ -19,14 +19,17 @@ class Route extends MY_Controller{
 
 	public function index(){
 		$query = $this->input->get('query');
-		$data = array(
-               'status' => 2,
-            );
-
-		$this->db->where('id', $query);
-		$Update = $this->db->update('notification', $data); 
+		$data_notifation = array('status' => 2,);
+		
+		$this->db->where('links', $query);
+	
+		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
+		
 		if($Update==true){
-			redirect(base_url('cms/oders_Management'));
+			$data_Orders = array('type_orders' => 3,);
+			$this->db->where('code_orders', $query);
+			$UpdateOrderStatus = $this->db->update('notification', $data_Orders); 
+			redirect(base_url('cms/oders_management'));
 		}
 	}
 	
