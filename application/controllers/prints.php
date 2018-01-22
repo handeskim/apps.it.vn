@@ -8,6 +8,12 @@ class Prints extends MY_Controller{
 	public function index(){
 		
 	}
+	public function orders(){
+		
+	}
+	public function guide(){
+		
+	}
 	
 	public function customer_details(){
 		if(isset($_GET['code'])){
