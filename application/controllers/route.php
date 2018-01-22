@@ -18,11 +18,11 @@ class Route extends MY_Controller{
 	public function tracking(){
 		$key = $this->input->get('key');
 		$cmd = $this->input->get('posts');
-		if($cmd==1){
+		$links ='';
+		if($cmd=1){
 			$links =  'http://www.vnpost.vn/en-us/dinh-vi/buu-pham?key='.$key;
 			 
-		}
-		if($cmd==2){
+		}else{
 			$links = "https://www.viettelpost.com.vn/Tracking?KEY=".$key;
 			
 		}
