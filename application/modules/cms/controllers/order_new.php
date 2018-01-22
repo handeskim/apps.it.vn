@@ -40,14 +40,14 @@ class Order_new extends MY_Controller{
 		$resuls = $this->GlobalMD->query_global($sql);
 		return $resuls;
 	}
-	private function Notifacation(){
+	private function Notifacation($code_order){
 		$title = 'Bạn có thông báo đơn hàng cần duyệt';
 		$links = base_url().'cms/oders_Management';
 		$order = array(
 			'title' => $title,
 			'staff' => $this->staff,
 			'authorities'  => $this->authorities,
-			'links'  => $links,
+			'links'  => $code_order,
 			'times'  => date('Y-m-d',time()),
 			'status'  => 1,
 		);
@@ -96,7 +96,7 @@ class Order_new extends MY_Controller{
 			}
 			$this->db->trans_complete();
 			if($install==true){
-				$this->Notifacation();
+				$this->Notifacation($params['CodeOrder']);
 				redirect(base_url('cms/oders_Management'));
 				$msg = "Tạo đơn hàng thành công";
 			}else{
