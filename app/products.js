@@ -22,14 +22,15 @@ $(document).ready(function(){
 				}else{
 					var list_temp = html_list_search_products(ResponseProductSearch.result);
 					$("#reponse_products_search").append(list_temp);
-					$('#submitbutton').click(function() {
-						var items = $("#inputid").val();
-						
-						$.get( BASE_URL+"cms/order_new/AddCart", { id: items,} ).done(function( newItemCart ) {
-							$('#bodyAddCart').append(newItemCart);
-							$("#addToCartFormPem").empty();
+					$.each(ResponseProductSearch.result, function(i, item) {
+						$('#submitbutton'+item.id).click(function() {
+							var items = $("#inputid").val();
+							$.get( BASE_URL+"cms/order_new/AddCart", { id: items,} ).done(function( newItemCart ) {
+								$('#bodyAddCart').append(newItemCart);
+								$("#addToCartFormPem"+item.id).empty();
+							});
+							
 						});
-						
 					});
 				}
 				
@@ -40,7 +41,7 @@ $(document).ready(function(){
 	function html_list_search_products(list){
 		var temp = '<ul style="list-style:  none;background: #00c0ef;text-align: center;">';
 		$.each(list, function(i, item) {
-			temp += '<li><form id="addToCartFormPem" name="addToCartForm"><input type="hidden" id="inputid" value="'+item.id+'"/><span>'+item.code_products+' </span><spanstyle="margin-right: 10px;" >'+item.name_products+'</span><span style="margin-left: 10px;" class="btn btn-success btn-small" id="submitbutton">  <i id="addToCartValue" class="fa fa-cart-plus"> </i></span></form></li>';
+			temp += '<li><form id="addToCartFormPem'+item.id+'" name="addToCartForm"><input type="hidden" id="inputid" value="'+item.id+'"/><span>'+item.code_products+' </span><spanstyle="margin-right: 10px;" >'+item.name_products+'</span><span style="margin-left: 10px;" class="btn btn-success btn-small" id="submitbutton'+item.id+'">  <i id="addToCartValue" class="fa fa-cart-plus"> </i></span></form></li>';
 		});	
 		temp += '</ul>';
 		return temp;
