@@ -15,6 +15,9 @@ class Route extends MY_Controller{
 	
 		
 	}
+	public function test(){
+		echo $_SERVER['PHP_SELF'];
+	}
 	public function tracking(){
 		$key = $this->input->get('key');
 		$cmd = $this->input->get('posts');
@@ -32,11 +35,11 @@ class Route extends MY_Controller{
 	public function packer(){
 		$query = $this->input->get('query');
 		$data_notifation = array(
+				'title' => 'Storage has confirm: '.$query,
 				'status' => 1,
-				'authorities' => 3,
+				'authorities' => 4,
 			);
 		$this->db->where('links', $query);
-	
 		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
 		
 		if($UpdateNotifation==true){
@@ -46,10 +49,56 @@ class Route extends MY_Controller{
 			redirect(base_url('cms/oders_management'));
 		}
 	}
+	public function destroy_packer(){
+		$query = $this->input->get('query');
+		$data_notifation = array(
+				'title' => 'Storage has Reject: '.$query,
+				'status' => 1,
+				'authorities' => 4,
+			);
+		$this->db->where('links', $query);
+		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
+		
+		if($UpdateNotifation==true){
+			$data_Orders = array('type_orders' => 8,);
+			$this->db->where('code_orders', $query);
+			$UpdateOrderStatus = $this->db->update('orders', $data_Orders); 
+			redirect(base_url('cms/oders_management'));
+		}
+	}	
+	public function destroy_staff(){
+		$query = $this->input->get('query');
+		$data_notifation = array(
+				'title' => 'Sale has Reject: '.$query,
+				'status' => 2,
+				'authorities' => 4,
+			);
+		$this->db->where('links', $query);
+		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
+		if($UpdateNotifation==true){
+			$data_Orders = array('type_orders' => 6,);
+			$this->db->where('code_orders', $query);
+			$UpdateOrderStatus = $this->db->update('orders', $data_Orders); 
+			redirect(base_url('cms/oders_management'));
+		}
+	}	
+	
+	public function notify(){
+		$query = $this->input->get('query');
+		$data_notifation = array(
+				'title' => 'Storage has Sendding: '.$query,
+				'status' => 2,
+				'authorities' => 4,
+			);
+		$this->db->where('links', $query);
+		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
+			redirect(base_url('cms/oders_management'));
+	}
 
 	public function accountancy(){
 		$query = $this->input->get('query');
 		$data_notifation = array(
+				'title' => 'Finance has confirm: '.$query,
 				'status' => 1,
 				'authorities' => 5,
 			);
@@ -58,7 +107,26 @@ class Route extends MY_Controller{
 		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
 		
 		if($UpdateNotifation==true){
-			$data_Orders = array('type_orders' => 5,);
+			$data_Orders = array('type_orders' => 3,);
+			$this->db->where('code_orders', $query);
+			$UpdateOrderStatus = $this->db->update('orders', $data_Orders); 
+			redirect(base_url('cms/oders_management'));
+		}
+	}	
+	
+	public function destroy_accounts(){
+		$query = $this->input->get('query');
+		$data_notifation = array(
+				'title' => 'Finance has Reject: '.$query,
+				'status' => 1,
+				'authorities' => 4,
+			);
+		$this->db->where('links', $query);
+	
+		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
+		
+		if($UpdateNotifation==true){
+			$data_Orders = array('type_orders' => 7,);
 			$this->db->where('code_orders', $query);
 			$UpdateOrderStatus = $this->db->update('orders', $data_Orders); 
 			redirect(base_url('cms/oders_management'));

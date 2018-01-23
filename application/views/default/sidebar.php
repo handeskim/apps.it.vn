@@ -1,4 +1,5 @@
  <?php 
+	$user_data = $this->session->userdata('data_users');
 	$authorities = $user_data['authorities'];
   ?>
 <aside class="main-sidebar">
@@ -8,7 +9,7 @@
   <div class="user-panel">
 	<div class="pull-left image">
 		<?php 
-			$user_data = $this->session->userdata('data_users');
+			
 			if(isset($user_data)){
 				if(isset($user_data['hinh_anh'])){
 					if(!empty($user_data['hinh_anh'])){

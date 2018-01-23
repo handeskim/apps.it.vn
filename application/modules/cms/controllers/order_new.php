@@ -49,7 +49,7 @@ class Order_new extends MY_Controller{
 		$order = array(
 			'title' => $title,
 			'staff' => $this->staff,
-			'authorities'  => $this->authorities,
+			'authorities'  => 3,
 			'links'  => $code_order,
 			'times'  => date('Y-m-d',time()),
 			'status'  => 1,

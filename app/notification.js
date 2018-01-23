@@ -5,4 +5,4 @@ function loadIt() {
     });
 }
 loadIt();
-setInterval(loadIt, 20000);
+setInterval(loadIt, 5000);

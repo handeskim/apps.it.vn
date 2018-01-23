@@ -31,6 +31,13 @@
 
   <script src="<?php echo base_url();?>public/dist/css/rila_global.css"></script>
   <script src="<?php echo base_url();?>app/notification.js"></script>
+   <?php 
+	$user_data = $this->session->userdata('data_users');
+	$authorities = $user_data['authorities'];
+	if($authorities ==3 || $authorities == 5){
+	?>
+	<meta http-equiv="refresh" content="1200" > 
+	<?php } ?>
 </head>
 <body ng-app="rilaApps" class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

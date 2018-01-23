@@ -64,9 +64,11 @@ class Notification extends MY_Controller{
 					$fa_icon = "fa-bullhorn";
 				}
 				if($value['authorities']==3){
-					$temp .= '<li><a href="'.base_url().'route/accountancy?query='.$value['links'].'"><i class="fa '.$fa_icon.' text-aqua"></i> '.$value['title'].' </a></li>';
+					$temp .= '<li><a href="'.base_url().'cms/oders_management"><i class="fa '.$fa_icon.' text-aqua"></i> '.$value['title'].' </a></li>';
 				}else if($value['authorities']==5){
-					$temp .= '<li><a href="'.base_url().'route/packer?query='.$value['links'].'"><i class="fa '.$fa_icon.' text-aqua"></i> '.$value['title'].' </a></li>';
+					$temp .= '<li><a href="'.base_url().'cms/oders_management"><i class="fa '.$fa_icon.' text-aqua"></i> '.$value['title'].' </a></li>';
+				}else{
+					$temp .= '<li><a href="'.base_url().'route/notify?query='.$value['links'].'"><i class="fa '.$fa_icon.' text-aqua"></i> '.$value['title'].' </a></li>';
 				}
 				
 			}
