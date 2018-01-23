@@ -87,8 +87,13 @@
 			</span>
 		</a>
 		<ul class="treeview-menu">
+			<?php 
+			if($authorities ==1 || $authorities == 2 || $authorities ==4){
+			?>
+			<li><a href="<?php echo base_url();?>cms/order_new"><i class="fa fa-shopping-cart"></i> Thêm mới đơn hàng</a></li>
+			<?php } ?>
 			<li><a href="<?php echo base_url();?>cms/oders_management"><i class="fa fa-shopping-cart"></i> Quản lý đơn hàng</a></li>
-
+			
 		</ul>
 	</li>
 	<li class="treeview">

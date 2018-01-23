@@ -181,7 +181,7 @@ class Prints extends MY_Controller{
 								 Phương thức thanh toán
 							</td>
 							<td>
-								 Thu Tiền (VNĐ)# 
+								 Thanh toán bằng tiền (VNĐ)# 
 							</td>
 						</tr>
 						<tr class="details">
@@ -346,25 +346,21 @@ class Prints extends MY_Controller{
 						<h3 class="header_info_cart"> hướng dẫn sử dụng thuốc theo trị liệu</h3>
 						<div class="col-md-12">
 							<h4>Danh sách thuốc</h4><hr>
-							<table class="table table-bordered">';
+							<table class="table table-bordered"  cellpadding="0" cellspacing="0"><tbody><div class="item_cart">';
 							foreach($data_field as $field_lists){
 								$temp .= '
+									
 									<tr>
-										<td> Mã sản phẩm: </td> <td>'.$field_lists['products_code'].'</td>
-										<td> Tên sản phẩm: </td> <td> '.$field_lists['products_name'].'</td>
+										<td> Mã sản phẩm: </br>'.$field_lists['products_code'].'</td>
+										<td> Tên sản phẩm:</br>  '.$field_lists['products_name'].'</td>
+										<td> Nhãn sản phẩm:</br> '.$field_lists['products_label'].'</td>
+										<td> kiểu thuốc: </br> '.$field_lists['name_pharma'].'</td>
+										<td> Số lượng: </br>'.$field_lists['orders_quantily'].'('.$field_lists['generic_pharma'].')</td>
+										<td> Giá: </br>'.$field_lists['orders_price'].' (vnđ) / '.$field_lists['generic_pharma'].'</td>
 									</tr>
-								
-									<tr>
-										<td> Nhãn sản phẩm: </td> <td> '.$field_lists['products_label'].'</td>
-										<td> kiểu thuốc: </td> <td> '.$field_lists['name_pharma'].'</td>
-									</tr>
-									<tr>
-										<td> Số lượng sản phẩm: </td> <td> '.$field_lists['orders_quantily'].'('.$field_lists['generic_pharma'].')</td>
-										<td> Giá sản phẩm: </td> <td> '.$field_lists['orders_price'].' (vnđ) / '.$field_lists['generic_pharma'].'</td>
-									</tr>							
 								';
 							}
-							$temp .='</table>';
+							$temp .='</div></tbody></table>';
 					$temp .='</div>
 						<div class="col-md-12">
 							<h4> Nội dung hướng dẫn trị liệu theo đơn </h4><hr>

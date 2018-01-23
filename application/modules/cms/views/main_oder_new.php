@@ -5,6 +5,12 @@
 <link rel="stylesheet" href="<?php echo base_url();?>public/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 <section class="content">
 	<div class="row">
+	<div class="col-md-12">
+		<div class="col-md-12">
+			<a class="btn btn-primary" href="<?php echo base_url('cms/oders_management');?>" ><i class="fa fa-shopping-cart"> </i> Quay lại quản lý đơn hàng</span></a>
+		</div>	
+		<hr>
+	</div>
 		<div class="col-md-12">
 		<div class="box box-info">
 			<div class="box-header">

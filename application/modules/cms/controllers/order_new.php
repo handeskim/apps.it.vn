@@ -85,10 +85,9 @@ class Order_new extends MY_Controller{
 			$params = $_POST;
 			$checkCode = $this->CheckOrder($params['CodeOrder']);
 			if($checkCode==false){
+				$code_customer = $params['CodeCustomer'];	
 				if($params['NameCheckCustomer'] == 2){
 					$code_customer = $this->setUpCustomer($params);
-				}else{
-					$code_customer = $params['CodeCustomer'];	
 				}
 				if($params['NameCheckCallBack'] ==1){
 					$this->setUpcallback($params,$code_customer);

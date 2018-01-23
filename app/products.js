@@ -136,7 +136,7 @@ function html_list_search_phone(list){
 function FindPhoneCustomer(){
 	$("#ResponseSearchCustomer").empty();
 	var phone_customer = $("#IndexSearchItemCustomer").val();
-	if(phone_customer === '' || phone_customer === null ){
+	if(phone_customer === '' || phone_customer === null || phone_customer.length < 5 || phone_customer.length > 13 ){
 		$("#ResponseSearchCustomer").append('<div class="callout callout-danger"><h4>Lỗi xảy ra!</h4><p>Vui lòng không bỏ trống Search.</p></div>');
 		return false;
 	}else{

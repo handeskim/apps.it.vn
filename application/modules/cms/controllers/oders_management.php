@@ -20,14 +20,14 @@ class Oders_Management extends MY_Controller{
 		if($this->permisson == 1 || $this->permisson == 3 || $this->permisson == 5){
 			return $temp;
 		}else{
-			$temp='<a class="btn btn-primary" href="'.base_url('cms/order_new').'"> <i class="fa fa-cart-plus"> </i> Tạo mới đơn hàng</a>';
+			$temp='<a class="btn btn-primary" href=""> <i class="fa fa-cart-plus"> </i> Tạo mới đơn hàng</a>';
 			return $temp;
 		}
 	}
 	public function index(){
 		$msg ='';
 		$data = array(
-			'msg' => $this->button_new_order(),
+			'msg' => '',
 			'content' => $this->Order(),
 			'user_data' => $this->user_data,
 			'title'=> 'Quản lý Đơn hàng',
@@ -38,6 +38,33 @@ class Oders_Management extends MY_Controller{
 		$this->parser->parse('default/main',$data);
 		$this->parser->parse('default/layout/main_curd_order',$data);
 		$this->parser->parse('default/footer',$data);
+	}
+	
+	private function excel_command(){
+		$user = $this->staff;
+		$permisson = $this->permisson;
+		if($this->permisson == 1 || $this->permisson == 2 ){
+			$sql = "";
+		}else{
+			$sql = "
+			SELECT 
+			s.full_name,
+			s.`code`,
+			s.dia_chi,
+			s.dien_thoai,
+			s.discount,
+			s.email,
+			s.ngay_sinh,
+			s.passport_id,
+			st.name_status,
+			a.name_auth
+			FROM staff s 
+			INNER JOIN authorities a ON s.authorities = a.id 
+			INNER JOIN `status` st ON s.`status` = st.id
+			WHERE s.authorities = $permisson
+			AND s.id = $user";
+		}
+		return core_encode($sql);
 	}
 	private function Order(){
 	
@@ -70,6 +97,7 @@ class Oders_Management extends MY_Controller{
 				$xcrud->button(base_url().'prints/guide?query={code_orders}','Guide','fa fa-file','',array('target'=>'_blank'));
 			}
 			if($this->permisson == 4){
+				$xcrud->table_name('[Orders] - Danh sách đơn hàng');
 				$xcrud->unset_remove();
 				$xcrud->unset_remove();
 				$xcrud->where('code_staff',$this->staff);
