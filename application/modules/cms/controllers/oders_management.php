@@ -47,6 +47,9 @@ class Oders_Management extends MY_Controller{
 			$xcrud->unset_csv();
 			$xcrud->unset_print();
 			$xcrud->unset_add();
+			$xcrud->button(base_url().'prints/orders?query={code_orders}','Invoice','fa fa-file','',array('target'=>'_blank','class'=>'btn btn-primary'));
+			$xcrud->button(base_url().'route/tracking?key={code_orders}&code={type_post}','Tracking','fa fa-ship','',array('target'=>'_blank'));
+			
 			if($this->permisson == 3 ){
 				$xcrud->table_name('[Orders] - Duyệt Đơn hàng');
 				$xcrud->unset_remove();
@@ -56,6 +59,7 @@ class Oders_Management extends MY_Controller{
 				$xcrud->button(base_url().'route/destroy_accounts?query={code_orders}','Reject','fa fa-remove','',array('class'=>'btn btn-danger'));
 				$xcrud->unset_edit();
 			}
+			
 			if($this->permisson == 5 ){
 				$xcrud->unset_edit();
 				$xcrud->unset_remove();
@@ -100,10 +104,8 @@ class Oders_Management extends MY_Controller{
 			$xcrud->relation('type_post','type_post','id','name_type_orders');
 			$xcrud->relation('code_staff','staff','id','code');
 			$xcrud->columns('code_products,code_customner,code_orders,type_orders,type_post,quantily,price,discounts,total_price');
-			$xcrud->button(base_url().'prints/orders?query={code_orders}','Invoice','fa fa-file','',array('target'=>'_blank','class'=>'btn btn-primary'));
-			if($this->permisson == 1 || $this->permisson == 2 || $this->permisson == 4 || $this->permisson == 5){
-				$xcrud->button(base_url().'route/tracking?key={code_orders}&code={type_post}','Tracking','fa fa-ship','',array('target'=>'_blank'));
-			}
+			
+			
 			
 			$xcrud->benchmark();
 			$response = $xcrud->render();
