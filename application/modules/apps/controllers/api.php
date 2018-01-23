@@ -50,6 +50,22 @@ class Api extends REST_Controller {
 		}
 		$this->response($response);
 	}
+	public function search_phone_get(){
+		$staff = $this->staff;
+		$response = array('result' => null);
+		$resuls = null;
+		$phones = $this->input->get_post('phones');
+		if(isset($phones) || !empty($phones)){
+			$sql = "SELECT * FROM customer WHERE dien_thoai LIKE '%$phones%' OR dien_thoai_2 LIKE '%$phones%' AND supervisor = '$staff'";
+			$resuls = $this->QueryCoreAll($sql);
+			if(!empty($resuls)){
+				$response = array('result' => $resuls);
+			}else{
+				$response = array('result' => null);
+			}
+		}
+		$this->response($response);
+	}
 	private function QueryCoreAll($sql){
 		$query = $this->db->query($sql);
 		$result = $query->result_array();

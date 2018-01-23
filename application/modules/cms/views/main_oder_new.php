@@ -56,10 +56,10 @@
 							
 						</div>
 						<div class="form-group col-md-12" style="margin-top: 10px;float:  left;width: 100%;">
-							<hr>
+							<h3 class="header_info_cart">Thông tin giỏ hàng</h3>
 							<label>Thông tin Giỏ hàng</label>
 							<div id="item_cart">
-								<table style="text-align: center;" id="bodyAddCart" class="table table-bordered"> 
+								<table style="text-align: center;"  class="table table-bordered"> 
 									<thead>
 									  <tr>
 										 <th style="text-align: center;" >Mã sản phẩm</th>
@@ -69,14 +69,13 @@
 										 <th style="text-align: center;" >Giá </th>
 									  </tr>
 									</thead>
-									<tbody >
+									<tbody id="bodyAddCart">
 									
 									</tbody>
 								</table>
 							</div>
 						</div>
-						<div class="form-group col-md-12" style="">
-							<hr>
+						<div class="form-group col-md-4">
 						<?php if($discounts==1){ ?>
 						<div class="col-md-12">
 							<div id="discounts"> 
@@ -87,17 +86,16 @@
 						<?php } ?>
 						</div>
 						<div class="form-group col-md-12" style="">
-						<hr>
-							<label>Thông tin khách hàng</label>
+							<h3 class="header_info_cart">Thông tin khách hàng</h3>
 							<div id="item_customer">
 								<div class="col-md-2">
-									<label for="exampleInputEmail1">Khách hàng</label>
+									<label for="exampleInputEmail1">Loại Khách hàng</label>
 									<select id="NameCheckCustomer" name="NameCheckCustomer" class="form-control" > 
 										<option value="1"> Cũ</option>
 										<option value="2"> Mới</option>
 									</select>
 								</div>
-								<div class="col-md-8">
+								<div class="col-md-10">
 									<div class="col-md-12">
 										<div id="template_customer"></div>
 									</div>
@@ -145,7 +143,6 @@
 						</div>
 						<div class="form-group col-md-12">
 							<div id="error_codecode"> </div>
-							
 						</div>
 					</form>
 				</div>
@@ -168,5 +165,16 @@ $('#date_allBack').datepicker({
 <style>
 #error_codecode {
 	color:red;
+}
+.header_info_cart{
+	margin: 10px;
+    background: #ecf0f5;
+    height: 45px;
+    padding: 15px;
+    text-align: left;
+    text-transform: uppercase;
+    color: #333;
+    border-bottom: 2px solid #fff212;
+    font-size: 16px;
 }
 </style>

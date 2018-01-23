@@ -14,9 +14,7 @@ class Order_new extends MY_Controller{
 		}else{
 			redirect(base_url('sign'));
 		}
-		// if($this->permisson == 5 || $this->permisson == 3){
-			// redirect(base_url('apps'));
-		// }
+		
 	}
 	
 	public function AddCart(){
@@ -25,17 +23,24 @@ class Order_new extends MY_Controller{
 		INNER JOIN generic_pharma g ON p.generic = g.id
 		WHERE p.id = '$id'";
 		$resuls = $this->GlobalMD->query_global($sql);
-		$temp = "<tr>";
+		$temp = '';
+		
 		foreach($resuls as $value){
+			
 			$pep = $value['id'];
+			$temp .= '<tr id="CartItem'.$pep.'">';
+			$temp .= '<div >';
 			$temp .= '<td><input  type="hidden" name="product['.$pep.'][]" value="'.$value['id'].'" required/>';
 			$temp .= $value['code_products'].'</td>';
 			$temp .= '<td>'.$value['name_products'].'</td>';
 			$temp .= '<td>'.$value['label_products'].'</td>';
 			$temp .= '<td><input type="number" name="product['.$pep.'][]" value="'.$value['quantily'].'" required/></td>';
 			$temp .= '<td>'.$value['price'].'/ 1 '.$value['name_generic_pharma'].'</td>';
+			$temp .= '<td><a class="btn" id="DelItem'.$pep.'" "> <i class="fa fa-trash"></i> </a></td>';
+			$temp .= "</div>";
+			$temp .= "</tr>";
 		}
-		$temp .= "</tr>";
+		
 		echo $temp;
 	}
 	private function InfoProduct($id){
@@ -71,6 +76,9 @@ class Order_new extends MY_Controller{
 		$this->db->update('products', $data); 
 	}
 	public function index(){
+		if($this->permisson == 5 || $this->permisson == 3){
+			redirect(base_url('apps'));
+		}
 		$msg ='';
 		$cmd = $this->input->post('cmd');
 		if(!empty($cmd)){
@@ -115,6 +123,9 @@ class Order_new extends MY_Controller{
 						'total_price' => $total_pay,
 						'manuals' => $params['manuals'],
 						'note' => $params['note'],
+						'date_order' => date('Y-m-d H:i:s',time()),
+						'date_confim' => date('Y-m-d H:i:s',time()),
+						'date_send' => date('Y-m-d H:i:s',time()),
 					);
 					$install = $this->db->insert('orders',$arrayOrder);
 				}

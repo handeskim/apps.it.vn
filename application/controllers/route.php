@@ -43,7 +43,10 @@ class Route extends MY_Controller{
 		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
 		
 		if($UpdateNotifation==true){
-			$data_Orders = array('type_orders' => 4,);
+			$data_Orders = array(
+				'type_orders' => 4,
+				'date_send' => date('Y-m-d H:i:s',time()),
+			);
 			$this->db->where('code_orders', $query);
 			$UpdateOrderStatus = $this->db->update('orders', $data_Orders); 
 			redirect(base_url('cms/oders_management'));
@@ -60,7 +63,10 @@ class Route extends MY_Controller{
 		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
 		
 		if($UpdateNotifation==true){
-			$data_Orders = array('type_orders' => 8,);
+			$data_Orders = array(
+				'type_orders' => 8,
+				'date_send' => date('Y-m-d H:i:s',time()),
+			);
 			$this->db->where('code_orders', $query);
 			$UpdateOrderStatus = $this->db->update('orders', $data_Orders); 
 			redirect(base_url('cms/oders_management'));
@@ -76,7 +82,11 @@ class Route extends MY_Controller{
 		$this->db->where('links', $query);
 		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
 		if($UpdateNotifation==true){
-			$data_Orders = array('type_orders' => 6,);
+			$data_Orders = array(
+				'type_orders' => 6,
+				'date_send' => date('Y-m-d H:i:s',time()),
+				'date_confim' => date('Y-m-d H:i:s',time()),
+			);
 			$this->db->where('code_orders', $query);
 			$UpdateOrderStatus = $this->db->update('orders', $data_Orders); 
 			redirect(base_url('cms/oders_management'));
@@ -107,7 +117,10 @@ class Route extends MY_Controller{
 		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
 		
 		if($UpdateNotifation==true){
-			$data_Orders = array('type_orders' => 3,);
+			$data_Orders = array(
+				'type_orders' => 3,
+				'date_confim' => date('Y-m-d H:i:s',time()),
+			);
 			$this->db->where('code_orders', $query);
 			$UpdateOrderStatus = $this->db->update('orders', $data_Orders); 
 			redirect(base_url('cms/oders_management'));
@@ -122,11 +135,12 @@ class Route extends MY_Controller{
 				'authorities' => 4,
 			);
 		$this->db->where('links', $query);
-	
 		$UpdateNotifation = $this->db->update('notification', $data_notifation); 
-		
 		if($UpdateNotifation==true){
-			$data_Orders = array('type_orders' => 7,);
+			$data_Orders = array(
+				'type_orders' => 7,
+				'date_confim' => date('Y-m-d H:i:s',time()),
+			);
 			$this->db->where('code_orders', $query);
 			$UpdateOrderStatus = $this->db->update('orders', $data_Orders); 
 			redirect(base_url('cms/oders_management'));
