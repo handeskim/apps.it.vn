@@ -18,7 +18,7 @@
 							<input id="inboxSearchProducts" type="text" class="form-control" id="ProductLabel" value="" placeholder="Mã sản phẩm ">
 						 </div>  
 						 <div class="col-md-6">
-							<label for="ProductLabel">(Tìm theo mã sản phẩm)</label>
+							<label for="ProductLabel">(Lựa chọn Tìm theo)</label>
 							<select id="NameSearchProducts" name="NameSearchProducts" class="form-control"> 
 									<option value="1"> Mã sản phẩm</option>
 									<option value="2"> Tên sản phẩm</option>

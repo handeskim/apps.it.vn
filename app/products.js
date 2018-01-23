@@ -39,7 +39,7 @@ $(document).ready(function(){
 	}
 	
 	function html_list_search_products(list){
-		var temp = '<ul style="list-style:  none;background: #00c0ef;text-align: center;">';
+		var temp = '<ul id="ulFromCart" style="list-style:  none;background: #00c0ef;text-align: center;"><button class="btn"id="resetFrom"><i class="fa fa-trash">remove</i></button>';
 		$.each(list, function(i, item) {
 			temp += '<li><form id="addToCartFormPem'+item.id+'" name="addToCartForm"><input type="hidden" id="inputid" value="'+item.id+'"/><span>'+item.code_products+' </span><spanstyle="margin-right: 10px;" >'+item.name_products+'</span><span style="margin-left: 10px;" class="btn btn-success btn-small" id="submitbutton'+item.id+'">  <i id="addToCartValue" class="fa fa-cart-plus"> </i></span></form></li>';
 		});	
