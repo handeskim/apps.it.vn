@@ -20,7 +20,7 @@ class Api extends REST_Controller {
 		$pepments = $this->input->get_post('name_pepr');
 		if(isset($code_products) || !empty($code_products)){
 			if($pepments==1){
-				$sql = "SELECT id,code_products,name_products,label_products,quantily,price,images  FROM products WHERE `code_products` = '$code_products'";
+				$sql = "SELECT id,code_products,name_products,label_products,quantily,price,images  FROM products WHERE `code_products` LIKE '%$code_products%'";
 				$resuls = $this->QueryCoreAll($sql);
 				if(!empty($resuls)){
 					$response = array('result' => $resuls);
@@ -29,7 +29,7 @@ class Api extends REST_Controller {
 				}
 			}
 			if($pepments==2){
-				$sql = "SELECT id,code_products,name_products,label_products,quantily,price,images  FROM products WHERE `name_products` = '$code_products'";	
+				$sql = "SELECT id,code_products,name_products,label_products,quantily,price,images  FROM products WHERE `name_products` LIKE '%$code_products%'";	
 				$resuls = $this->QueryCoreAll($sql);
 				if(!empty($resuls)){
 					$response = array('result' => $resuls);
@@ -39,7 +39,7 @@ class Api extends REST_Controller {
 				
 			}
 			if($pepments==3){
-				$sql = "SELECT id,code_products,name_products,label_products,quantily,price,images  FROM products WHERE `label_products` = '$code_products'";
+				$sql = "SELECT id,code_products,name_products,label_products,quantily,price,images  FROM products WHERE `label_products` LIKE '%$code_products%'";
 				$resuls = $this->QueryCoreAll($sql);
 				if(!empty($resuls)){
 					$response = array('result' => $resuls);

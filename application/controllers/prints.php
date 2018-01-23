@@ -36,7 +36,7 @@ class Prints extends MY_Controller{
 		if(isset($data_field)){
 			$temp = '<div class="col-md-6">';
 			$temp .= '<table class="table table-bordered">';
-			$temp .= '<h2> Thông tin khách hàng '.$data_field[0]['full_name'].'</h2>';
+			$temp .= '<h2> Thông tin khách hàng </h2>';
 			$temp .= '<tbody>';
 			$temp .='<tr>
 						<td>

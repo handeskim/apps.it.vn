@@ -17,7 +17,7 @@ class Oders_Management extends MY_Controller{
 
 	private function button_new_order(){
 		$temp = '';
-		if($this->permisson == 1 || $this->permisson == 2 || $this->permisson == 3 || $this->permisson == 5){
+		if($this->permisson == 1 || $this->permisson == 3 || $this->permisson == 5){
 			return $temp;
 		}else{
 			$temp='<a class="btn btn-primary" href="'.base_url('cms/order_new').'"> <i class="fa fa-cart-plus"> </i> Tạo mới đơn hàng</a>';
