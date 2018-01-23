@@ -32,6 +32,9 @@ $(document).ready(function(){
 							
 						});
 					});
+					$("#resetFrom").click(function(){
+						$("#ulFromCart").empty();
+					});
 				}
 				
 			}
@@ -39,7 +42,7 @@ $(document).ready(function(){
 	}
 	
 	function html_list_search_products(list){
-		var temp = '<ul id="ulFromCart" style="list-style:  none;background: #00c0ef;text-align: center;"><button class="btn"id="resetFrom"><i class="fa fa-trash">remove</i></button>';
+		var temp = '<ul id="ulFromCart" style="list-style:  none;background: #00c0ef;text-align: center;"><div style="float: right;width: 100%;"><button style="float: right;" class="btn"id="resetFrom"><i class="fa fa-trash"></i></button></div>';
 		$.each(list, function(i, item) {
 			temp += '<li><form id="addToCartFormPem'+item.id+'" name="addToCartForm"><input type="hidden" id="inputid" value="'+item.id+'"/><span>'+item.code_products+' </span><spanstyle="margin-right: 10px;" >'+item.name_products+'</span><span style="margin-left: 10px;" class="btn btn-success btn-small" id="submitbutton'+item.id+'">  <i id="addToCartValue" class="fa fa-cart-plus"> </i></span></form></li>';
 		});	
@@ -50,9 +53,10 @@ $(document).ready(function(){
 		var temp_html_error_product = 'sản phẩm không tồn tại vui lòng thử lại';
 		return temp_html_error_product;
 	}
-	
+		
 	
 });
+
 function submitDetailsForm() {
 	$("#error_codecode").empty();
 	var CodeOrder = $("#CodeOrder").val();

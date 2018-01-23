@@ -63,7 +63,7 @@ class Oders_Management extends MY_Controller{
 				$xcrud->fields('type_orders');
 				$xcrud->button(base_url().'route/packer?query={code_orders}','Approved','fa fa-check-circle','',array('class'=>'btn btn-success'));
 				$xcrud->button(base_url().'route/destroy_packer?query={code_orders}','Reject','fa fa-remove','',array('class'=>'btn btn-danger'));
-				$xcrud->button(base_url().'prints/guide?query={id}','Guide','fa fa-file','',array('target'=>'_blank'));
+				$xcrud->button(base_url().'prints/guide?query={code_orders}','Guide','fa fa-file','',array('target'=>'_blank'));
 			}
 			if($this->permisson == 4){
 				$xcrud->unset_remove();
@@ -71,8 +71,8 @@ class Oders_Management extends MY_Controller{
 				$xcrud->where('code_staff',$this->staff);
 				$xcrud->fields('type_post,manuals,note');
 				$xcrud->where('type_orders !=',6);
-				$xcrud->button(base_url().'prints/guide?query={id}','Guide','fa fa-file','',array('target'=>'_blank'));
-				$xcrud->columns('code_orders,price,quantily,total_price,code_customner,type_post,type_orders,manuals,note');
+				$xcrud->button(base_url().'prints/guide?query={code_orders}','Guide','fa fa-file','',array('target'=>'_blank'));
+				$xcrud->columns('code_products,code_orders,price,quantily,total_price,code_customner,type_post,type_orders');
 				$xcrud->button(base_url().'route/destroy_staff?query={code_orders}','Reject','fa fa-remove','',array('class'=>'btn btn-danger'));
 				
 			}
@@ -83,6 +83,7 @@ class Oders_Management extends MY_Controller{
 				$xcrud->table_name('[Orders] - Quản lý Đơn hàng');
 			}
 			
+			$xcrud->label('discounts','Giảm Giá');
 			$xcrud->label('code_products','Mã SP');
 			$xcrud->label('code_orders','Mã ĐH');
 			$xcrud->label('type_post','Nhà Bưu Chính');
@@ -99,7 +100,7 @@ class Oders_Management extends MY_Controller{
 			$xcrud->relation('type_post','type_post','id','name_type_orders');
 			$xcrud->relation('code_staff','staff','id','code');
 			$xcrud->columns('code_products,code_customner,code_orders,type_orders,type_post,quantily,price,discounts,total_price');
-			$xcrud->button(base_url().'prints/orders?query={id}','Invoice','fa fa-print','',array('target'=>'_blank','class'=>'btn btn-primary'));
+			$xcrud->button(base_url().'prints/orders?query={code_orders}','Invoice','fa fa-file','',array('target'=>'_blank','class'=>'btn btn-primary'));
 			if($this->permisson == 1 || $this->permisson == 2 || $this->permisson == 4 || $this->permisson == 5){
 				$xcrud->button(base_url().'route/tracking?key={code_orders}&code={type_post}','Tracking','fa fa-ship','',array('target'=>'_blank'));
 			}
