@@ -28,9 +28,9 @@ class Apps extends MY_Controller{
 		$this->parser->parse('default/header',$data);
 		$this->parser->parse('default/sidebar',$data);
 		$this->parser->parse('default/main',$data);
-		if($this->permisson ==4){
-			$this->parser->parse('dashboard_authorities_4',$data);
-		}
+		// if($this->permisson ==4){
+			// $this->parser->parse('dashboard_authorities_4',$data);
+		// }
 		
 		$this->parser->parse('default/footer',$data);
 	}
