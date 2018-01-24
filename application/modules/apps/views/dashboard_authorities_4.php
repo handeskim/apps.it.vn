@@ -23,19 +23,20 @@
 			</div>
 			<div class="col-md-12">
 				<div id="normal_search" >
-					<form method="get" action="<?php echo base_url('apps/search');?>">
+					<form id="frm_normal_search" method="get" action="<?php echo base_url('apps/search');?>">
 						<div class="form-group">
 						  <input type="text" name="q" class="form-control" placeholder="Từ khóa...">
 						</div>
 						<div class="form-group">
-							<select class="form-control" name="finds">
+							<select class="form-control" name="finds" >
 								<option value="1"> Tìm kiếm khách hàng</option>
 								<option value="2"> Tìm kiếm đơn hàng</option>
 								<option value="3"> Tìm kiếm lịch gọi lại</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<button type="button" name="search" value="1" id="normal_search" class="btn btn-flat"><i class="fa fa-search"></i>Tìm kiếm </button>
+							<input type="hidden" name="search" value="1">
+							<button type="button"  id="normal_search" class="btn btn-flat"><i class="fa fa-search"></i>Tìm kiếm </button>
 						</div>
 						
 				   </form>
