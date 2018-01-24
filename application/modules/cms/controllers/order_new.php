@@ -75,6 +75,10 @@ class Order_new extends MY_Controller{
 		$this->db->where('id', $id);
 		$this->db->update('products', $data); 
 	}
+	private function InfoCustomert($customer){
+		$sql = "SELECT * FROM customer WHERE `code` =  '$customer'";
+		return $this->GlobalMD->query_global($sql);
+	}
 	public function index(){
 		if($this->permisson == 5 || $this->permisson == 3){
 			redirect(base_url('apps'));
@@ -85,9 +89,28 @@ class Order_new extends MY_Controller{
 			$params = $_POST;
 			$checkCode = $this->CheckOrder($params['CodeOrder']);
 			if($checkCode==false){
-				$code_customer = $params['CodeCustomer'];	
 				if($params['NameCheckCustomer'] == 2){
 					$code_customer = $this->setUpCustomer($params);
+					$full_name  = $params['name_customer'];
+					$email  = $params['email_customer'];
+					$dia_chi  = $params['addr_customer'];
+					$dien_thoai  = $params['phone_customer'];
+				}else{
+					$code_customer = $params['CodeCustomer'];	
+					$infoCustomer = $this->InfoCustomert($code_customer);
+					if(!empty($infoCustomer)){
+						$full_name  = $infoCustomer[0]['full_name'];
+						$email  = $infoCustomer[0]['email'];
+						$dia_chi  = $infoCustomer[0]['dia_chi'];
+						$dien_thoai  = $infoCustomer[0]['dien_thoai'];
+					}else{
+						break;
+						$msg =  '<div class="callout callout-success">
+							<h4>Thành công!</h4>
+							<p>Tạo mới đơn hàng thành công </p>
+						</div>';
+					}
+					
 				}
 				if($params['NameCheckCallBack'] ==1){
 					$this->setUpcallback($params,$code_customer);
@@ -118,6 +141,10 @@ class Order_new extends MY_Controller{
 						'type_orders' => 2,
 						'discounts' => $discounts,
 						'quantily' => $quantily,
+						'full_name' => $full_name,
+						'email' => $email,
+						'dia_chi' => $dia_chi,
+						'dien_thoai' => $dien_thoai,
 						'price' => $price,
 						'total_price' => $total_pay,
 						'manuals' => $params['manuals'],

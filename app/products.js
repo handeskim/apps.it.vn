@@ -79,7 +79,7 @@ function temp_old_customer(){
 		temp +='</div><div id="ResponseSearchCustomer" class="col-md-12"> </div><br>';
 		temp +='<div class="col-md-12">';
 		temp +='<label >Mã khách hàng</label>';
-		temp +='<input id="CodeCustomer" type="text" class="form-control" name="CodeCustomer" value="" placeholder="Mã khách hàng - xxxxx" required>';
+		temp +='<input id="CodeCustomer" type="hidden" class="form-control" name="CodeCustomer" value="" placeholder="Mã khách hàng - xxxxx" required>';
 		temp +=' </div></div>';
 	$("#template_customer").append(temp);
 }

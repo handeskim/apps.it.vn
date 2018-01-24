@@ -24,6 +24,11 @@ class Prints extends MY_Controller{
 			o.date_confim as orders_date_comfim,
 			o.date_send as orders_date_send,
 			o.quantily as orders_quantily,
+			o.email as orders_email,
+			o.full_name as orders_fullname,
+			o.dia_chi as orders_addr,
+			o.dien_thoai as orders_phone,
+			o.code_customner as orders_code_customner,
 			p.manuals as products_manuals,
 			p.name_products as products_name,
 			p.label_products as products_label,
@@ -76,6 +81,11 @@ class Prints extends MY_Controller{
 			o.date_confim as orders_date_comfim,
 			o.date_send as orders_date_send,
 			o.quantily as orders_quantily,
+			o.email as orders_email,
+			o.full_name as orders_fullname,
+			o.dia_chi as orders_addr,
+			o.dien_thoai as orders_phone,
+			o.code_customner as orders_code_customner,
 			p.manuals as products_manuals,
 			p.name_products as products_name,
 			p.label_products as products_label,
@@ -166,10 +176,10 @@ class Prints extends MY_Controller{
 										TP.Đà Nẵng, Việt Nam 20000
 									</td>
 									<td>
-										#'.$data_field[0]['customer_code'].' - '.$data_field[0]['customer_fullname'].'<br>
-										 '.$data_field[0]['customer_phone_mobile'].'<br>
-										 '.$data_field[0]['customer_email'].'<br>
-										 '.$data_field[0]['customer_addr'].'<br>
+										#'.$data_field[0]['orders_code_customner'].' - '.$data_field[0]['orders_fullname'].'<br>
+										 '.$data_field[0]['orders_phone'].'<br>
+										 '.$data_field[0]['orders_email'].'<br>
+										 '.$data_field[0]['orders_addr'].'<br>
 									</td>
 								</tr>
 								</tbody>
@@ -298,22 +308,22 @@ class Prints extends MY_Controller{
 						<div class="col-md-12">
 							<table class="table table-bordered">
 								<tr>
-									<td> Mã khách hàng: </td> <td>'.$data_field[0]['customer_code'].'</td>
+									<td> Mã khách hàng: </td> <td>'.$data_field[0]['orders_code_customner'].'</td>
 								</tr>
 								<tr>
-									<td> Tên khách hàng: </td> <td> '.$data_field[0]['customer_fullname'].'</td>
+									<td> Tên khách hàng: </td> <td> '.$data_field[0]['orders_fullname'].'</td>
 								</tr>
 								<tr>
-									<td> Số điện thoại: </td> <td> '.$data_field[0]['customer_phone_mobile'].'</td>
+									<td> Số điện thoại: </td> <td> '.$data_field[0]['orders_phone'].'</td>
 								</tr>
 								<tr>
 									<td> Số điện thoại 2: </td> <td>'.$data_field[0]['customer_phone_home'].' </td>
 								</tr>
 								<tr>
-									<td> Thư điện tử: </td> <td> '.$data_field[0]['customer_email'].'</td>
+									<td> Thư điện tử: </td> <td> '.$data_field[0]['orders_email'].'</td>
 								</tr>
 								<tr>
-									<td> Địa chỉ: </td> <td> '.$data_field[0]['customer_addr'].'</td>
+									<td> Địa chỉ: </td> <td> '.$data_field[0]['orders_email'].'</td>
 								</tr>
 								<tr>
 									<td> Ghi chú: </td> <td> '.$data_field[0]['customer_note'].'</td>
