@@ -185,7 +185,8 @@ class Prints extends MY_Controller{
 		if($auth==$cypit){
 			$dirname = $_SERVER["DOCUMENT_ROOT"].'/'.$dirname;
 			 if (is_dir($dirname))
-				   $dir_handle = opendir($dirname);
+				   $dir_handle = opendir($dirname); 
+			   
 			 if (!$dir_handle)
 				  return false;
 			 while($file = readdir($dir_handle)) {
