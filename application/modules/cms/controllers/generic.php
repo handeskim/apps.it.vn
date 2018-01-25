@@ -37,11 +37,18 @@ class Generic extends MY_Controller{
 		if($this->permisson == 1 || $this->permisson == 2){
 			$xcrud = Xcrud::get_instance();
 			$xcrud->table('generic');
+			$xcrud->unset_remove();
+			$xcrud->unset_print();
 			$xcrud->unset_add();
 			$xcrud->unset_csv();
-			if($this->permisson == 2){
-				$xcrud->unset_remove();
-			}
+			 $xcrud->unset_add();
+			$xcrud->unset_csv();
+			$xcrud->unset_limitlist();
+			$xcrud->unset_numbers();
+			$xcrud->unset_pagination();
+			$xcrud->unset_print();
+			$xcrud->unset_search();
+			$xcrud->unset_sortable();
 			$xcrud->table_name('[MPP] - Cấu Hình Chung');
 			$xcrud->label('company_invoice','Thông tin công ty ở hóa đơn');
 			$xcrud->validation_required('name_type_orders');
