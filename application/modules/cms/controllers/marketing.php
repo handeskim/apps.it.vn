@@ -49,6 +49,12 @@ class Marketing extends MY_Controller{
 				$xcrud = Xcrud::get_instance();
 				$xcrud->table('email_sending');
 				$xcrud->unset_csv();
+				$xcrud->validation_pattern('email', 'email');
+				$xcrud->validation_required('staff');
+				$xcrud->validation_required('status');
+				$xcrud->validation_required('title');
+				$xcrud->validation_required('content');
+				$xcrud->validation_required('email');
 				if($this->authorities == 4){
 					$xcrud->where('staff',$staff);
 				}
