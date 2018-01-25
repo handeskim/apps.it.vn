@@ -29,7 +29,7 @@ class Apps extends MY_Controller{
 		$this->parser->parse('default/sidebar',$data);
 		$this->parser->parse('default/main',$data);
 		// if($this->permisson ==4){
-			// $this->parser->parse('dashboard_authorities_4',$data);
+			$this->parser->parse('dashboard_authorities_4',$data);
 		// }
 		
 		$this->parser->parse('default/footer',$data);
@@ -38,7 +38,7 @@ class Apps extends MY_Controller{
 				$staff =   $this->staff;
 				$keyword =  $params["q"];
 				if($params["finds"]==1){
-					$sql = "SELECT full_name,code,email,dia_chi,dien_thoai,dien_thoai_2,passport_id FROM customer 
+					$sql = "SELECT * FROM customer 
 						WHERE full_name LIKE '%$keyword%'
 						OR  code LIKE '%$keyword%'
 						OR  email LIKE '%$keyword%'
@@ -52,11 +52,12 @@ class Apps extends MY_Controller{
 				}
 				if($params["finds"]==2){
 					$sql = "SELECT * FROM orders 
-						WHERE full_name LIKE '%$keyword%'
+						WHERE code_orders LIKE '%$keyword%'
+						OR code_customner LIKE '%$keyword%'
+						OR full_name LIKE '%$keyword%'
 						OR  dien_thoai LIKE '%$keyword%'
 						OR  email LIKE '%$keyword%'
 						OR  dia_chi LIKE '%$keyword%'
-						OR code_customner LIKE '%$keyword%'
 						AND code_staff = '$staff'
 						GROUP BY code_orders
 						ORDER BY id DESC
@@ -89,9 +90,11 @@ class Apps extends MY_Controller{
 						$limit= 0;
 					}
 					$keyword =  $params["q"];
+					$finds =  $params["finds"];
 					$data = $this->QueryLike($params,$limit);
 					$reponse = array(
-						'limit' => $limit,
+						'finds' => (int)$finds,
+						'limit' => (int)$limit,
 						'results' => $data,
 					);
 					echo json_encode($reponse, true);

@@ -69,7 +69,45 @@ class Customer_Management extends MY_Controller{
 		$this->parser->parse('default/footer',$data);
 	}
 	
-	
+	public function edit(){
+		$id_customer = $this->input->get('query');
+		if($this->permisson == 3 || $this->permisson == 5 ){
+			redirect(base_url('apps'));
+		}
+		$msg ='';
+		$data = array(
+			'msg' => $msg,
+			'content' => $this->edit_customer($id_customer),
+			'user_data' => $this->user_data,
+			'excel_command' => $this->excel_command(),
+			'total_customer' => $this->total_customer(),
+			'title'=> 'Quản lý khách hàng',
+			'title_main' => 'Quản lý khách hàng',
+		);
+		$this->parser->parse('default/header',$data);
+		$this->parser->parse('default/sidebar',$data);
+		$this->parser->parse('default/main',$data);
+		$this->parser->parse('default/layout/main_curd_Customers',$data);
+		$this->parser->parse('default/footer',$data);
+	}
+	public function view(){
+		$id_customer = $this->input->get('query');
+		$msg ='';
+		$data = array(
+			'msg' => $msg,
+			'content' => $this->view_customer($id_customer),
+			'user_data' => $this->user_data,
+			'excel_command' => $this->excel_command(),
+			'total_customer' => $this->total_customer(),
+			'title'=> 'Quản lý khách hàng',
+			'title_main' => 'Quản lý khách hàng',
+		);
+		$this->parser->parse('default/header',$data);
+		$this->parser->parse('default/sidebar',$data);
+		$this->parser->parse('default/main',$data);
+		$this->parser->parse('default/layout/main_curd_Customers',$data);
+		$this->parser->parse('default/footer',$data);
+	}
 	public function index(){
 		if($this->permisson == 3 || $this->permisson == 5 ){
 			redirect(base_url('apps'));
@@ -137,6 +175,132 @@ class Customer_Management extends MY_Controller{
 		}
 		return $result;
 	}
+	private function edit_customer($id_customer){
+		
+		$user = $this->staff;
+			$xcrud = Xcrud::get_instance();
+			$xcrud->table('customer');
+			$xcrud->unset_csv();
+			$xcrud->where('id',$id_customer);
+			$xcrud->order_by('id','desc');
+			$xcrud->unset_add();
+			
+			if($this->permisson == 4){
+				$xcrud->where('supervisor',$this->staff);
+				$xcrud->unset_remove();
+			}
+			if($this->permisson == 2 || $this->permisson == 3 || $this->permisson == 5){
+				$xcrud->unset_remove();
+				$xcrud->unset_edit();
+			}
+			if($this->permisson == 3 || $this->permisson == 5){
+				$xcrud->unset_print();
+			}
+			$xcrud->table_name('[Customer] - Quản lý khách hàng');
+			$xcrud->label('code','Mã khách hàng');
+			$xcrud->label('full_name','Họ Va Tên');
+			$xcrud->label('email','email');
+			$xcrud->label('ngay_sinh','Ngày Sinh');
+			$xcrud->label('dia_chi','Địa Chỉ ');
+			$xcrud->label('dien_thoai','Điện thoại');
+			$xcrud->label('dien_thoai_2','Điện thoại 2');
+			$xcrud->label('hinh_anh','Hình Ảnh');
+			$xcrud->label('passport_id','CMTND');
+			$xcrud->label('note','Ghi chú');
+			$xcrud->label('supervisor','Nhân viên Tiếp Thị');
+			$xcrud->validation_required('code');
+			$xcrud->validation_required('full_name');
+			$xcrud->validation_required('email');
+			$xcrud->validation_required('ngay_sinh');
+			$xcrud->validation_required('dia_chi');
+			$xcrud->validation_required('dien_thoai');
+			$xcrud->validation_required('supervisor');
+			
+			if($this->permisson == 4){
+				$xcrud->columns('code,full_name,email,dien_thoai');
+				$xcrud->fields('dia_chi,full_name,dien_thoai,email,passport_id,dien_thoai_2,note,hinh_anh,ngay_sinh');
+			}else{
+				$xcrud->columns('code,full_name,email,dien_thoai,supervisor');
+			}
+			if($this->permisson == 1 || $this->permisson == 2){
+				$xcrud->fields('dia_chi,full_name,dien_thoai,email,passport_id,dien_thoai_2,note,hinh_anh,ngay_sinh,supervisor');
+			}
+			
+			if($this->permisson == 4 || $this->permisson == 5|| $this->permisson == 3){
+				$xcrud->relation('supervisor','staff','id',array('code'),'authorities=4 and id='.$user);
+			}else{
+				$xcrud->relation('supervisor','staff','id',array('code'),'authorities=4');
+			}
+			$xcrud->change_type('hinh_anh', 'image', '', array('width' => 200, 'height' => 200,'path' => '/upload/Customer/',));
+			$xcrud->button(base_url().'prints/customer_details?code={id}','Prints','fa fa-print','',array('target'=>'_blank'));
+			$xcrud->benchmark();
+			$response = $xcrud->render('edit',$id_customer);
+			return $response;
+	
+	}
+	private function view_customer($id_customer){
+		
+		$user = $this->staff;
+			$xcrud = Xcrud::get_instance();
+			$xcrud->table('customer');
+			$xcrud->unset_csv();
+			$xcrud->where('id',$id_customer);
+			$xcrud->order_by('id','desc');
+			$xcrud->unset_add();
+			
+			if($this->permisson == 4){
+				$xcrud->where('supervisor',$this->staff);
+				$xcrud->unset_remove();
+			}
+			if($this->permisson == 2 || $this->permisson == 3 || $this->permisson == 5){
+				$xcrud->unset_remove();
+				$xcrud->unset_edit();
+			}
+			if($this->permisson == 3 || $this->permisson == 5){
+				$xcrud->unset_print();
+			}
+			$xcrud->table_name('[Customer] - Quản lý khách hàng');
+			$xcrud->label('code','Mã khách hàng');
+			$xcrud->label('full_name','Họ Va Tên');
+			$xcrud->label('email','email');
+			$xcrud->label('ngay_sinh','Ngày Sinh');
+			$xcrud->label('dia_chi','Địa Chỉ ');
+			$xcrud->label('dien_thoai','Điện thoại');
+			$xcrud->label('dien_thoai_2','Điện thoại 2');
+			$xcrud->label('hinh_anh','Hình Ảnh');
+			$xcrud->label('passport_id','CMTND');
+			$xcrud->label('note','Ghi chú');
+			$xcrud->label('supervisor','Nhân viên Tiếp Thị');
+			$xcrud->validation_required('code');
+			$xcrud->validation_required('full_name');
+			$xcrud->validation_required('email');
+			$xcrud->validation_required('ngay_sinh');
+			$xcrud->validation_required('dia_chi');
+			$xcrud->validation_required('dien_thoai');
+			$xcrud->validation_required('supervisor');
+			
+			if($this->permisson == 4){
+				$xcrud->columns('code,full_name,email,dien_thoai');
+				$xcrud->fields('dia_chi,full_name,dien_thoai,email,passport_id,dien_thoai_2,note,hinh_anh,ngay_sinh');
+			}else{
+				$xcrud->columns('code,full_name,email,dien_thoai,supervisor');
+			}
+			if($this->permisson == 1 || $this->permisson == 2){
+				$xcrud->fields('dia_chi,full_name,dien_thoai,email,passport_id,dien_thoai_2,note,hinh_anh,ngay_sinh,supervisor');
+			}
+			
+			if($this->permisson == 4 || $this->permisson == 5|| $this->permisson == 3){
+				$xcrud->relation('supervisor','staff','id',array('code'),'authorities=4 and id='.$user);
+			}else{
+				$xcrud->relation('supervisor','staff','id',array('code'),'authorities=4');
+			}
+			$xcrud->change_type('hinh_anh', 'image', '', array('width' => 200, 'height' => 200,'path' => '/upload/Customer/',));
+			$xcrud->button(base_url().'prints/customer_details?code={id}','Prints','fa fa-print','',array('target'=>'_blank'));
+			$xcrud->benchmark();
+			$response = $xcrud->render('view',$id_customer);
+			return $response;
+	
+	}
 	private function Customer(){
 		$user = $this->staff;
 			$xcrud = Xcrud::get_instance();
@@ -175,10 +339,15 @@ class Customer_Management extends MY_Controller{
 			$xcrud->validation_required('dia_chi');
 			$xcrud->validation_required('dien_thoai');
 			$xcrud->validation_required('supervisor');
+			
 			if($this->permisson == 4){
 				$xcrud->columns('code,full_name,email,dien_thoai');
+				$xcrud->fields('dia_chi,full_name,dien_thoai,email,passport_id,dien_thoai_2,note,hinh_anh,ngay_sinh');
 			}else{
 				$xcrud->columns('code,full_name,email,dien_thoai,supervisor');
+			}
+			if($this->permisson == 1 || $this->permisson == 2){
+				$xcrud->fields('dia_chi,full_name,dien_thoai,email,passport_id,dien_thoai_2,note,hinh_anh,ngay_sinh,supervisor');
 			}
 			
 			if($this->permisson == 4 || $this->permisson == 5|| $this->permisson == 3){

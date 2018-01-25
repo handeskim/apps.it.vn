@@ -1,5 +1,10 @@
 <section class="content">
 <div class="row">
+	<?php 
+	$user_data = $this->session->userdata('data_users');
+	$authorities = $user_data['authorities'];
+	if($authorities ==1|| $authorities == 2 || $authorities == 4){
+	?>
 	<div class="col-md-12">
 		<div class="col-md-1">
 			<a href="<?php echo base_url('cms/customer_management/addnew');?>" >
@@ -22,6 +27,7 @@
 			</a>
 		</div>
 	</div>
+	<?php } ?>
 	<div class="col-md-12 col-sm-12 col-xs-12">
 	  <?php echo $content; ?>
 	</div>

@@ -13,6 +13,10 @@ class Api extends REST_Controller {
 		}
 		
 	}
+	public function info_get(){
+		$response = array('results' => null);
+		$this->response($response);
+	}
 	public function search_product_item_get(){
 		$response = array('result' => null);
 		$resuls = null;

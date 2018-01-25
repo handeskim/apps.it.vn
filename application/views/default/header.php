@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="<?php echo base_url();?>public/bower_components/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>public/bower_components/Ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>public/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?php echo base_url();?>public/dist/css/pqa_global.css">
   <link rel="stylesheet" href="<?php echo base_url();?>public/dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>public/bower_components/morris.js/morris.css">
   <link rel="stylesheet" href="<?php echo base_url();?>public/bower_components/jvectormap/jquery-jvectormap.css">
@@ -25,19 +26,23 @@
 	<script type="text/javascript">
   		var BASE_URL = "<?php echo base_url(); ?>";
   	</script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-	<script src="<?php echo base_url();?>public/dist/js/angular/1.2.1/angular.min.js"></script>
-	<script src="<?php echo base_url();?>public/plugins/bootpag/jquery.bootpag.min.js"></script>
-
-  <script src="<?php echo base_url();?>public/dist/css/rila_global.css"></script>
+	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip 
+	<script src="public/dist/js/angular/1.2.1/angular.min.js"></script>
+	
+	<script src="public/plugins/bootpag/jquery.bootpag.min.js"></script>
+	-->
   <script src="<?php echo base_url();?>app/notification.js"></script>
    <?php 
 	$user_data = $this->session->userdata('data_users');
 	$authorities = $user_data['authorities'];
 	if($authorities ==3 || $authorities == 5){
 	?>
+	
 	<meta http-equiv="refresh" content="1200" > 
 	<?php } ?>
+	<script type="text/javascript">
+  		var authorities = "<?php echo $authorities; ?>";
+  	</script>
 </head>
 <body ng-app="rilaApps" class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
