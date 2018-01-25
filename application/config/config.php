@@ -359,6 +359,7 @@ $config['rewrite_short_tags'] = FALSE;
 |
 */
 $config['proxy_ips'] = '';
+$config['CONSUMER_SECRET'] = '1c8fbe27001898a72db5efc69a274312';
 
 
 /* End of file config.php */

