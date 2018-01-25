@@ -394,7 +394,13 @@ class Prints extends MY_Controller{
 		}
 		return $temp;
 	}
+	private function info_company_invoice(){
+		$sql = "SELECT company_invoice FROM generic ";
+		$data_field = $this->GlobalMD->query_global($sql);
+		return $data_field[0]['company_invoice'];
+	}
 	private function template_invoice_details($sql){
+		$info_company_invoice = $this->info_company_invoice();
 		$temp = '';
 		$data_field = $this->GlobalMD->query_global($sql);
 		if(isset($data_field)){
@@ -429,9 +435,7 @@ class Prints extends MY_Controller{
 								<tbody>
 								<tr>
 									<td>
-										 Công ty cổ phần PQA .<br>
-										 Số 123 Hoàng Hoa Thám - Q.Ngô Quyền<br>
-										TP.Đà Nẵng, Việt Nam 20000
+										'. $info_company_invoice.'
 									</td>
 									<td>
 										#'.$data_field[0]['orders_code_customner'].' - '.$data_field[0]['orders_fullname'].'<br>
@@ -557,14 +561,7 @@ class Prints extends MY_Controller{
 							'.$data_field[0]['order_note'].'
 						</div>
 					</div>';
-					foreach($data_field as $field){
-						$temp .= '<div class="col-md-12">
-							<h3 class="header_info_cart"> hướng dẫn sử dụng thuốc: <i><u><b>'.$field['products_name'].'  ('.$field['products_label'].') </b></u></i></h3>
-								<div class="col-md-12">
-								'.$field['products_manuals'].'
-								</div>
-						</div>';
-					}
+				
 				return $temp;
 			}
 		}else{

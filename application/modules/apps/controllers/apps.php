@@ -36,7 +36,7 @@ class Apps extends MY_Controller{
 	}
 	private function QueryLike($params,$limit){
 				$staff =   $this->staff;
-				$keyword =  $params["q"];
+				$keyword =  $params["q"]; 
 				if($params["finds"]==1){
 					$sql = "SELECT * FROM customer 
 						WHERE full_name LIKE '%$keyword%'

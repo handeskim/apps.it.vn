@@ -5,6 +5,9 @@ $authorities = $user_data['authorities']; ?>
 <?php if($authorities ==3 || $authorities == 5){ ?>
 <script src="<?php echo base_url();?>app/apps_search_p2.js"> </script>
 <?php } ?>
+<?php if($authorities ==4 ){ ?>
+<script src="<?php echo base_url();?>app/apps_search_p3.js"> </script>
+<?php } ?>
 <link rel="stylesheet" href="<?php echo base_url();?>public/bower_components/bootstrap-daterangepicker/daterangepicker.css">
 <link rel="stylesheet" href="<?php echo base_url();?>public/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 <script src="<?php echo base_url();?>public/bower_components/moment/min/moment.min.js"></script>
@@ -63,7 +66,7 @@ $authorities = $user_data['authorities']; ?>
 				<div class="form-group" id="date_ranger">
 				<div class="input-group">
 				  <button type="button" class="btn btn-default pull-right" id="daterange-btn" >
-					<span>
+					<span> 
 						<i class="fa fa-calendar"></i> Chọn ngày Tìm kiếm
 					</span>
 					<input id="search_date" type="hidden" name="date_search" value="">

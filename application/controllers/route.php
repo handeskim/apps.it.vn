@@ -32,6 +32,16 @@ class Route extends MY_Controller{
 		header('Location: '.$links);
 		
 	}
+	public function destroy_scheduling(){
+		$query = $this->input->get('query');
+		$data_notifation = array(
+				'status' => 2,
+			);
+		$this->db->where('id', $query);
+		$UpdateNotifation = $this->db->update('scheduling_callback', $data_notifation); 
+			redirect(base_url('apps'));
+		
+	}
 	public function packer(){
 		$query = $this->input->get('query');
 		$data_notifation = array(

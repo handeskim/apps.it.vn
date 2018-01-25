@@ -15,6 +15,72 @@ class Scheduling extends MY_Controller{
 		}
 		
 	}
+	private function scheduling_edit($id){
+		if($this->permisson == 3 || $this->permisson == 5){
+			return error_authorities();
+		}else{
+			$xcrud = Xcrud::get_instance();
+			$xcrud->table('scheduling_callback');
+			$xcrud->unset_add();
+			$xcrud->unset_csv();
+			$xcrud->where('id',$id);
+			$xcrud->unset_csv();
+			$xcrud->unset_print();
+			  $xcrud->unset_add();
+			
+			$xcrud->unset_remove();
+			$xcrud->unset_csv();
+			$xcrud->unset_limitlist();
+			$xcrud->unset_numbers();
+			$xcrud->unset_pagination();
+			$xcrud->unset_print();
+			$xcrud->unset_search();
+			$xcrud->unset_sortable();
+			$xcrud->order_by('scheduling','desc');
+			if($this->permisson == 2 || $this->permisson == 4){
+				$xcrud->unset_remove();
+			}
+			if($this->permisson == 4){
+				$xcrud->where('code_staff',$this->staff);
+			}
+			$xcrud->table_name('[Customer care] - Chỉnh sửa lịch gọi ID: '.$id);
+			$xcrud->label('code_staff','Mã Nhân viên');
+			$xcrud->label('code_customer','Mã Khách hàng');
+			$xcrud->label('scheduling','Ngày lập lịch');
+			$xcrud->label('note','Ghi chú');
+			$xcrud->validation_required('code_staff');
+			$xcrud->relation('status','status_callback','id','name_status');
+			$xcrud->relation('code_staff','staff','id','code' ,'id='.$this->staff);
+			$xcrud->relation('code_customer','customer','code','code','supervisor='.$this->staff);
+			$xcrud->validation_required('code_customer');
+			$xcrud->validation_required('scheduling');
+			$xcrud->change_type('note', 'textarea');
+			$xcrud->benchmark();
+			$response = $xcrud->render('edit',$id);
+			return $response;
+			
+		}
+	}
+	public function edit($id){
+		
+		if($this->permisson == 5 || $this->permisson == 3 ){
+			redirect(base_url('apps'));
+		}
+		$msg ='';
+		
+		$data = array(
+			'msg' => $msg,
+			'content' => $this->scheduling_edit($id),
+			'user_data' => $this->user_data,
+			'title'=> 'chỉnh sửa  lịch gọi lại',
+			'title_main' => 'chỉnh sửa   lịch gọi lại',
+		);
+		$this->parser->parse('default/header',$data);
+		$this->parser->parse('default/sidebar',$data);
+		$this->parser->parse('default/main',$data);
+		$this->parser->parse('default/layout/main_curd_account',$data);
+		$this->parser->parse('default/footer',$data);
+	}
 	public function index(){
 		if($this->permisson == 5 || $this->permisson == 3 ){
 			redirect(base_url('apps'));
@@ -57,7 +123,7 @@ class Scheduling extends MY_Controller{
 			$xcrud->validation_required('code_staff');
 			$xcrud->relation('status','status_callback','id','name_status');
 			$xcrud->relation('code_staff','staff','id','code' ,'id='.$this->staff);
-			$xcrud->relation('code_customer','customer','id','code','supervisor='.$this->staff);
+			$xcrud->relation('code_customer','customer','code','code','supervisor='.$this->staff);
 			$xcrud->validation_required('code_customer');
 			$xcrud->validation_required('scheduling');
 			$xcrud->change_type('note', 'textarea');

@@ -121,6 +121,7 @@
 		<ul class="treeview-menu">
 			<li><a href="<?php echo base_url();?>cms/staff"><i class="fa fa-users"></i> Nhân viên </a></li>
 			<li><a href="<?php echo base_url();?>cms/partnerspost"><i class="fa fa-ship"></i> Dịch vụ bưu chính</a></li>
+			<li><a href="<?php echo base_url();?>cms/generic"><i class="fa fa-gears"></i> Cấu hình Chung</a></li>
 			<li><a href="<?php echo base_url();?>cms/typespharma"><i class="fa  fa-eyedropper"></i> Loại thuốc</a></li>
 			
 		</ul>
