@@ -11,6 +11,8 @@ $(function(){
 			$("#normal_search").hide();
 		}
 	});
+	
+	
 	$("#btn_normal_search").click(function(){
 		$("#ResponseResults").empty();
 		$.ajax({ 
@@ -29,6 +31,26 @@ $(function(){
 			}
 		});
 	});
+	$("#btn_advanced_search").click(function(){
+		$("#ResponseResults").empty();
+		$.ajax({ 
+			type: 'GET', 
+			url: BASE_URL+'apps/search', 
+			data: $('form#frm_advanced_search').serialize(), 
+			dataType: 'json',
+			success: function (reponse) { 
+				$("#ResponseResults").empty();
+				if(reponse.results == null || reponse.results == '' ||  reponse.results == 'null'){
+					$("#ResponseResults").append('<div class="callout callout-warning"><h4>Tìm kiếm thất bại!</h4><p>sản phẩm không tìm thấy vui lòng tìm lại.</p></div>');
+				}else{
+					var temp_search = html_temp_search_advanced_results(reponse);
+					$("#ResponseResults").append(temp_search);
+				}
+			}
+		});
+	});
+	
+	
 	$("#inbox_normal_search").keyup(function(){
 		$("#ResponseResults").empty();
 		$.ajax({ 
@@ -47,6 +69,69 @@ $(function(){
 			}
 		});
 	})
+	
+	function html_temp_search_advanced_results(reponse){
+		var info = 'Từ khóa '+reponse.q;
+		var temp = '<div class="box"><div class="box-header"><h3 class="box-title">Dữ liệu tìm kiếm '+info+'</h3></br><a href="'+BASE_URL+'excel_export/dowload?code='+reponse.code+'" target="_blank" class="btn btn-danger"><span> <i class="fa fa-cloud-download"> </i> Download dữ liệu tìm kiếm</span></a></div>'
+		
+		temp += '<div class="box-body"><table id="response_search" class="table table-bordered table-hover dataTable" >';
+		temp += '<thead>';
+		temp +=  '<tr>';
+			temp += '<th>ID NV</th>';
+			temp += '<th>ID KH</th>';
+			temp += '<th>ID HĐ</th>';
+			temp += '<th>Tên khách</th>';
+			temp += '<th>Email</th>';
+			temp += '<th>Phone</th>';
+			temp += '<th>Addr</th>';
+			temp += '<th>Trạng Thái</th>';
+			if(authorities==3 || authorities==5){
+				temp += '<th></th>';
+				temp += '<th></th>';
+			}
+			temp += '<th></th>';
+			temp += '<th></th>';
+			temp += '<th></th>';
+		temp +=  '</tr>';
+		temp += '</thead>';
+		temp += '<tbody>';;
+		console.log(reponse.results);
+		$.each(reponse.results, function(i, item) {
+			temp +=  '<tr>';
+			temp += '<td> '+item.staff_code+'</td>';
+			temp += '<td> '+item.code_customner+'</td>';
+			temp += '<td> '+item.code_orders+'</td>';
+			temp += '<td> '+item.full_name+'</td>';
+			temp += '<td> '+item.email+'</td>';
+			temp += '<td> '+item.dien_thoai+'</td>';
+			temp += '<td> '+item.dia_chi+'</td>';
+			temp += '<td> '+item.orders_status+'</td>';
+			
+			if(authorities==4 && item.type_orders <= 2  ){
+				temp += '<td><a title="Reject" target="_blank" href="'+BASE_URL+'route/destroy_staff?query='+item.code_orders+'" class="btn btn-danger"><i class="glyphicon glyphicon-ban-circle"> </i></a></td>';
+			}
+			if(authorities==3 && item.type_orders==2){
+				temp += '<td><a title="Approved" target="_blank" href="'+BASE_URL+'route/accountancy?query='+item.code_orders+'" class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"> </i></a></td>';
+				temp += '<td><a title="Reject" target="_blank" href="'+BASE_URL+'route/destroy_accounts?query='+item.code_orders+'" class="btn btn-danger"><i class="glyphicon glyphicon-ban-circle"> </i></a></td>';
+			}
+			if(authorities==5 && item.type_orders==3){
+				temp += '<td><a title="Approved" target="_blank" href="'+BASE_URL+'route/packer?query='+item.code_orders+'" class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"> </i></a></td>';
+				temp += '<td><a title="Reject" target="_blank" href="'+BASE_URL+'route/destroy_packer?query='+item.code_orders+'" class="btn btn-danger"><i class="glyphicon glyphicon-ban-circle"> </i></a></td>';
+			}
+			temp += '<td><a title="Details" target="_blank" href="'+BASE_URL+'prints/details?query='+item.code_orders+'" class="btn btn-info"><i class="fa fa-eye"> </i></a></td>';
+			temp += '<td><a title="letter" target="_blank" href="'+BASE_URL+'prints/letter?query='+item.code_orders+'" class="btn btn-success"><i class="fa fa-envelope-o"> </i></a></td>';
+			temp += '<td><a title="Prints Invoice" target="_blank" href="'+BASE_URL+'prints/orders?query='+item.code_orders+'" class="btn btn-warning"><i class="fa fa-print"></i></a></td>';
+			temp += '<td><a title="Prints Guide" target="_blank" href="'+BASE_URL+'prints/guide?query='+item.code_orders+'" class="btn btn-primary"><i class="fa fa-file"></i></a></td>';
+			temp += '<td><a title="Tracking" target="_blank" href="'+BASE_URL+'route/tracking?key='+item.code_orders+'&posts='+item.type_post+'" class="btn btn-info"><i class="fa fa-ship"></i></a></td>';
+				
+				
+			temp +=  '</tr>';
+		});
+		temp +='</tbody>';
+		temp +='</table></div>';
+		return temp;
+	}
+	
 	
 	function html_temp_search_results(reponse){
 		if(reponse.finds == 1){
@@ -70,6 +155,7 @@ $(function(){
 			temp += '<th>Email</th>';
 			temp += '<th>Phone</th>';
 			temp += '<th>Addr</th>';
+			temp += '<th>Status</th>';
 			if(reponse.finds == 2){
 				if(authorities==3 || authorities==5){
 					temp += '<th></th>';
@@ -100,6 +186,8 @@ $(function(){
 				temp += '<td> '+item.email+'</td>';
 				temp += '<td> '+item.dien_thoai+'</td>';
 				temp += '<td> '+item.dia_chi+'</td>';
+				temp += '<td> '+item.orders_status+'</td>';
+				
 				if(reponse.finds == 2){
 					if(authorities==3 && item.type_orders==2){
 						temp += '<td><a title="Approved" target="_blank" href="'+BASE_URL+'route/accountancy?query='+item.code_orders+'" class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"> </i></a></td>';

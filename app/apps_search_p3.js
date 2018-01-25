@@ -22,7 +22,6 @@ $(function(){
 	});
 	
 	function temp_response(reponse){
-		console.log(reponse);
 		var temp = '';
 		var temp = '<div class="box"><div class="box-header"><h3 class="box-title">Danh sách khách hàng cần gọi lại</h3></div>'
 		temp += '<div class="box-body"><table id="response_search" class="table table-bordered table-hover dataTable" >';

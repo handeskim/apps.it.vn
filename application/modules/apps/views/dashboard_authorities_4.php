@@ -42,7 +42,7 @@ $authorities = $user_data['authorities']; ?>
 				<div id="normal_search" >
 					<form id="frm_normal_search">
 						<div class="form-group">
-						  <input id="inbox_normal_search" type="text" name="q" class="form-control" placeholder="Từ khóa...">
+						  <input id="inbox_normal_search" type="text" name="q" class="form-control" placeholder="Từ khóa..." required>
 						</div>
 						<div class="form-group">
 							<select class="form-control" name="finds" >
@@ -62,25 +62,29 @@ $authorities = $user_data['authorities']; ?>
 				</div>
 			</div>
 			<div id="advanced_search" class="col-md-12">
-				<form >
+				<form id="frm_advanced_search">
 				<div class="form-group" id="date_ranger">
-				<div class="input-group">
-				  <button type="button" class="btn btn-default pull-right" id="daterange-btn" >
-					<span> 
-						<i class="fa fa-calendar"></i> Chọn ngày Tìm kiếm
-					</span>
-					<input id="search_date" type="hidden" name="date_search" value="">
-					<i class="fa fa-caret-down"></i>
-				  </button>
+					<div class="input-group">
+					  <button type="button" class="btn btn-default pull-right" id="daterange-btn" >
+						<span> 
+							<i class="fa fa-calendar"></i> Chọn ngày Tìm kiếm
+						</span>
+						<input id="search_date" type="hidden" name="date_search" value="" required>
+						<i class="fa fa-caret-down"></i>
+					  </button>
+					</div>
 				</div>
-			  </div>
-			  <button type="button" name="search"  value="2" class="btn btn-default" > <i class="fa fa-search" id="advanced_search"> </i> Tìm kiếm nâng cao</button>
+				<div class="form-group">
+				  <input id="inbox_normal_search" type="text" name="q" class="form-control" placeholder="Từ khóa..." required>
+				</div>
+				<input type="hidden" name="search" value="2">
+				<button type="button"  class="btn btn-flat" id="btn_advanced_search"> <i class="fa fa-search" > </i> Tìm kiếm nâng cao</button>
 			  </form>
 			</div>
 		</div>
 	</div>
 	<div class="col-md-12">
-		
+		<hr>
 		<div class="col-md-12">
 			<div id="ResponseResults"></div>
 		</div>
