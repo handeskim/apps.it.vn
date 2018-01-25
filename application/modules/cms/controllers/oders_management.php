@@ -74,6 +74,7 @@ class Oders_Management extends MY_Controller{
 			$xcrud->unset_csv();
 			$xcrud->unset_print();
 			$xcrud->unset_add();
+			$xcrud->button(base_url().'prints/letter?query={code_orders}','Letter','fa fa-envelope-o','',array('target'=>'_blank','class'=>'btn btn-primary'));
 			$xcrud->button(base_url().'prints/orders?query={code_orders}','Invoice','fa fa-file','',array('target'=>'_blank','class'=>'btn btn-primary'));
 			$xcrud->button(base_url().'route/tracking?key={code_orders}&code={type_post}','Tracking','fa fa-ship','',array('target'=>'_blank'));
 			

@@ -47,7 +47,7 @@ class Staff extends MY_Controller{
 			if($this->permisson == 2){
 				$xcrud->unset_remove();
 			}
-			$xcrud->table_name('[HRM] - Quản lý nhân viên');
+			$xcrud->table_name('[HRM] - Thay đổi mật khẩu ID: '.$id_user);
 			$xcrud->label('full_name','Họ Và Tên');
 			$xcrud->label('email','email');
 			$xcrud->label('ngay_sinh','Ngày Sinh');
@@ -61,13 +61,14 @@ class Staff extends MY_Controller{
 			$xcrud->label('authorities','Quyền hạn');
 			$xcrud->label('status','Trạng Thái');
 			$xcrud->validation_required('status');
-			$xcrud->validation_required('password',8);
+			$xcrud->validation_required('password',6);
 			$xcrud->validation_required('email');
 			$xcrud->validation_required('full_name');
 			$xcrud->validation_required('authorities');
 			$xcrud->relation('status','status','id','name_status');
 			$xcrud->relation('authorities','authorities','id','name_auth');
-			$xcrud->fields('status,full_name,hinh_anh,email,passport_id,authorities,status,dien_thoai,sendmail');
+			$xcrud->fields('password');
+			$xcrud->change_type('password', 'password', 'md5', array('maxlength'=>10,'placeholder'=>'enter password'));
 			$xcrud->columns('status,code,full_name,hinh_anh,email,passport_id,authorities,status,dien_thoai,sendmail');
 			$xcrud->change_type('password', 'password', 'md5', array('class'=>'xcrud-input form-control', 'maxlength'=>10,'placeholder'=>'Nhập mật khẩu'));
 			$xcrud->change_type('hinh_anh', 'image', '', 

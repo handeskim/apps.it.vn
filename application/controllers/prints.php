@@ -65,6 +65,63 @@ class Prints extends MY_Controller{
 			$this->parser->parse('prints/default',$data);
 		}
 	}
+	public function letter(){
+		if(isset($_GET['query'])){
+			$code_orders = $_GET['query'];
+			$sql = "SELECT
+			o.id as orders_id,
+			o.manuals as orders_manuals,
+			o.note as order_note,
+			o.code_orders as orders_code,
+			o.price as orders_price,
+			o.total_price as orders_total_price,
+			o.discounts as orders_discounts,
+			o.code_staff as orders_staff_id,
+			o.date_order as orders_date_buy,
+			o.date_confim as orders_date_comfim,
+			o.date_send as orders_date_send,
+			o.quantily as orders_quantily,
+			o.email as orders_email,
+			o.full_name as orders_fullname,
+			o.dia_chi as orders_addr,
+			o.dien_thoai as orders_phone,
+			o.code_customner as orders_code_customner,
+			p.manuals as products_manuals,
+			p.name_products as products_name,
+			p.label_products as products_label,
+			p.note as products_note,
+			p.id as products_id,
+			p.code_products as products_code,
+			s.id as staff_id,
+			s.full_name as staff_fullname, 
+			s.`code` as staff_code,
+			s.email as staff_email, 
+			s.dien_thoai as staff_phone,
+			c.`code` as customer_code,
+			c.email as customer_email,
+			c.full_name as customer_fullname,
+			c.dien_thoai as customer_phone_mobile, 
+			c.dien_thoai_2 as customer_phone_home,
+			c.dia_chi as customer_addr,
+			c.note as customer_note,
+			odr.name_oders as name_type_orders,
+			ppm.name_types_pharma as name_pharma,
+			pgm.name_generic_pharma as generic_pharma
+			FROM orders o
+			INNER JOIN products p ON o.code_products = p.id
+			INNER JOIN types_pharma ppm ON p.types = ppm.id
+			INNER JOIN generic_pharma pgm ON p.generic = pgm.id
+			INNER JOIN type_post tpt ON o.type_post = tpt.id
+			INNER JOIN staff s ON o.code_staff = s.id
+			INNER JOIN customer c ON o.code_customner = c.`code`
+			INNER JOIN type_oders odr ON o.type_orders = odr.id
+			WHERE o.code_orders = '$code_orders'";
+			$data = array(
+				'content' => $this->template_Letter($sql),
+			);
+			$this->parser->parse('prints/default',$data);
+		}
+	}
 	public function orders(){
 		if(isset($_GET['query'])){
 			$code_orders = $_GET['query'];
@@ -542,6 +599,78 @@ class Prints extends MY_Controller{
 								<tr class="invoice_total"><td>Thanh Toán: </td><td> '.number_format($total_discounts_bill).' </td></tr>
 								
 									
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				';
+			}
+		}
+		return $temp;
+	}
+	
+	private function template_Letter($sql){
+		$info_company_invoice = $this->info_company_invoice();
+		$temp = '';
+		$data_field = $this->GlobalMD->query_global($sql);
+		if(isset($data_field)){
+			if(!empty($data_field)){
+				$temp = '
+				<div class="col-md-12">
+					<div class="invoice-box">
+						<table cellpadding="0" cellspacing="0">
+						<tbody>
+						<tr class="information">
+							<td colspan="2">
+								<table>
+								<tbody>
+									<tr>
+										<td>
+											<b>CÔNG TY CỔ PHẦN DƯỢC PHẨM PQA</b></br>
+											<b>THỬA 99, KHU ĐỒNG QUÀN, XÃ TÂN THÀNH, VỤ BẢN, NAM ĐỊNH</b></br>
+											NGƯỜI GỬI: <b>'.$data_field[0]['staff_fullname'].'</b></br>
+											SỐ ĐIỆN THOẠI: <b>'.$data_field[0]['staff_phone'].'</b></br>
+										</td>
+									</tr>
+								</tbody>
+								</table>
+							</td>
+						</tr>
+						</tbody>
+						</table>
+						<table cellpadding="0" cellspacing="0">
+						<tbody>
+						<tr class="heading">
+							<td style="text-align: left;">#</td>
+							<td style="text-align: left;">Tên sản phẩm</td>
+							<td style="text-align: left;">Số lượng </td>	
+							<td style="text-align: left;">Thành tiền</td>
+						</tr>';
+						$stt = 1;
+						$total_bill = array();
+						foreach($data_field as $value){
+							$bill = (int)$value['orders_quantily'] * (int)$value['orders_price'];
+							$temp .='<tr class="item">
+									<td style="text-align: left;">'.$stt.'</td>
+									<td style="text-align: left;">'.$value['products_name'].'</td>
+									<td style="text-align: left;">'.$value['orders_quantily'].'</td>
+									<td style="text-align: left;">'. number_format($bill).' </td>
+								</tr>';
+							$stt++;
+							$total_bill[] = $bill;
+						}
+					$temp .='
+						</tbody>
+						</table>
+						<table cellpadding="0" cellspacing="0">
+							<tbody>
+								<tr class="invoice_total">
+									<td style="text-transform: uppercase;font-size: 16px;padding: 20px;" > 
+										Tên Người Nhận: <b>'.$data_field[0]['orders_fullname'].'</b></br>
+										Địa chỉ: <b>'.$data_field[0]['orders_addr'].' </b></br>
+										Số điện thoại: <b>'.$data_field[0]['orders_phone'].'</b></br>
+									</td>
 								</tr>
 							</tbody>
 						</table>
