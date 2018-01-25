@@ -78,6 +78,15 @@
 							  </select>
 						  </div>
 					</div>
+					<div class="form-group">
+						<label for="inputEmail3" class="col-md-2 control-label">Marketing</label>
+						  <div class="col-md-10">
+							  <select class="form-control" name="sendmail"  required>
+									<option class="form-control"  value="1">  Có </option>
+									<option class="form-control"  value="0">  Không </option>
+							  </select>
+						  </div>
+					</div>
 				</div>
 				<div class="box-footer">
 					<input type="hidden" name="cmd" value="1000">

@@ -1,6 +1,7 @@
  <?php 
 	$user_data = $this->session->userdata('data_users');
 	$authorities = $user_data['authorities'];
+	$sendmail = $user_data['sendmail'];
   ?>
 <aside class="main-sidebar">
 <!-- sidebar: style can be found in sidebar.less -->
@@ -96,6 +97,22 @@
 			
 		</ul>
 	</li>
+	<?php 
+		if($authorities !=3 || $authorities != 5){
+	?>
+	<li class="treeview">
+		<a href="#">
+		<i class="fa fa-bullhorn"></i> <span>Marketing</span>
+			<span class="pull-right-container">
+			<i class="fa fa-angle-left pull-right"></i>
+			</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="<?php echo base_url();?>cms/marketing/email"><i class="fa fa-cube"></i> Marketing Email </a></li>
+			<li><a href="<?php echo base_url();?>cms/marketing/sms"><i class="fa fa-cube"></i> Marketing SMS </a></li>
+		</ul>
+	</li>
+	<?php } ?>
 	<li class="treeview">
 		<a href="#">
 		<i class="fa fa-cubes"></i> <span>Sản phẩm</span>
