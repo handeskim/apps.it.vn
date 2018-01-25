@@ -26,8 +26,6 @@ class Scheduling extends MY_Controller{
 			$xcrud->where('id',$id);
 			$xcrud->unset_csv();
 			$xcrud->unset_print();
-			  $xcrud->unset_add();
-			
 			$xcrud->unset_remove();
 			$xcrud->unset_csv();
 			$xcrud->unset_limitlist();

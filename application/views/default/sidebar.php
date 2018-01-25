@@ -72,7 +72,7 @@
 		<ul class="treeview-menu">
 			<li><a href="<?php echo base_url();?>cms/customer_management"><i class="fa fa-user-secret"></i> Quản lý khách hàng</a></li>
 			<?php 
-				if($authorities ==4){
+				if($authorities ==1 || $authorities == 2 || $authorities ==4){
 			?>
 			<li><a href="<?php echo base_url();?>cms/scheduling"><i class="fa fa-history"></i> Lập lịch gọi lại</a></li>
 			<?php } ?>
