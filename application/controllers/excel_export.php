@@ -8,6 +8,7 @@ class Excel_export extends MY_Controller{
 		$this->user_data = $this->session->userdata('data_users');
 		$this->permisson = $this->user_data['authorities'];
 		$this->users = $this->user_data['id'];
+		$this->staff = $this->user_data['id'];
 		if(isset($this->login)==false){
 			redirect(base_url('sign'));
 		}

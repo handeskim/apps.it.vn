@@ -28,7 +28,14 @@ class Marketing extends MY_Controller{
 		if($this->authorities == 5 || $this->authorities == 3){
 			redirect(base_url('apps'));
 		}
-		$msg ='';
+		$msg ='
+			
+			<div class="col-md-3"> <a href="'.base_url().'route/destroy_email_success" class="btn btn-danger"> <i class="fa fa-trash"> </i> Xóa ALL Email Thành công  </a></div>
+			<div class="col-md-3"> <a  href="'.base_url().'route/destroy_email_error" class="btn btn-warning"> <i class="fa fa-trash"> </i> Xóa ALL Email Thất bại </a></div>
+			<div class="col-md-3"> <a target="_blank" href="'.base_url().'route/dowload_email_success" class="btn btn-info"> <i class="fa fa-cloud-download"> </i> Download ALL Email Thành công </a></div>
+			<div class="col-md-3"> <a target="_blank" href="'.base_url().'route/dowload_email_error" class="btn btn-info"> <i class="fa fa-cloud-download"> </i> Download ALL Email Thất bại</a></div>
+			
+		';
 		$data = array(
 			'msg' => $msg,
 			'content' => $this->LoadEmailManager(),
@@ -48,8 +55,8 @@ class Marketing extends MY_Controller{
 		}
 		$msg ='
 			
-			<div class="col-md-3"> <a target="_blank" href="'.base_url().'route/destroy_sms_success" class="btn btn-danger"> <i class="fa fa-trash"> </i> Xóa ALL SMS Thành công  </a></div>
-			<div class="col-md-3"> <a target="_blank" href="'.base_url().'route/destroy_sms_error" class="btn btn-warning"> <i class="fa fa-trash"> </i> Xóa ALL SMS Thất bại </a></div>
+			<div class="col-md-3"> <a href="'.base_url().'route/destroy_sms_success" class="btn btn-danger"> <i class="fa fa-trash"> </i> Xóa ALL SMS Thành công  </a></div>
+			<div class="col-md-3"> <a  href="'.base_url().'route/destroy_sms_error" class="btn btn-warning"> <i class="fa fa-trash"> </i> Xóa ALL SMS Thất bại </a></div>
 			<div class="col-md-3"> <a target="_blank" href="'.base_url().'route/dowload_sms_success" class="btn btn-info"> <i class="fa fa-cloud-download"> </i> Download ALL SMS Thành công </a></div>
 			<div class="col-md-3"> <a target="_blank" href="'.base_url().'route/dowload_sms_error" class="btn btn-info"> <i class="fa fa-cloud-download"> </i> Download ALL SMS Thất bại</a></div>
 			
@@ -74,6 +81,7 @@ class Marketing extends MY_Controller{
 				$xcrud = Xcrud::get_instance();
 				$xcrud->table('email_sending');
 				$xcrud->unset_csv();
+				
 				$xcrud->validation_pattern('email', 'email');
 				$xcrud->validation_required('staff');
 				$xcrud->validation_required('status');
@@ -105,13 +113,12 @@ class Marketing extends MY_Controller{
 			if($this->sendmail==1){
 				$xcrud = Xcrud::get_instance();
 				$xcrud->table('sms_sending');
+				$xcrud->where('status <',5);
 				$xcrud->unset_csv();
-				$xcrud->validation_pattern('email', 'email');
 				$xcrud->validation_required('staff');
 				$xcrud->validation_required('status');
 				$xcrud->validation_required('title');
-				$xcrud->validation_required('content');
-				$xcrud->validation_required('email');
+				$xcrud->validation_required('phone');
 				if($this->authorities == 4){
 					$xcrud->where('staff',$staff);
 				}

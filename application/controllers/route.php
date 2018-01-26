@@ -15,20 +15,96 @@ class Route extends MY_Controller{
 	
 		
 	}
+	public function destroy_email_success(){
+		$sql = "SELECT * FROM `email_sending` WHERE `status` = 3";
+		$data = $this->GlobalMD->query_global($sql);
+		foreach($data as $value){
+			$data = array(
+               'status' => 5,
+            );
+			$this->db->where('id', $value['id']);
+			$this->db->update('email_sending', $data); 
+		}
+		redirect(base_url('cms/marketing/email_manager'));
+		
+	}
+	public function destroy_email_error(){
+		$sql = "SELECT * FROM `email_sending` WHERE `status` = 2";
+		$data = $this->GlobalMD->query_global($sql);
+		foreach($data as $value){
+			$data = array(
+               'status' => 6,
+            );
+			$this->db->where('id', $value['id']);
+			$this->db->update('email_sending', $data); 
+		}
+		redirect(base_url('cms/marketing/email_manager'));
+	}
+	public function dowload_email_error(){
+		$staff = $this->staff;
+		if($this->authorities==4){
+			$sql = "SELECT * FROM `email_sending` INNER JOIN status_email ON email_sending.`status` = status_email.id WHERE `status` = 2 AND `staff` = '$staff'";
+		}else{
+			$sql = "SELECT * FROM `email_sending` INNER JOIN status_email ON email_sending.`status` = status_email.id WHERE `status` = 2";
+		}
+		$encrypt = core_encode($sql);
+		redirect(base_url('excel_export/dowload?code='.$encrypt));
+	}
+	public function dowload_email_success(){
+		$staff = $this->staff;
+		if($this->authorities==4){
+			$sql = "SELECT * FROM `email_sending` INNER JOIN status_email ON email_sending.`status` = status_email.id WHERE `status` = 3 AND `staff` = '$staff'";
+		}else{
+			$sql = "SELECT * FROM `email_sending` INNER JOIN status_email ON email_sending.`status` = status_email.id WHERE `status` = 3";
+		}
+		
+		$encrypt = core_encode($sql);
+		redirect(base_url('excel_export/dowload?code='.$encrypt));
+	}
+	
+	
 	public function destroy_sms_success(){
-		$sql = "SELECT * FROM `sms_sending` INNER JOIN status_email ON sms_sending.`status` = status_email.id WHERE `status` = 3";
+		$sql = "SELECT * FROM `sms_sending` WHERE `status` = 3";
+		$data = $this->GlobalMD->query_global($sql);
+		foreach($data as $value){
+			$data = array(
+               'status' => 5,
+            );
+			$this->db->where('id', $value['id']);
+			$this->db->update('sms_sending', $data); 
+		}
+		redirect(base_url('cms/marketing/sms_manager'));
 		
 	}
 	public function destroy_sms_error(){
-		
+		$sql = "SELECT * FROM `sms_sending` WHERE `status` = 2";
+		$data = $this->GlobalMD->query_global($sql);
+		foreach($data as $value){
+			$data = array(
+               'status' => 6,
+            );
+			$this->db->where('id', $value['id']);
+			$this->db->update('sms_sending', $data); 
+		}
+		redirect(base_url('cms/marketing/sms_manager'));
 	}
 	public function dowload_sms_error(){
-		$sql = "SELECT * FROM `sms_sending` INNER JOIN status_email ON sms_sending.`status` = status_email.id WHERE `status` = 2";
+		$staff = $this->staff;
+		if($this->authorities==4){
+			$sql = "SELECT * FROM `sms_sending` INNER JOIN status_email ON sms_sending.`status` = status_email.id WHERE `status` = 2  AND `staff` = '$staff'";
+		}else{
+			$sql = "SELECT * FROM `sms_sending` INNER JOIN status_email ON sms_sending.`status` = status_email.id WHERE `status` = 2";
+		}
 		$encrypt = core_encode($sql);
 		redirect(base_url('excel_export/dowload?code='.$encrypt));
 	}
 	public function dowload_sms_success(){
-		$sql = "SELECT * FROM `sms_sending` INNER JOIN status_email ON sms_sending.`status` = status_email.id WHERE `status` = 3";
+		$staff = $this->staff;
+		if($this->authorities==4){
+			$sql = "SELECT * FROM `sms_sending` INNER JOIN status_email ON sms_sending.`status` = status_email.id WHERE `status` = 3  AND `staff` = '$staff'";
+		}else{
+			$sql = "SELECT * FROM `sms_sending` INNER JOIN status_email ON sms_sending.`status` = status_email.id WHERE `status` = 3";
+		}
 		$encrypt = core_encode($sql);
 		redirect(base_url('excel_export/dowload?code='.$encrypt));
 	}
