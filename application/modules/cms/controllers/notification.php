@@ -37,9 +37,11 @@ class Notification extends MY_Controller{
 		$this->temp_notifacation();
 	}
 	public function load_schedule(){
+		$staff =  $this->staff;
 		$date = date("Y-m-d",time());
-		$sql = "SELECT * FROM scheduling_callback WHERE DATE_FORMAT(scheduling, '%Y-%m-%d') <  '$date' AND `status` =  1";
-		return $this->GlobalMD->query_global($sql);
+		$sql = "SELECT * FROM scheduling_callback WHERE code_staff = '$staff' AND DATE_FORMAT(scheduling, '%Y-%m-%d') <  '$date' AND `status` =  1  ";
+		$data =  $this->GlobalMD->query_global($sql);
+		var_dump($data );
 		
 	}
 	public function temp_notifacation(){
