@@ -15,6 +15,7 @@ class Scheduling extends MY_Controller{
 		}
 		
 	}
+	
 	private function scheduling_edit($id){
 		if($this->permisson == 3 || $this->permisson == 5){
 			return error_authorities();

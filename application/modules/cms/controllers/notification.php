@@ -36,12 +36,19 @@ class Notification extends MY_Controller{
 	public function index(){
 		$this->temp_notifacation();
 	}
+	public function load_schedule(){
+		$date = date("Y-m-d",time());
+		$sql = "SELECT * FROM scheduling_callback WHERE DATE_FORMAT(scheduling, '%Y-%m-%d') <  '$date' AND `status` =  1";
+		return $this->GlobalMD->query_global($sql);
+		
+	}
 	public function temp_notifacation(){
 		$data = $this->Notification();
+		$scheduling = $this->load_schedule();
 		$total_notifications = 0;
-		if($data){
-			$total_notifications = count($data);
-		}
+		$totalx_notifications = count($data);
+		$total_scheduling = count($scheduling);
+		$total_notifications = $totalx_notifications + $total_scheduling;
 		$temp = '<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
 		if($total_notifications==0){
 			$temp .= '<i style="color: #00a65a;font-size: 18px;" class="fa fa-bell-o"></i>';
@@ -73,7 +80,19 @@ class Notification extends MY_Controller{
 				
 			}
 		}
+		
+		if(!empty($scheduling)){
+			foreach($scheduling as $value_scheduling){
+				$staff = $value_scheduling['code_staff'];
+				$fa_icon = "fa fa-history";
+				if($this->authorities==4){
+					$temp .= '<li><a href="'.base_url().'cms/scheduling/edit/'.$value_scheduling['id'].'"><i class="fa '.$fa_icon.' text-aqua"></i> Chưa gọi cho khách mã:'.$value_scheduling['code_customer'].' </a></li>';
+				}
+				
+			}
+		}
         $temp .= '</ul></li></ul>';
+		
 		echo $temp;
 		}
 	

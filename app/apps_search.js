@@ -186,8 +186,9 @@ $(function(){
 				temp += '<td> '+item.email+'</td>';
 				temp += '<td> '+item.dien_thoai+'</td>';
 				temp += '<td> '+item.dia_chi+'</td>';
-				temp += '<td> '+item.orders_status+'</td>';
-				
+				if(reponse.finds == 2){
+					temp += '<td> '+item.orders_status+'</td>';
+				}
 				if(reponse.finds == 2){
 					if(authorities==3 && item.type_orders==2){
 						temp += '<td><a title="Approved" target="_blank" href="'+BASE_URL+'route/accountancy?query='+item.code_orders+'" class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"> </i></a></td>';
