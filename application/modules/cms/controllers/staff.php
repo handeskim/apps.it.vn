@@ -234,7 +234,7 @@ class Staff extends MY_Controller{
 			$xcrud->validation_required('authorities');
 			$xcrud->relation('status','status','id','name_status');
 			$xcrud->relation('authorities','authorities','id','name_auth');
-			$xcrud->fields('status,full_name,hinh_anh,email,passport_id,authorities,status,dien_thoai,sendmail');
+			$xcrud->fields('status,full_name,hinh_anh,email,passport_id,authorities,status,dien_thoai,sendmail,discount');
 			$xcrud->columns('status,code,full_name,hinh_anh,email,passport_id,authorities,status,dien_thoai,sendmail');
 			$xcrud->button(base_url().'cms/staff/Update_Password?key={id}','Đổi mật khẩu','icon-link','',array('target'=>'_blank'));
 			$xcrud->change_type('password', 'password', 'md5', array('class'=>'xcrud-input form-control', 'maxlength'=>10,'placeholder'=>'Nhập mật khẩu'));

@@ -203,7 +203,7 @@ class Api extends REST_Controller {
 		$resuls = null;
 		$phones = $this->input->get_post('phones');
 		if(isset($phones) || !empty($phones)){
-			$sql = "SELECT * FROM customer WHERE dien_thoai LIKE '%$phones%' OR dien_thoai_2 LIKE '%$phones%' AND supervisor = '$staff' limit 30";
+			$sql = "SELECT * FROM customer WHERE supervisor = '$staff' AND dien_thoai LIKE '%$phones%' OR dien_thoai_2 LIKE '%$phones%'  limit 1000";
 			$resuls = $this->QueryCoreAll($sql);
 			if(!empty($resuls)){
 				$response = array('result' => $resuls);

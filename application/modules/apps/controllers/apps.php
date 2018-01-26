@@ -40,8 +40,9 @@ class Apps extends MY_Controller{
 				$keyword =  $params["q"]; 
 				$ofset = $limit * 50;
 				if($params["finds"]==1){
-					if($this->authorities !=3 || $this->authorities !=5){
-						$sql = "SELECT * FROM customer 
+					if($this->authorities ==1 || $this->authorities ==2 || $this->authorities ==4){
+						if($this->authorities ==4){
+								$sql = "SELECT * FROM customer 
 							WHERE supervisor = '$staff' 
 							AND full_name LIKE '%$keyword%'
 							OR  code LIKE '%$keyword%'
@@ -51,8 +52,23 @@ class Apps extends MY_Controller{
 							OR  dien_thoai_2 LIKE '%$keyword%'
 							OR  passport_id LIKE '%$keyword%'
 							LIMIT $ofset,50
-						";
-						return $this->GlobalMD->query_global($sql);
+							";
+							return $this->GlobalMD->query_global($sql);
+						}
+						if($this->authorities ==1 || $this->authorities ==2){
+							$sql = "SELECT * FROM customer 
+							WHERE  full_name LIKE '%$keyword%'
+							OR  code LIKE '%$keyword%'
+							OR  email LIKE '%$keyword%'
+							OR  dia_chi LIKE '%$keyword%'
+							OR  dien_thoai LIKE '%$keyword%'
+							OR  dien_thoai_2 LIKE '%$keyword%'
+							OR  passport_id LIKE '%$keyword%'
+							LIMIT $ofset,50
+							";
+							return $this->GlobalMD->query_global($sql);
+						}
+					
 					}
 				}
 				if($params["finds"]==2){
