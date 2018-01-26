@@ -6,19 +6,17 @@ class Task extends MY_Controller{
 	}
 	
 	public function sender_email(){
-		$this->load->library('email');
-		$this->email->initialize($config);
-		$this->email->set_newline("\r\n");
 		$conf_email = $this->load_conf_email();
 		$message = '';
 		$config = Array(
-			'protocol' => 'smtp',
 			'smtp_host' => $conf_email['smtp_host'],
 			'smtp_port' => $conf_email['smtp_port'],
 			'smtp_user' => $conf_email['smtp_user'],
 			'smtp_pass' => $conf_email['smtp_pass'],
 			'smtp_crypto' => $conf_email['smtp_crypto'],
 		);
+		// $this->load->library('email',$config);
+		$this->load->library('email');
 		$datasend = $this->load_data_email();
 		if(!empty($datasend)){
 			foreach($datasend as $value_send){
@@ -31,7 +29,7 @@ class Task extends MY_Controller{
 				$this->email->to($email_clients);
 				$this->email->subject($subject);
 				$this->email->message($body);
-				if($this->email->send()==true){
+				if($this->email->send()){
 					$status = 3;
 					$this->update_sendmail($id,$status);
 				}else{
