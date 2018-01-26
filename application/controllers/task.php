@@ -7,16 +7,19 @@ class Task extends MY_Controller{
 	
 	public function sender_email(){
 		$conf_email = $this->load_conf_email();
-		$message = '';
-		$config = Array(
-			'smtp_host' => $conf_email['smtp_host'],
-			'smtp_port' => $conf_email['smtp_port'],
-			'smtp_user' => $conf_email['smtp_user'],
-			'smtp_pass' => $conf_email['smtp_pass'],
-			'smtp_crypto' => $conf_email['smtp_crypto'],
-		);
-		// $this->load->library('email',$config);
 		$this->load->library('email');
+		$config['protocol']    = 'smtp';
+		$config['smtp_host']    =  $conf_email['smtp_host'];
+		$config['smtp_port']    =  $conf_email['smtp_port'];
+		$config['smtp_crypto'] = $conf_email['smtp_crypto'];
+		$config['smtp_timeout'] = '7';
+		$config['smtp_user']    = $conf_email['smtp_user'];
+		$config['smtp_pass']    = $conf_email['smtp_pass'];
+		$config['charset']    = 'utf-8';
+		$config['newline']    = "\r\n";
+		$config['mailtype'] = 'html';
+		$config['validation'] = TRUE; 
+		$this->email->initialize($config);
 		$datasend = $this->load_data_email();
 		if(!empty($datasend)){
 			foreach($datasend as $value_send){
