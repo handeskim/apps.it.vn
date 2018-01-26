@@ -110,7 +110,8 @@
 		<ul class="treeview-menu">
 			<li><a href="<?php echo base_url();?>cms/marketing/email"><i class="fa fa-envelope-square"></i> Tạo Marketing Email </a></li>
 			<li><a href="<?php echo base_url();?>cms/marketing/email_manager"><i class="fa fa-envelope"></i> Quản lý gửi email </a></li>
-			<li><a href="<?php echo base_url();?>cms/marketing/sms"><i class="fa fa-cube"></i> Marketing SMS </a></li>
+			<li><a href="<?php echo base_url();?>cms/marketing/sms"><i class="fa fa-cube"></i> Tạo Marketing SMS </a></li>
+			<li><a href="<?php echo base_url();?>cms/marketing/sms_manager"><i class="fa fa-tablet"></i> Quản lý gửi SMS </a></li>
 		</ul>
 	</li>
 	<?php } ?>

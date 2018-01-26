@@ -42,7 +42,26 @@ class Task extends MY_Controller{
 			}
 		}
 	}
-	private function sender_sms($content,$phone){
+	
+	public function sender_sms(){
+		$datasend = $this->load_data_sms();
+		$conf = $this->load_conf_email();
+		foreach($datasend as $value_sms){
+			$phone = $value_sms['phone'];
+			$content = $value_sms['title'];
+			$id = $value_sms['id'];
+			$result = $this->running_sms($content,$phone);
+			if($result==true){
+				$status = 3;
+				$this->update_sendsms($id,$status);
+			}else{
+				$status = 2;
+				$this->update_sendsms($id,$status);
+			}
+		}
+		
+	}
+	private function running_sms($content,$phone){
 		$SendContent=urlencode($content);
 		$conf = $this->load_conf_email();
 		$APIKey=$conf['sms_key'];
@@ -59,24 +78,6 @@ class Task extends MY_Controller{
 		}else{
 			return false;
 		}
-	}
-	public function sms(){
-		$datasend = $this->load_data_sms();
-		$conf = $this->load_conf_email();
-		foreach($datasend as $value_sms){
-			$phone = $value_sms['phone'];
-			$content = $value_sms['title'];
-			$id = $value_sms['id'];
-			$result = $this->sender_sms($content,$phone);
-			if($result==true){
-				$status = 3;
-				$this->update_sendsms($id,$status);
-			}else{
-				$status = 2;
-				$this->update_sendsms($id,$status);
-			}
-		}
-		
 	}
 	private function load_conf_email(){
 		$sql = "SELECT * FROM generic";

@@ -15,8 +15,22 @@ class Route extends MY_Controller{
 	
 		
 	}
-	public function test(){
-		echo $_SERVER['PHP_SELF'];
+	public function destroy_sms_success(){
+		$sql = "SELECT * FROM `sms_sending` INNER JOIN status_email ON sms_sending.`status` = status_email.id WHERE `status` = 3";
+		
+	}
+	public function destroy_sms_error(){
+		
+	}
+	public function dowload_sms_error(){
+		$sql = "SELECT * FROM `sms_sending` INNER JOIN status_email ON sms_sending.`status` = status_email.id WHERE `status` = 2";
+		$encrypt = core_encode($sql);
+		redirect(base_url('excel_export/dowload?code='.$encrypt));
+	}
+	public function dowload_sms_success(){
+		$sql = "SELECT * FROM `sms_sending` INNER JOIN status_email ON sms_sending.`status` = status_email.id WHERE `status` = 3";
+		$encrypt = core_encode($sql);
+		redirect(base_url('excel_export/dowload?code='.$encrypt));
 	}
 	public function tracking(){
 		$key = $this->input->get('key');

@@ -33,8 +33,33 @@ class Marketing extends MY_Controller{
 			'msg' => $msg,
 			'content' => $this->LoadEmailManager(),
 			'user_data' => $this->user_data,
-			'title'=> 'Partners Post',
-			'title_main' => 'Partners Post',
+			'title'=> 'Marketing EMAIL',
+			'title_main' => 'Marketing EMAIL',
+		);
+		$this->parser->parse('default/header',$data);
+		$this->parser->parse('default/sidebar',$data);
+		$this->parser->parse('default/main',$data);
+		$this->parser->parse('default/layout/main_curd_account',$data);
+		$this->parser->parse('default/footer',$data);
+	}
+	public function sms_manager(){
+		if($this->authorities == 5 || $this->authorities == 3){
+			redirect(base_url('apps'));
+		}
+		$msg ='
+			
+			<div class="col-md-3"> <a target="_blank" href="'.base_url().'route/destroy_sms_success" class="btn btn-danger"> <i class="fa fa-trash"> </i> Xóa ALL SMS Thành công  </a></div>
+			<div class="col-md-3"> <a target="_blank" href="'.base_url().'route/destroy_sms_error" class="btn btn-warning"> <i class="fa fa-trash"> </i> Xóa ALL SMS Thất bại </a></div>
+			<div class="col-md-3"> <a target="_blank" href="'.base_url().'route/dowload_sms_success" class="btn btn-info"> <i class="fa fa-cloud-download"> </i> Download ALL SMS Thành công </a></div>
+			<div class="col-md-3"> <a target="_blank" href="'.base_url().'route/dowload_sms_error" class="btn btn-info"> <i class="fa fa-cloud-download"> </i> Download ALL SMS Thất bại</a></div>
+			
+		';
+		$data = array(
+			'msg' => $msg,
+			'content' => $this->LoadSMSManager(),
+			'user_data' => $this->user_data,
+			'title'=> 'Marketing SMS',
+			'title_main' => 'Marketing SMS',
 		);
 		$this->parser->parse('default/header',$data);
 		$this->parser->parse('default/sidebar',$data);
@@ -59,6 +84,38 @@ class Marketing extends MY_Controller{
 					$xcrud->where('staff',$staff);
 				}
 				$xcrud->table_name('[MPP] - Quản lý danh sách gửi email');
+				if($this->authorities == 4){
+					$xcrud->relation('staff','staff','id','code','id='.$staff);
+				}else{
+					$xcrud->relation('staff','staff','id','code');
+				}
+				$xcrud->relation('status','status_email','id','name_status');
+				$response = $xcrud->render();
+				return $response;
+			}else{
+				return error_authorities();
+			}
+		}else{
+			return error_authorities();
+		}
+	}
+	private function LoadSMSManager(){
+		$staff = $this->staff;
+		if($this->authorities == 1 || $this->authorities == 2 || $this->authorities == 4){
+			if($this->sendmail==1){
+				$xcrud = Xcrud::get_instance();
+				$xcrud->table('sms_sending');
+				$xcrud->unset_csv();
+				$xcrud->validation_pattern('email', 'email');
+				$xcrud->validation_required('staff');
+				$xcrud->validation_required('status');
+				$xcrud->validation_required('title');
+				$xcrud->validation_required('content');
+				$xcrud->validation_required('email');
+				if($this->authorities == 4){
+					$xcrud->where('staff',$staff);
+				}
+				$xcrud->table_name('[MPP] - Quản lý danh sách gửi SMS');
 				if($this->authorities == 4){
 					$xcrud->relation('staff','staff','id','code','id='.$staff);
 				}else{
@@ -130,11 +187,28 @@ class Marketing extends MY_Controller{
 			if($this->sendmail==0){
 				$msg ='cấm quyền truy cập';
 			}
+			$cmd = $this->input->post('cmd');
+			if($cmd == 'c1'){
+				$ArrayConvert = $this->FileUpload();
+				$ParmaPOST = $_POST;
+				foreach($ArrayConvert as $email){
+					$params = array(
+						'staff' => $this->staff,
+						'title' => $ParmaPOST['title_email'],
+						'phone' => $email,
+						'status' => 1,
+					);
+					$install = $this->db->insert('sms_sending',$params);
+					if($install==true){
+						$msg = '<div class="callout callout-success"><h4>Cài đặt thành công!</h4><p>Vui lòng thoát ra không tải lại trang.</p></div>';
+					}
+				}
+			}
 			$data = array(
 				'msg' => $msg,
 				'user_data' => $this->user_data,
-				'title'=> 'Marketing Email',
-				'title_main' => 'Marketing Email',
+				'title'=> 'Marketing SMS',
+				'title_main' => 'Marketing SMS',
 				'error' => '',
 			);
 			$this->parser->parse('default/header',$data);
