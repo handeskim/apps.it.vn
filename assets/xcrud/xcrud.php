@@ -488,6 +488,7 @@ class Xcrud
         unset($fields);
         return $this;
     }
+
     public function relation($fields = '', $rel_tbl = '', $rel_field = '', $rel_name = '', $rel_where = array(), $order_by = false,
         $multi = false, $rel_concat_separator = ' ', $tree = false, $depend_field = '', $depend_on = '')
     {

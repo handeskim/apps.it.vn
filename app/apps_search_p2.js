@@ -52,9 +52,10 @@ $(function(){
 				temp += '<td><a title="Reject" target="_blank" href="'+BASE_URL+'route/destroy_packer?query='+item.orders_code+'" class="btn btn-danger"><i class="glyphicon glyphicon-ban-circle"> </i></a></td>';
 			}
 			temp += '<td><a title="Details" target="_blank" href="'+BASE_URL+'prints/details?query='+item.orders_code+'" class="btn btn-info"><i class="fa fa-eye"> </i></a></td>';
-			temp += '<td><a title="Prints Invoice" target="_blank" href="'+BASE_URL+'prints/orders?query='+item.orders_code+'" class="btn btn-warning"><i class="fa fa-print"></i></a></td>';
-			temp += '<td><a title="Prints Guide" target="_blank" href="'+BASE_URL+'prints/guide?query='+item.orders_code+'" class="btn btn-primary"><i class="fa fa-file"></i></a></td>';
-			temp += '<td><a title="Tracking" target="_blank" href="'+BASE_URL+'route/tracking?key='+item.orders_code+'&posts='+item.orders_posts+'" class="btn btn-info"><i class="fa fa-ship"></i></a></td>';
+			temp += '<td><a title="In đơn" target="_blank" href="'+BASE_URL+'prints/orders?query='+item.orders_code+'" class="btn btn-warning"><i class="fa fa-print"></i></a></td>';
+			temp += '<td><a title="In PB" target="_blank" href="'+BASE_URL+'prints/letter?query='+item.orders_code+'" class="btn btn-primary"><i class="fa fa-file"></i></a></td>';
+			temp += '<td><a title="In HD" target="_blank" href="'+BASE_URL+'prints/guide?query='+item.orders_code+'" class="btn btn-primary"><i class="fa fa-file"></i></a></td>';
+			temp += '<td><a title="Tra vận đơn" target="_blank" href="'+BASE_URL+'route/tracking?key='+item.orders_code+'&posts='+item.orders_posts+'" class="btn btn-info"><i class="fa fa-ship"></i></a></td>';
 				
 			
 			temp +=  '</tr>';

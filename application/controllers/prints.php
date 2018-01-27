@@ -277,6 +277,7 @@ class Prints extends MY_Controller{
 	}
 	private function template_details($sql){
 		$temp = '';
+		$info_company_invoice = $this->info_company_invoice();
 		$data_field = $this->GlobalMD->query_global($sql);
 		if(isset($data_field)){
 			if(!empty($data_field)){
@@ -310,9 +311,7 @@ class Prints extends MY_Controller{
 								<tbody>
 								<tr>
 									<td>
-										 Công ty cổ phần PQA .<br>
-										 Số 123 Hoàng Hoa Thám - Q.Ngô Quyền<br>
-										TP.Đà Nẵng, Việt Nam 20000
+										 '. $info_company_invoice.'
 									</td>
 									<td>
 										#'.$data_field[0]['orders_code_customner'].' - '.$data_field[0]['orders_fullname'].'<br>
@@ -420,10 +419,10 @@ class Prints extends MY_Controller{
 								<tr class="invoice_total"><td>Tổng cộng : </td><td>'. number_format($total_price_bill).'</td></tr>
 								<tr class="invoice_total"><td>Chiết khấu: </td><td>'.$value['orders_discounts'].' % </td></tr>
 								<tr class="invoice_total"><td>Hưởng Chiết Khấu: </td><td> - '.number_format($discounts_bill).'</td></tr>
-								<tr class="invoice_total"><td>VAT: </td><td> 10 % </td></tr>
-								<tr class="invoice_total"><td>Thuế: </td><td>+ '.number_format($total_vat_bill).'</td></tr>
-								<tr class="invoice_total"><td>Thanh Toán không VAT : </td><td> '.number_format($total_discounts_bill).' </td></tr>
-								<tr class="invoice_total"><td>Thanh Toán đã bao gồm VAT : </td><td>'.number_format($total_price).' </td></tr>
+							
+								
+								<tr class="invoice_total"><td>Thanh Toán : </td><td> '.number_format($total_discounts_bill).' </td></tr>
+							
 									
 								</tr>
 							</tbody>

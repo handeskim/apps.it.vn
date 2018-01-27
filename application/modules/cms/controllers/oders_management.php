@@ -74,17 +74,19 @@ class Oders_Management extends MY_Controller{
 			$xcrud->unset_csv();
 			$xcrud->unset_print();
 			$xcrud->unset_add();
-			$xcrud->button(base_url().'prints/letter?query={code_orders}','Letter','fa fa-envelope-o','',array('target'=>'_blank','class'=>'btn btn-primary'));
-			$xcrud->button(base_url().'prints/orders?query={code_orders}','Invoice','fa fa-file','',array('target'=>'_blank','class'=>'btn btn-primary'));
-			$xcrud->button(base_url().'route/tracking?key={code_orders}&code={type_post}','Tracking','fa fa-ship','',array('target'=>'_blank'));
+			
+			$xcrud->button(base_url().'prints/letter?query={code_orders}','In PB','fa fa-envelope-o','',array('target'=>'_blank','class'=>'btn btn-primary'));
+			$xcrud->button(base_url().'prints/guide?query={code_orders}','In HD','fa fa-file','',array('target'=>'_blank'));
+			$xcrud->button(base_url().'prints/orders?query={code_orders}','In đơn','fa fa-file','',array('target'=>'_blank','class'=>'btn btn-primary'));
+			$xcrud->button(base_url().'route/tracking?key={code_orders}&code={type_post}','Tra vận đơn','fa fa-ship','',array('target'=>'_blank'));
 			
 			if($this->permisson == 3 ){
 				$xcrud->table_name('[Orders] - Duyệt Đơn hàng');
 				$xcrud->unset_remove();
 				$xcrud->where('type_orders',2);
 				$xcrud->or_where('type_orders',7);
-				$xcrud->button(base_url().'route/accountancy?query={code_orders}','Approved','fa fa-check-circle','',array('class'=>'btn btn-success'));
-				$xcrud->button(base_url().'route/destroy_accounts?query={code_orders}','Reject','fa fa-remove','',array('class'=>'btn btn-danger'));
+				$xcrud->button(base_url().'route/accountancy?query={code_orders}','Đồng ý','fa fa-check-circle','',array('class'=>'btn btn-success'));
+				$xcrud->button(base_url().'route/destroy_accounts?query={code_orders}','Từ chối','fa fa-remove','',array('class'=>'btn btn-danger'));
 				$xcrud->unset_edit();
 			}
 			
@@ -93,9 +95,9 @@ class Oders_Management extends MY_Controller{
 				$xcrud->unset_remove();
 				$xcrud->where('type_orders',3);
 				$xcrud->fields('type_orders');
-				$xcrud->button(base_url().'route/packer?query={code_orders}','Approved','fa fa-check-circle','',array('class'=>'btn btn-success'));
-				$xcrud->button(base_url().'route/destroy_packer?query={code_orders}','Reject','fa fa-remove','',array('class'=>'btn btn-danger'));
-				$xcrud->button(base_url().'prints/guide?query={code_orders}','Guide','fa fa-file','',array('target'=>'_blank'));
+				$xcrud->button(base_url().'route/packer?query={code_orders}','Đồng ý','fa fa-check-circle','',array('class'=>'btn btn-success'));
+				$xcrud->button(base_url().'route/destroy_packer?query={code_orders}','Từ chối','fa fa-remove','',array('class'=>'btn btn-danger'));
+				
 			}
 			if($this->permisson == 4){
 				$xcrud->table_name('[Orders] - Danh sách đơn hàng');
@@ -104,9 +106,9 @@ class Oders_Management extends MY_Controller{
 				$xcrud->where('code_staff',$this->staff);
 				$xcrud->fields('type_post,manuals,note');
 				$xcrud->where('type_orders !=',6);
-				$xcrud->button(base_url().'prints/guide?query={code_orders}','Guide','fa fa-file','',array('target'=>'_blank'));
+				$xcrud->button(base_url().'prints/guide?query={code_orders}','In HD','fa fa-file','',array('target'=>'_blank'));
 				$xcrud->columns('code_products,code_orders,price,quantily,total_price,code_customner,type_post,type_orders');
-				$xcrud->button(base_url().'route/destroy_staff?query={code_orders}','Reject','fa fa-remove','',array('class'=>'btn btn-danger'));
+				$xcrud->button(base_url().'route/destroy_staff?query={code_orders}','Từ chối','fa fa-remove','',array('class'=>'btn btn-danger'));
 				
 			}
 			
@@ -118,9 +120,9 @@ class Oders_Management extends MY_Controller{
 			
 			$xcrud->label('discounts','Giảm Giá');
 			$xcrud->label('code_products','Mã SP');
-			$xcrud->label('code_orders','Mã ĐH');
+			$xcrud->label('code_orders','Mã đơn hàng');
 			$xcrud->label('type_post','Nhà Bưu Chính');
-			$xcrud->label('type_orders','Trạng Thái ĐH');
+			$xcrud->label('type_orders','Trạng Thái đơn');
 			$xcrud->label('code_staff','Mã Nhân viên');
 			$xcrud->label('code_customner','Mã KH');
 			$xcrud->label('quantily','Số lượng');
