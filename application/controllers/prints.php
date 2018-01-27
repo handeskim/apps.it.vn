@@ -687,17 +687,18 @@ class Prints extends MY_Controller{
 						}
 						$total_price_bill = array_sum($total_bill);
 					$temp .='
+						<tr class="heading">
+							<td style="text-align: left;"></td>
+							<td style="text-align: left;"></td>
+							<td style="text-align: left;">COD:</td>	
+							<td style="text-align: left;">'.number_format($total_price_bill).' VNĐ</td>
+						</tr>
 						</tbody>
 						</table>
-						<table cellpadding="0" cellspacing="0">
-						<tbody>
-							<tr class="invoice_total">
-								COD = '.number_format($total_price_bill).' VNĐ
-							</div>
-						</tbody>
-						</table>
+						
 						<table cellpadding="0" cellspacing="0">
 							<tbody>
+								
 								<tr class="invoice_total">
 									<td style="text-transform: uppercase;font-size: 16px;padding: 20px;" > 
 										Tên Người Nhận: <b>'.$data_field[0]['orders_fullname'].'</b></br>
