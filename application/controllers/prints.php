@@ -685,7 +685,15 @@ class Prints extends MY_Controller{
 							$stt++;
 							$total_bill[] = $bill;
 						}
+						$total_price_bill = array_sum($total_bill);
 					$temp .='
+						</tbody>
+						</table>
+						<table cellpadding="0" cellspacing="0">
+						<tbody>
+							<tr class="invoice_total">
+								COD = '.number_format($total_price_bill).' VNĐ
+							</div>
 						</tbody>
 						</table>
 						<table cellpadding="0" cellspacing="0">
