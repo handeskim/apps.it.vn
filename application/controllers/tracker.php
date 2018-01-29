@@ -9,7 +9,7 @@ class Tracker extends MY_Controller{
 	public function index(){
 		$msg = '';
 		$response = '';
-		$cmd = $this->input->get('c_check');
+		$cmd = $this->input->get('code');
 		$key = $this->input->get('key');
 		
 			if($cmd==1){

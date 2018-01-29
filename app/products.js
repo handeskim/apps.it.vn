@@ -91,7 +91,7 @@ function temp_new_customer(){
 		temp +='<label >Địa Chỉ Khách hàng</label>';
 		temp +='<input id="addr_customer" type="text" class="form-control" name="addr_customer" value="" placeholder="Địa Chỉ Khách hàng- xxxxx" required>';
 		temp +='<label >Email Khách hàng</label>';
-		temp +='<input id="email_customer" type="text" class="form-control" name="email_customer" value="" placeholder="Email Khách hàng - xxxxx" required>';
+		temp +='<input id="email_customer" type="text" class="form-control" name="email_customer" value="" placeholder="Email Khách hàng - xxxxx" >';
 		temp +='<label >Số ĐT Khách hàng</label>';
 		temp +='<input id="phone_customer" type="text" class="form-control" name="phone_customer" value="" placeholder="Số ĐT Khách hàng - xxxxx" required>';
 		temp +='<div class="form-group">';

@@ -112,10 +112,11 @@ class Route extends MY_Controller{
 		$key = $this->input->get('key');
 		$cmd = $this->input->get('posts');
 		$links ='';
-		if($cmd=1){
+		if($cmd==1){
 			$links =  'http://www.vnpost.vn/en-us/dinh-vi/buu-pham?key='.$key;
 			 
-		}else{
+		}
+		if($cmd==2){
 			$links = "https://www.viettelpost.com.vn/Tracking?KEY=".$key;
 			
 		}

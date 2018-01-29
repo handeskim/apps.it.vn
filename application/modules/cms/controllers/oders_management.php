@@ -78,7 +78,7 @@ class Oders_Management extends MY_Controller{
 			$xcrud->button(base_url().'prints/letter?query={code_orders}','In PB','fa fa-envelope-o','',array('target'=>'_blank','class'=>'btn btn-primary'));
 			$xcrud->button(base_url().'prints/guide?query={code_orders}','In HD','fa fa-file','',array('target'=>'_blank'));
 			$xcrud->button(base_url().'prints/orders?query={code_orders}','In đơn','fa fa-file','',array('target'=>'_blank','class'=>'btn btn-primary'));
-			$xcrud->button(base_url().'route/tracking?key={code_orders}&code={type_post}','Tra vận đơn','fa fa-ship','',array('target'=>'_blank'));
+			$xcrud->button(base_url().'route/tracking?key={code_orders}&posts={type_post}','Tra vận đơn','fa fa-ship','',array('target'=>'_blank'));
 			
 			if($this->permisson == 3 ){
 				$xcrud->table_name('[Orders] - Duyệt Đơn hàng');

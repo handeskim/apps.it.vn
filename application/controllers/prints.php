@@ -483,6 +483,7 @@ class Prints extends MY_Controller{
 	private function template_invoice_details($sql){
 		$info_company_invoice = $this->info_company_invoice();
 		$temp = '';
+		$orders_discounts = 0;
 		$data_field = $this->GlobalMD->query_global($sql);
 		if(isset($data_field)){
 			if(!empty($data_field)){
@@ -606,6 +607,8 @@ class Prints extends MY_Controller{
 							$total_bill[] = $bill;
 						}
 					$total_price_bill = array_sum($total_bill);
+					
+					$orders_discounts = (int)$value['orders_discounts'] ;
 					$discounts_bill = ((int)$value['orders_discounts'] * $total_price_bill)/100;
 					$total_discounts_bill = $total_price_bill - $discounts_bill;
 					// $total_vat_bill = ($total_discounts_bill * 10)/100;
@@ -617,10 +620,13 @@ class Prints extends MY_Controller{
 						<table cellpadding="0" cellspacing="0">
 							<tbody>
 								<tr class="invoice_total">
-								<tr class="invoice_total"><td>Tổng cộng : </td><td>'. number_format($total_price_bill).'</td></tr>
-								<tr class="invoice_total"><td>Chiết khấu: </td><td>'.$value['orders_discounts'].' % </td></tr>
+								<tr class="invoice_total"><td>Tổng cộng : </td><td>'. number_format($total_price_bill).'</td></tr>';
+								if($orders_discounts > 0){
+								$temp .='<tr class="invoice_total"><td>Chiết khấu: </td><td>'.$value['orders_discounts'].' % </td></tr>
 								<tr class="invoice_total"><td>Hưởng Chiết Khấu: </td><td> - '.number_format($discounts_bill).'</td></tr>
-								<tr class="invoice_total"><td>Thanh Toán: </td><td> '.number_format($total_discounts_bill).' </td></tr>
+								';
+								}
+					$temp .='<tr class="invoice_total"><td>Thanh Toán: </td><td> '.number_format($total_discounts_bill).' </td></tr>
 								
 									
 								</tr>
@@ -669,7 +675,8 @@ class Prints extends MY_Controller{
 							<td style="text-align: left;">#</td>
 							<td style="text-align: left;">Tên sản phẩm</td>
 							<td style="text-align: left;">Số lượng </td>	
-							<td style="text-align: left;">Thành tiền</td>
+							<td style="text-align: left;"> </td>	
+						
 						</tr>';
 						$stt = 1;
 						$total_bill = array();
@@ -679,7 +686,7 @@ class Prints extends MY_Controller{
 									<td style="text-align: left;">'.$stt.'</td>
 									<td style="text-align: left;">'.$value['products_name'].'</td>
 									<td style="text-align: left;">'.$value['orders_quantily'].'</td>
-									<td style="text-align: left;">'. number_format($bill).' </td>
+									
 								</tr>';
 							$stt++;
 							$total_bill[] = $bill;
