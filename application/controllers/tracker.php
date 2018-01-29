@@ -15,8 +15,7 @@ class Tracker extends MY_Controller{
 			if($cmd==1){
 				$links =  'http://www.vnpost.vn/en-us/dinh-vi/buu-pham?key='.$key;
 				$response = '<span>Tra cứu dịch vụ bưu chính Vietnam POST  <a target ="_blank" href="'.$links.'"> vui lòng Nhấn vào đây  </a> để xem chi tiết  </span>';
-			}
-			if($cmd==2){
+			}else{
 				$c_element = ".trackingItem";
 				$c_url = "https://www.viettelpost.com.vn/Tracking?KEY=".$key;
 				$response = $this->crawler_run($c_url,$c_element);	
